@@ -2,8 +2,36 @@ import React from 'react';
 import GoogleLogin from '../../Components/Social Login/GoogleLogin';
 import { Link } from 'react-router';
 import { useForm } from "react-hook-form"
+import useAuth from '../../Hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const Register = () => {
+
+    const { createUser, updateUserProfile } = useAuth()
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    const handleCreateUser = (data) => {
+        const { name: displayName, email, password, photo: photoURL } = data;
+        createUser(email, password)
+            .then(() => {
+                updateUserProfile({ displayName, photoURL })
+                    .then(() => {
+                        toast.success("account created successfully")
+                    })
+                    .catch(error => {
+                        toast.error(error.code)
+                    })
+            })
+            .catch(error => {
+                toast.error(error.code)
+            })
+    }
+
     return (
         <div className="flex flex-col justify-center p-10 w-11/12 lg:max-w-[500px] bg-base-100 shadow-md">
             <div className="text-center sm:mx-auto sm:w-full ">
@@ -13,7 +41,7 @@ const Register = () => {
             </div>
             <div className="mt-8 sm:mx-auto sm:w-full ">
                 <div className=" px-4 pb-4 pt-8 sm:rounded-lg w-full sm:shadow">
-                    <form className="space-y-6 w-full">
+                    <form onSubmit={handleSubmit(handleCreateUser)} className="space-y-6 w-full">
                         {/* name  */}
                         <div>
                             <label
@@ -24,13 +52,14 @@ const Register = () => {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    {...register('name', { required: 'name is required' })}
                                     id="name"
                                     type="text"
                                     placeholder='your name'
-                                    required
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
-                                    value=""
+
                                 />
+                                {errors?.name && <p className='text-red-500'>{errors?.name.message}</p>}
                             </div>
                         </div>
                         {/* email  */}
@@ -43,13 +72,14 @@ const Register = () => {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    {...register('email', { required: "email is required" })}
+
                                     id="email"
                                     type="email"
                                     placeholder='example@gmail.com'
-                                    required
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
-                                    value=""
                                 />
+                                {errors?.email && <p className='text-red-500'>{errors?.email.message}</p>}
                             </div>
                         </div>
 
@@ -63,12 +93,12 @@ const Register = () => {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    {...register('photo', { required: "photo is required " })}
                                     id="photo"
-                                    type="file"
-                                    required
+                                    type="text"
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
-                                    value=""
                                 />
+                                {errors?.photo && <p className='text-red-500'>{errors?.photo.message}</p>}
                             </div>
                         </div>
                         {/* password  */}
@@ -81,14 +111,20 @@ const Register = () => {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    {...register('password', {
+                                        required: "passwored is required",
+                                        pattern: {
+                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/,
+                                            message: "Password must have 8+ characters, with uppercase, lowercase, number, and special character."
+                                        }
+                                    })}
                                     id="password"
                                     placeholder='*******'
                                     name="password"
                                     type="password"
-                                    required
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
-                                    value=""
                                 />
+                                {errors?.password && <p className='text-red-500'>{errors?.password.message}</p>}
                             </div>
                         </div>
                         <div className="flex items-center justify-between">
