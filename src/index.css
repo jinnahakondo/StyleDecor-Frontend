@@ -1,2 +1,19 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: blue;
+  --color-secondary: teal;
+  --color-accent: '#1f2937'
+}
+
+.heading-one {
+  @apply text-2xl lg:text-5xl font-bold
+}
+
+.heading-two {
+  @apply text-xl lg:text-2xl font-bold
+}

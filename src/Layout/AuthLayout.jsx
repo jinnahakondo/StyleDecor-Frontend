@@ -1,9 +1,11 @@
 import React from 'react';
+import { Outlet } from 'react-router';
+
 
 const AuthLayout = () => {
     return (
-        <div>
-            Auth
+        <div className='h-screen grid place-items-center'>
+            <Outlet />
         </div>
     );
 };
