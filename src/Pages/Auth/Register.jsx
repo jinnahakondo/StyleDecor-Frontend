@@ -1,13 +1,15 @@
 import React from 'react';
 import GoogleLogin from '../../Components/Social Login/GoogleLogin';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 
 const Register = () => {
 
-    const { createUser, updateUserProfile } = useAuth()
+    const { createUser, updateUserProfile } = useAuth();
+
+    const navigate = useNavigate();
 
     const {
         register,
@@ -21,6 +23,7 @@ const Register = () => {
             .then(() => {
                 updateUserProfile({ displayName, photoURL })
                     .then(() => {
+                        navigate('/')
                         toast.success("account created successfully")
                     })
                     .catch(error => {

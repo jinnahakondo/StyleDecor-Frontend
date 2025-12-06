@@ -1,8 +1,34 @@
 import React from 'react';
 import GoogleLogin from '../../Components/Social Login/GoogleLogin';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { useForm } from "react-hook-form"
+import useAuth from '../../Hooks/useAuth';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+
+    const { signInUser } = useAuth();
+
+    const navigate = useNavigate();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    const handelLogin = (data) => {
+        const { email, password } = data;
+        signInUser(email, password)
+            .then(() => {
+                navigate('/')
+                toast.success("signed in successfull")
+            })
+            .catch(error => {
+                toast.error(error.code)
+            })
+    }
+
     return (
 
         <div className="flex flex-col justify-center p-10 w-11/12 lg:max-w-[500px] bg-base-100 shadow-md">
@@ -13,7 +39,9 @@ const Login = () => {
             </div>
             <div className="mt-8 sm:mx-auto sm:w-full ">
                 <div className=" px-4 pb-4 pt-8 sm:rounded-lg w-full sm:shadow">
-                    <form className="space-y-6 w-full">
+                    <form
+                        onSubmit={handleSubmit(handelLogin)}
+                        className="space-y-6 w-full">
                         <div>
                             <label
                                 htmlFor="email"
@@ -23,11 +51,12 @@ const Login = () => {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    {...register("email", { required: "please enter your email" })}
                                     id="email"
                                     type="text"
-                                    required
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
                                 />
+                                {errors?.email && <p className='text-red-500'>{errors?.email?.message}</p>}
                             </div>
                         </div>
                         <div>
@@ -39,12 +68,19 @@ const Login = () => {
                             </label>
                             <div className="mt-1">
                                 <input
+                                    {...register('password', {
+                                        required: "please enter a valid password",
+                                        pattern: {
+                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/,
+                                            message: "Password must have 8+ characters, with uppercase, lowercase, number, and special character."
+                                        }
+                                    })}
                                     id="password"
                                     name="password"
                                     type="password"
-                                    required
                                     className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
                                 />
+                                {errors?.password && <p className='text-red-500'>{errors?.password?.message}</p>}
                             </div>
                         </div>
                         <div className="flex items-center justify-between">
@@ -55,6 +91,7 @@ const Login = () => {
                                     type="checkbox"
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:text-white dark:border-gray-600 dark:focus:ring-indigo-400 disabled:cursor-wait disabled:opacity-50"
                                 />
+
                                 <label
                                     htmlFor="remember_me"
                                     className="ml-2 block text-sm text-gray-900 dark:text-white"
