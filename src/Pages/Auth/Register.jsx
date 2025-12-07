@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleLogin from '../../Components/Social Login/GoogleLogin';
 import { Link, useNavigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import userPic from '../../assets/user.png'
+import axios from 'axios';
+import PostImage from '../../Utils/PostImage';
 
 const Register = () => {
 
     const { createUser, updateUserProfile } = useAuth();
+
+    const [profilePic, setProfilePic] = useState(userPic)
 
     const navigate = useNavigate();
 
@@ -20,9 +25,14 @@ const Register = () => {
 
     const axiosSecure = useAxiosSecure()
 
-    const handleCreateUser = (data) => {
-        const { name: displayName, email, password, photo: photoURL } = data;
-        const user = {
+    const handleCreateUser = async (data) => {
+        const { name: displayName, email, password, photo } = data;
+
+        const image = photo[0];
+
+        const photoURL = await PostImage(image)
+
+        const userInfo = {
             name: displayName,
             email,
             role: 'user',
@@ -34,7 +44,7 @@ const Register = () => {
                 updateUserProfile({ displayName, photoURL })
 
                     .then(async () => {
-                        const res = await axiosSecure.post('/users', user)
+                        const res = await axiosSecure.post('/users', userInfo)
                         console.log(res);
                         navigate('/')
                         toast.success("account created successfully")
@@ -58,6 +68,33 @@ const Register = () => {
             <div className="mt-8 sm:mx-auto sm:w-full ">
                 <div className=" px-4 pb-4 pt-8 sm:rounded-lg w-full sm:shadow">
                     <form onSubmit={handleSubmit(handleCreateUser)} className="space-y-6 w-full">
+                        {/* photo  */}
+                        <div>
+                            <label
+                                htmlFor="photo"
+                                className="grid place-items-center mb-10 "
+                            >
+                                <img src={profilePic} className='h-24 w-24 rounded-full border border-gray-300 ' />
+                            </label>
+                            <div className="mt-1">
+                                <input
+
+                                    {...register('photo', {
+                                        required: "photo is required ",
+                                        onChange: (e) => {
+                                            const file = e.target.files[0];
+                                            const url = URL.createObjectURL(file);
+                                            setProfilePic(url)
+                                        }
+                                    })}
+                                    id="photo"
+                                    type="file"
+                                    accept="image/*"
+                                    className=" w-full hidden appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
+                                />
+                                {errors?.photo && <p className='text-red-500'>{errors?.photo.message}</p>}
+                            </div>
+                        </div>
                         {/* name  */}
                         <div>
                             <label
@@ -99,24 +136,7 @@ const Register = () => {
                             </div>
                         </div>
 
-                        {/* photo  */}
-                        <div>
-                            <label
-                                htmlFor="photo"
-                                className="block text-sm font-medium text-gray-700 dark:text-white"
-                            >
-                                Your Photo
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                    {...register('photo', { required: "photo is required " })}
-                                    id="photo"
-                                    type="text"
-                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white dark:placeholder-gray-300 dark:focus:border-indigo-400 dark:focus:ring-indigo-400 sm:text-sm"
-                                />
-                                {errors?.photo && <p className='text-red-500'>{errors?.photo.message}</p>}
-                            </div>
-                        </div>
+
                         {/* password  */}
                         <div>
                             <label
