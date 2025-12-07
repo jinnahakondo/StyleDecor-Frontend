@@ -3,9 +3,9 @@ import React from 'react';
 const ServiceCard = () => {
     return (
         <div>
-            <div className=" bg-white rounded-2xl shadow-md transition-all overflow-hidden border hover:shadow-primary hover:shadow-lg border-gray-100">
+            <div className=" bg-white rounded-2xl shadow-md transition-all overflow-hidden border hover:shadow-primary hover:shadow-lg hover:scale-105 border-gray-100">
                 {/* Image */}
-                <figure className="h-48 w-full overflow-hidden rounded-lg">
+                <figure className='rounded-lg'>
                     <img
                         src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
                         alt="Service"
