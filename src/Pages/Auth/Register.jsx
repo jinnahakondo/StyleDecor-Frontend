@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const Register = () => {
 
@@ -17,12 +18,24 @@ const Register = () => {
         formState: { errors },
     } = useForm()
 
+    const axiosSecure = useAxiosSecure()
+
     const handleCreateUser = (data) => {
         const { name: displayName, email, password, photo: photoURL } = data;
+        const user = {
+            name: displayName,
+            email,
+            role: 'user',
+            profileImage: photoURL,
+            createdAt: new Date()
+        }
         createUser(email, password)
             .then(() => {
                 updateUserProfile({ displayName, photoURL })
-                    .then(() => {
+
+                    .then(async () => {
+                        const res = await axiosSecure.post('/users', user)
+                        console.log(res);
                         navigate('/')
                         toast.success("account created successfully")
                     })
