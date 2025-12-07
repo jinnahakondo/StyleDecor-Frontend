@@ -5,7 +5,7 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: blue;
+  --color-primary: #734dee;
   --color-secondary: teal;
   --color-accent: '#1f2937'
 }
@@ -15,5 +15,9 @@
 }
 
 .heading-two {
-  @apply text-xl lg:text-2xl font-bold
+  @apply text-lg lg:text-xl font-semibold
+}
+
+.margin {
+  @apply my-20
 }

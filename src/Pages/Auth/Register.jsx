@@ -6,12 +6,11 @@ import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import userPic from '../../assets/user.png'
-import axios from 'axios';
 import PostImage from '../../Utils/PostImage';
 
 const Register = () => {
 
-    const { createUser, updateUserProfile } = useAuth();
+    const { createUser, updateUserProfile, loading } = useAuth();
 
     const [profilePic, setProfilePic] = useState(userPic)
 
@@ -20,42 +19,47 @@ const Register = () => {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm()
 
     const axiosSecure = useAxiosSecure()
 
     const handleCreateUser = async (data) => {
-        const { name: displayName, email, password, photo } = data;
+        const { name, email, password, photo } = data;
 
-        const image = photo[0];
-
-        const photoURL = await PostImage(image)
+        const updateInfo = { displayName: name, photoURL: photo }
 
         const userInfo = {
-            name: displayName,
+            name,
             email,
             role: 'user',
-            profileImage: photoURL,
+            profileImage: photo,
             createdAt: new Date()
         }
-        createUser(email, password)
-            .then(() => {
-                updateUserProfile({ displayName, photoURL })
 
-                    .then(async () => {
-                        const res = await axiosSecure.post('/users', userInfo)
-                        console.log(res);
-                        navigate('/')
-                        toast.success("account created successfully")
-                    })
-                    .catch(error => {
-                        toast.error(error.code)
-                    })
-            })
-            .catch(error => {
-                toast.error(error.code)
-            })
+        try {
+            await createUser(email, password)
+            await updateUserProfile(updateInfo)
+            const res = await axiosSecure.post('/users', userInfo)
+            console.log("from register page", res);
+            navigate('/')
+            toast.success("account created successfully")
+        } catch (error) {
+            toast.error(error.code)
+        }
+
+
+    }
+
+    const handleOnchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) {
+            return
+        }
+        const photoURL = await PostImage(file);
+        setProfilePic(photoURL)
+        setValue("photo", photoURL);
     }
 
     return (
@@ -79,14 +83,8 @@ const Register = () => {
                             <div className="mt-1">
                                 <input
 
-                                    {...register('photo', {
-                                        required: "photo is required ",
-                                        onChange: (e) => {
-                                            const file = e.target.files[0];
-                                            const url = URL.createObjectURL(file);
-                                            setProfilePic(url)
-                                        }
-                                    })}
+                                    {...register('photo')}
+                                    onChange={handleOnchange}
                                     id="photo"
                                     type="file"
                                     accept="image/*"
@@ -181,7 +179,9 @@ const Register = () => {
 
                         </div>
                         <div>
-                            <button className='btn w-full'>Create Account</button>
+                            <button className='btn w-full btn-primary'>
+                                {loading ? "loading..." : "Create Account"}
+                            </button>
                         </div>
                     </form>
                     <div className="mt-6">

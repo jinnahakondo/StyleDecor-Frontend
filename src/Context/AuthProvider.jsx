@@ -46,7 +46,8 @@ const AuthProvider = ({ children }) => {
         createUser,
         signInUser,
         updateUserProfile,
-        SignOUtUser
+        SignOUtUser,
+        loading
     }
 
     //set observer
