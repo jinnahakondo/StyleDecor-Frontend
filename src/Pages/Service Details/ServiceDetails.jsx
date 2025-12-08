@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import { Link, useParams } from 'react-router';
+import React, { useRef } from 'react';
+import { Link, useNavigate, useParams } from 'react-router';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Loader from '../../Components/Loader/Loader';
 import { FaUser } from "react-icons/fa";
@@ -8,14 +8,19 @@ import { VscWorkspaceTrusted } from "react-icons/vsc";
 import { MdSupportAgent } from "react-icons/md";
 import Tab from './Tab/Tab';
 import { format } from "date-fns";
-
+import BookDrawer from '../../Components/Sections/Services/BookDrawer';
+import useAuth from '../../Hooks/useAuth';
 
 
 const ServiceDetails = () => {
+    const { user } = useAuth()
+    const openBookDrawer = useRef(null)
 
     const axiosSecure = useAxiosSecure();
 
     const { id } = useParams();
+
+    const navigate = useNavigate()
 
     const { data: service, isLoading } = useQuery({
         queryKey: ['service-details', id],
@@ -26,7 +31,6 @@ const ServiceDetails = () => {
     })
 
     if (isLoading) <Loader />
-    console.log(service);
 
     return (
         <div >
@@ -47,7 +51,16 @@ const ServiceDetails = () => {
                         <p className='text-accent font-medium'>
                             Created At: {service?.createdAt && format(new Date(service?.createdAt), "dd MMM yyyy")} </p>
 
-                        <Link className="btn btn-primary mt-2 w-fit">Book Now</Link>
+                        <button
+                            onClick={() => {
+                                if (user) {
+                                    openBookDrawer.current.checked = true;
+                                }
+                                else {
+                                    return navigate('/auth')
+                                }
+                            }}
+                            className="btn btn-primary mt-2 w-fit">Book Now</button>
                     </div>
                     <div className='divider'></div>
                     <div className='space-y-4'>
@@ -64,6 +77,7 @@ const ServiceDetails = () => {
                 </div>
             </div>
             <Tab service={service} />
+            <BookDrawer openBookDrawer={openBookDrawer} service={service} />
         </div>
     );
 };
