@@ -4,6 +4,7 @@ import Home from "../Pages/Home/Home";
 import AuthLayout from "../Layout/AuthLayout"
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
+import ServiceDetails from "../Pages/Service Details/ServiceDetails";
 
 export const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: '/service-details/:id',
+                Component: ServiceDetails
             },
         ]
     },

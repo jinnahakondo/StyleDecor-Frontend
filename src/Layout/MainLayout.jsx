@@ -10,7 +10,7 @@ const MainLayout = () => {
             <header>
                 <Navbar />
             </header>
-            <main>
+            <main className='margin'>
                 <Container>
                     <Outlet />
                 </Container>
