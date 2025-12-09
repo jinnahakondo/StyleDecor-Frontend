@@ -5,6 +5,7 @@ import AuthLayout from "../Layout/AuthLayout"
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ServiceDetails from "../Pages/Service Details/ServiceDetails";
+import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
 
 export const router = createBrowserRouter([
     {
@@ -34,5 +35,9 @@ export const router = createBrowserRouter([
                 Component: Register
             },
         ]
+    },
+    {
+        path: '/dashboard',
+        Component: DashBoardLayout
     }
 ])
