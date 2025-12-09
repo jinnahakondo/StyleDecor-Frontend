@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const BookDrawer = ({ openBookDrawer, service }) => {
     const { user } = useAuth()
@@ -11,19 +12,25 @@ const BookDrawer = ({ openBookDrawer, service }) => {
         "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM",
         "8:00 PM", "9:00 PM", "10:00 PM"
     ];
-    const [selectedTimeSlot, setSelectedTimeSlot] = useState()
+    const [address, setAddress] = useState('')
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState('')
     const [selectedDate, setSelectedDate] = useState("");
     const bookServiceInfo = {
-        serviceName: service?.timeSlots,
+        serviceName: service?.title,
         servicePrice: service?.price,
         customerName: user?.displayName,
         customerEmail: user?.email,
+        customerAddress: address,
         bookingDate: selectedDate,
         bookingTime: selectedTimeSlot,
     }
+
     const handelBookingService = async () => {
+
         const res = await axiosSecure.post('/bookings', bookServiceInfo);
-        console.log(res.data);
+        if (res.data.insertedId) {
+            toast.success("service booked");
+        }
         openBookDrawer.current.checked = false;
     }
     return (
@@ -32,7 +39,6 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                 <input id="my-drawer-5" type="checkbox" className="drawer-toggle" ref={openBookDrawer} />
                 <div className="drawer-content">
                     {/* Page content here */}
-                    <label htmlFor="my-drawer-5" className="drawer-button btn btn-primary">Open drawer</label>
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-5" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -81,6 +87,14 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                                 />
                             </div>
 
+                            {/* customer address */}
+                            <div className='flex flex-col gap-2 mt-4'>
+                                <label className='font-bold '> customer address</label>
+                                <textarea onChange={(e) => {
+                                    setAddress(e.target.value)
+                                }} className='textarea' placeholder='Enter Yor Full address'></textarea>
+                            </div>
+
                             {/* date picker calender  */}
                             <div className='flex flex-col gap-2 mt-4'>
                                 <label className='font-bold '>Select Date</label>
@@ -90,7 +104,6 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                                 />
                             </div>
                         </form>
-
                         <div className='mt-10'>
                             <h2 className=' font-bold mb-4'>Select Time Slot</h2>
                             <div className='grid grid-cols-2 gap-5 '>
@@ -109,6 +122,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                                 >Book Service</button>
                             </div>
                         </div>
+
                     </ul>
                 </div>
             </div>

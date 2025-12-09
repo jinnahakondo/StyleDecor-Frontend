@@ -22,7 +22,7 @@ const TopDecorators = () => {
     console.log(decorators);
     return (
         <div className='my-10'>
-            <h2 className='heading-one mb-10'>Top Decorators</h2>
+            <h2 className='heading-one mb-10 text-center'>Top Decorators</h2>
             <div className='mx-auto'>
                 <Swiper
                     modules={[Autoplay]}
