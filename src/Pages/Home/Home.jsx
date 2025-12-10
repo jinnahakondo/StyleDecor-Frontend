@@ -1,7 +1,9 @@
 import React from 'react';
 import useAuth from '../../Hooks/useAuth';
 import Services from '../../Components/Sections/Services/Services';
-import TopDecorators from '../../Components/Sections/Services/Top Decorators/TopDecorators';
+import TopDecorators from '../../Components/Sections/Top Decorators/TopDecorators';
+import Coverage from '../../Components/Sections/Service Coverage/Coverage';
+
 
 
 const Home = () => {
@@ -11,6 +13,7 @@ const Home = () => {
         <div className='margin space-y-20'>
             <Services />
             <TopDecorators />
+            <Coverage />
         </div>
     );
 };

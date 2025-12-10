@@ -21,3 +21,7 @@
 .margin {
   @apply my-20
 }
+
+.dashboard.active {
+  @apply bg-purple-100
+}

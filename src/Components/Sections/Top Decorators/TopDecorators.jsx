@@ -1,11 +1,11 @@
 import React from 'react';
 import Decorator from './Decorator';
-import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import Loader from '../../../Loader/Loader';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle'
 import { Autoplay, } from 'swiper/modules';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { Loader } from 'lucide-react';
 
 const TopDecorators = () => {
 
