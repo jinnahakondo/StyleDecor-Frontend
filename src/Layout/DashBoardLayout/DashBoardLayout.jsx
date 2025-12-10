@@ -5,10 +5,16 @@ import { Link, NavLink } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import { AiOutlineHome } from "react-icons/ai";
-;
+import { CgProfile } from "react-icons/cg";
+import { FaCalendarCheck } from "react-icons/fa6";
+import { ReceiptText } from 'lucide-react';
+import useRole from '../../Hooks/useRole';
+import { FaUserCog } from "react-icons/fa";
 
 const DashBoardLayout = () => {
     const { user, SignOUtUser } = useAuth()
+    const role = useRole()
+    console.log(role);
 
     const handelLogout = () => {
         SignOUtUser()
@@ -20,12 +26,14 @@ const DashBoardLayout = () => {
             })
     }
 
+
     const links = <>
-        <li><NavLink to={'/abcd'}>Home</NavLink></li>
-        <li><NavLink to={'/ab'}> Services</NavLink></li>
-        <li><NavLink to={'/abc'}>About</NavLink></li>
-        <li><NavLink to={'/abcd'}> Contact</NavLink></li>
+        <li><NavLink to={'/'}>Home</NavLink></li>
+        <li><NavLink to={'/services'}> Services</NavLink></li>
+        <li><NavLink to={'/about'}>About</NavLink></li>
+        <li><NavLink to={'/contact'}> Contact</NavLink></li>
     </>
+
 
     return (
         <div>
@@ -85,22 +93,68 @@ const DashBoardLayout = () => {
                     <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
                     <div className="flex min-h-full flex-col items-start bg-white is-drawer-close:w-14 is-drawer-open:w-64 border-r border-gray-300">
                         {/* Sidebar content here */}
-                        <ul className="menu w-full grow">
+                        <ul className="menu w-full grow space-y-3">
                             {/* List item */}
                             <li>
-                                <NavLink className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Homepage">
+                                <NavLink to={'/dashboard'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Homepage">
                                     {/* Home icon */}
                                     <AiOutlineHome className="text-2xl" />
                                     <span className="is-drawer-close:hidden">Homepage</span>
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
+                                    {/* profile icon */}
+                                    <CgProfile className="text-2xl" />
+                                    <span className="is-drawer-close:hidden">
+                                        My Profile
+                                    </span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Bookings">
+                                    {/* booking icon */}
+                                    <FaCalendarCheck className="text-2xl" />
+                                    <span className="is-drawer-close:hidden">
+                                        My Bookings
+                                    </span>
+                                </NavLink>
+                            </li>
+
+                            {/* admin links */}
+                            {
+                                role === 'admin' && <>
+
+                                    <li>
+                                        <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Decorators ">
+                                            {/* profile icon */}
+                                            <FaUserCog className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Manage Decorators
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Bookings">
+                                            {/* booking icon */}
+                                            <FaCalendarCheck className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                My Bookings
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                </>
+                            }
+                            {/* admin links */}
 
                             {/* List item */}
                             <li>
-                                <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Settings">
-                                    {/* Settings icon */}
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
-                                    <span className="is-drawer-close:hidden">Settings</span>
+                                <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History
+">
+                                    {/* payment icon */}
+                                    <ReceiptText className='text-2xl' />
+                                    <span className="is-drawer-close:hidden">Payment History
+                                    </span>
                                 </button>
                             </li>
                         </ul>

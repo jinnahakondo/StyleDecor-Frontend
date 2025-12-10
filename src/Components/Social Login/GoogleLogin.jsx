@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
@@ -16,12 +16,13 @@ const GoogleLogin = () => {
         googleLogin()
             .then((res) => {
                 const userInfo = {
-                    name: res?.displayName,
-                    email: res?.email,
+                    name: res?.user?.displayName,
+                    email: res?.user.email,
                     role: 'user',
-                    profileImage: res?.photoURL,
+                    profileImage: res?.user.photoURL,
                     createdAt: new Date()
                 }
+                console.log("before save db", userInfo);
 
                 axiosSecure.post('/users', userInfo)
                     .then(res => {
