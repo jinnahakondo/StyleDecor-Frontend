@@ -99,6 +99,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                             <div className='flex flex-col gap-2 mt-4'>
                                 <label className='font-bold '>Select Date</label>
                                 <input type="date"
+                                    min={new Date().toISOString().split("T")[0]}
                                     className='input'
                                     onChange={(e) => setSelectedDate(e.target.value)}
                                 />
