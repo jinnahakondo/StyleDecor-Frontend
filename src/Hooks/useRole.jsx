@@ -15,7 +15,7 @@ const useRole = () => {
         }
     })
 
-    return role
+    return { role, isLoading, refetch }
 };
 
 export default useRole;

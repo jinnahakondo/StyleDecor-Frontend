@@ -6,6 +6,8 @@ import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ServiceDetails from "../Pages/Service Details/ServiceDetails";
 import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
+import BeaDecorator from "../Pages/Be A Decorator/BeaDecorator";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -19,6 +21,12 @@ export const router = createBrowserRouter([
             {
                 path: '/service-details/:id',
                 Component: ServiceDetails
+            },
+            {
+                path: '/be-a-decorator',
+                element: <PrivateRoutes>
+                    <BeaDecorator />
+                </PrivateRoutes>
             },
         ]
     },
@@ -38,6 +46,8 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        Component: DashBoardLayout
+        element: <PrivateRoutes>
+            <DashBoardLayout />
+        </PrivateRoutes>
     }
 ])

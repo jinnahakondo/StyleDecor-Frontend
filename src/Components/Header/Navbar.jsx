@@ -10,6 +10,7 @@ const Navbar = ({ style }) => {
         <li><NavLink to={'/services'}> Services</NavLink></li>
         <li><NavLink to={'/about'}>About</NavLink></li>
         <li><NavLink to={'/contact'}> Contact</NavLink></li>
+        <li><NavLink to={'/be-a-decorator'}> Be A Decorator</NavLink></li>
     </>
     const { user, SignOUtUser } = useAuth()
 
@@ -64,7 +65,10 @@ const Navbar = ({ style }) => {
                                     </ul>
                                 </div>
                                 :
-                                <Link className="btn btn-primary" to={'/auth'}>Login</Link>
+                                <div className='flex flex-row gap-5'>
+                                    <Link className="btn btn-primary" to={'/auth'}>Login</Link>
+                                    <Link className="btn btn-outline btn-primary" to={'/be-a-decorator'}>Be a decorator</Link>
+                                </div>
                         }
                     </div>
                 </div>

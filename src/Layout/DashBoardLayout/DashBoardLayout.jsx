@@ -10,11 +10,15 @@ import { FaCalendarCheck } from "react-icons/fa6";
 import { ReceiptText } from 'lucide-react';
 import useRole from '../../Hooks/useRole';
 import { FaUserCog } from "react-icons/fa";
+import Loader from '../../Components/Loader/Loader';
+import { LuCalendarCog } from "react-icons/lu";
+import { FaScrewdriverWrench } from "react-icons/fa6";
+import { FaUserPlus } from "react-icons/fa";
 
 const DashBoardLayout = () => {
     const { user, SignOUtUser } = useAuth()
-    const role = useRole()
-    console.log(role);
+    // const { role, isLoading } = useRole()
+    const role = 'admin'
 
     const handelLogout = () => {
         SignOUtUser()
@@ -34,7 +38,7 @@ const DashBoardLayout = () => {
         <li><NavLink to={'/contact'}> Contact</NavLink></li>
     </>
 
-
+    // if (isLoading) <Loader />
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -95,42 +99,22 @@ const DashBoardLayout = () => {
                         {/* Sidebar content here */}
                         <ul className="menu w-full grow space-y-3">
                             {/* List item */}
-                            <li>
+                            <li className='mt-14'>
                                 <NavLink to={'/dashboard'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Homepage">
                                     {/* Home icon */}
                                     <AiOutlineHome className="text-2xl" />
                                     <span className="is-drawer-close:hidden">Homepage</span>
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
-                                    {/* profile icon */}
-                                    <CgProfile className="text-2xl" />
-                                    <span className="is-drawer-close:hidden">
-                                        My Profile
-                                    </span>
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Bookings">
-                                    {/* booking icon */}
-                                    <FaCalendarCheck className="text-2xl" />
-                                    <span className="is-drawer-close:hidden">
-                                        My Bookings
-                                    </span>
-                                </NavLink>
-                            </li>
-
-                            {/* admin links */}
+                            {/* user links */}
                             {
-                                role === 'admin' && <>
-
+                                role === 'user' && <>
                                     <li>
-                                        <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Decorators ">
+                                        <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
                                             {/* profile icon */}
-                                            <FaUserCog className="text-2xl" />
+                                            <CgProfile className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
-                                                Manage Decorators
+                                                My Profile
                                             </span>
                                         </NavLink>
                                     </li>
@@ -143,20 +127,64 @@ const DashBoardLayout = () => {
                                             </span>
                                         </NavLink>
                                     </li>
+                                    <li>
+                                        <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History
+">
+                                            {/* payment icon */}
+                                            <ReceiptText className='text-2xl' />
+                                            <span className="is-drawer-close:hidden">Payment History
+                                            </span>
+                                        </button>
+                                    </li>
+                                </>
+                            }
+
+                            {/* admin links */}
+                            {
+                                role === 'admin' && <>
+
+                                    <li>
+                                        <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Decorators ">
+                                            {/* user icon */}
+                                            <FaUserCog className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Manage Decorators
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Bookings">
+                                            {/*manage booking icon */}
+                                            <LuCalendarCog className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Manage Bookings
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Manage Services">
+                                            {/*manage service icon */}
+                                            <FaScrewdriverWrench className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Manage Services
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    {/* <li>
+                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Assign Decorator">
+                                            Assign Decorator icon
+                                            <FaUserPlus className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Assign Decorator
+                                            </span>
+                                        </NavLink>
+                                    </li> */}
                                 </>
                             }
                             {/* admin links */}
 
                             {/* List item */}
-                            <li>
-                                <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History
-">
-                                    {/* payment icon */}
-                                    <ReceiptText className='text-2xl' />
-                                    <span className="is-drawer-close:hidden">Payment History
-                                    </span>
-                                </button>
-                            </li>
+
                         </ul>
                     </div>
                 </div>

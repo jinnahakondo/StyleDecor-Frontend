@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import GoogleLogin from '../../Components/Social Login/GoogleLogin';
-import { Link, useNavigate } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
@@ -10,11 +10,13 @@ import PostImage from '../../Utils/PostImage';
 
 const Register = () => {
 
-    const { createUser, updateUserProfile, loading } = useAuth();
+    const { createUser, updateUserProfile, loading, user } = useAuth();
 
     const [profilePic, setProfilePic] = useState(userPic)
 
     const navigate = useNavigate();
+
+    const location = useLocation()
 
     const {
         register,
@@ -43,7 +45,7 @@ const Register = () => {
             await updateUserProfile(updateInfo)
             const res = await axiosSecure.post('/users', userInfo)
             console.log("from register page", res);
-            navigate('/')
+            navigate(location.state || '/')
             toast.success("account created successfully")
         } catch (error) {
             toast.error(error.code)
@@ -62,6 +64,9 @@ const Register = () => {
         setValue("photo", photoURL);
     }
 
+    if (user) {
+        return <Navigate to={'/'} />
+    }
     return (
         <div className="flex flex-col justify-center p-10 w-11/12 lg:max-w-[500px] bg-base-100 shadow-md">
             <div className="text-center sm:mx-auto sm:w-full ">
@@ -202,7 +207,7 @@ const Register = () => {
                     <div className="m-auto mt-6 w-fit md:mt-8">
                         <span className="m-auto dark:text-gray-400">
                             Already have an account?
-                            <Link to={'/auth'} className="font-semibold text-indigo-600 dark:text-indigo-100" href="/register">
+                            <Link to={'/auth'} state={location.state} className="font-semibold text-indigo-600 dark:text-indigo-100" href="/register">
                                 Login
                             </Link>
                         </span>

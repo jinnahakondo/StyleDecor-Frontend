@@ -1,15 +1,18 @@
 import React from 'react';
 import GoogleLogin from '../../Components/Social Login/GoogleLogin';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate, useLocation, Navigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 
+
 const Login = () => {
 
-    const { signInUser } = useAuth();
+    const { signInUser, user } = useAuth();
 
     const navigate = useNavigate();
+
+    const location = useLocation()
 
     const {
         register,
@@ -21,12 +24,16 @@ const Login = () => {
         const { email, password } = data;
         signInUser(email, password)
             .then(() => {
-                navigate('/')
+                navigate(location.state || '/')
                 toast.success("signed in successfull")
             })
             .catch(error => {
                 toast.error(error.code)
             })
+    }
+
+    if (user) {
+        return <Navigate to={'/'} />
     }
 
     return (
@@ -127,7 +134,7 @@ const Login = () => {
                     <div className="m-auto mt-6 w-fit md:mt-8">
                         <span className="m-auto dark:text-gray-400">
                             Don't have an account?
-                            <Link to={'/auth/register'} className="font-semibold text-indigo-600 dark:text-indigo-100" href="/register">
+                            <Link to={'/auth/register'} state={location.state} className="font-semibold text-indigo-600 dark:text-indigo-100" href="/register">
                                 Create Account
                             </Link>
                         </span>

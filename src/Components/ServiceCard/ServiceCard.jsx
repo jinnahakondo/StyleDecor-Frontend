@@ -9,7 +9,7 @@ const ServiceCard = ({ service }) => {
                 {/* Image */}
                 <figure className='rounded-lg'>
                     <img
-                        src={service.image}
+                        src={service?.image}
                         alt="Service"
                         className="w-full h-full object-cover"
                     />

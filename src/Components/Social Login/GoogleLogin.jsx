@@ -2,7 +2,7 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const GoogleLogin = () => {
@@ -11,6 +11,8 @@ const GoogleLogin = () => {
     const axiosSecure = useAxiosSecure();
 
     const navigate = useNavigate()
+
+    const location = useLocation()
 
     const handelLogin = () => {
         googleLogin()
@@ -27,7 +29,7 @@ const GoogleLogin = () => {
                 axiosSecure.post('/users', userInfo)
                     .then(res => {
                         console.log(res.data);
-                        navigate('/');
+                        navigate(location.state || '/');
                     })
                     .catch(error => console.log(error.code))
 
