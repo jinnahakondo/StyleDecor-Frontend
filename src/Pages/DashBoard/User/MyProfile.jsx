@@ -10,65 +10,65 @@ const MyProfile = () => {
         <div className='p-10 max-w-4xl mx-auto flex flex-col gap-5'>
 
             {/* basic profile info  */}
-            <div className='flex items-center gap-5'>
+            <div className='flex max-lg:flex-col items-center gap-5'>
                 <div className=''>
                     {
                         isEdit
                             ?
                             <div className=''>
                                 <label for='profile'>
-                                    <img src={user?.photoURL} alt="user image" className='h-28 w-28 rounded-full ' />
+                                    <img src={user?.photoURL} alt="user image" className='w-20 h-20 lg:h-28 lg:w-28 rounded-full ' />
                                 </label>
                                 <input type='file' id='profile' name='profile' accept="image/*" className='hidden ' />
                             </div>
                             :
-                            <img src={user?.photoURL} alt="user image" className='h-28 w-28 rounded-full ' />
+                            <img src={user?.photoURL} alt="user image" className='w-20 h-20 lg:h-28 lg:w-28 rounded-full ' />
                     }
                 </div>
                 <div className='space-y-1'>
-                    <p className='text-accent font-medium text-2xl'>{user?.displayName}</p>
-                    <p className='text-accent font-medium text-2xl'>{user?.email}</p>
+                    <p className='text-accent font-medium lg:text-2xl max-lg:text-center'>{user?.displayName}</p>
+                    <p className='text-accent font-medium lg:text-2xl'>{user?.email}</p>
                 </div>
             </div>
             <div className='divider'></div>
             {/* name  */}
-            <div className='flex items-center justify-between'>
-                <p className='text-2xl text-accent font-medium flex-1'>Name</p>
+            <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
+                <p className='lg:text-2xl text-accent font-medium flex-1'>Name</p>
                 {
                     isEdit
                         ?
                         <input
                             defaultValue={user?.displayName}
-                            type="text" className='text-2xl text-accent font-medium py-5 outline-0 flex-1 ' />
+                            type="text" className='lg:text-2xl text-accent font-medium py-5 outline-0 flex-1 ' />
                         :
-                        <p className='text-2xl text-accent font-medium '>{user?.displayName}</p>
+                        <p className='lg:text-2xl text-accent font-medium '>{user?.displayName}</p>
 
                 }
             </div>
             <div className='divider'></div>
             {/* email  */}
-            <div className='flex items-center justify-between'>
-                <p className='text-2xl text-accent font-medium flex-1'>Email Address</p>
-                <p className='text-2xl text-accent font-medium'>{user?.email}</p>
+            <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
+                <p className='lg:text-2xl text-accent font-medium flex-1'>Email Address</p>
+                <p className='lg:text-2xl text-accent font-medium'>{user?.email}</p>
             </div>
             <div className='divider'></div>
             {/* mobile number  */}
-            <div className='flex items-center justify-between'>
-                <p className='text-2xl text-accent font-medium flex-1'>Mobile Number</p>
+            <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between'>
+                <p className='lg:text-2xl text-accent font-medium flex-1'>Mobile Number</p>
                 {
                     isEdit
                         ?
-                        <input defaultValue={user?.phoneNumber} type="number" className='text-2xl text-accent font-medium py-5 outline-0 flex-1' />
+                        <input defaultValue={user?.phoneNumber} type="number" className='lg:text-2xl text-accent font-medium py-5 outline-0 flex-1' />
                         :
-                        <p className='text-2xl text-accent font-medium'>{user?.phoneNumber}</p>
+                        <p className='lg:text-2xl text-accent font-medium'>{user?.phoneNumber}</p>
 
                 }
             </div>
             <div className='divider'></div>
             {/*  lastLoginAt  */}
-            <div className='flex items-center justify-between mb-10'>
-                <p className='text-2xl text-accent font-medium flex-1'>lastLoginAt</p>
-                <p className='text-2xl text-accent font-medium'>{format(new Date(Number(user?.metadata?.lastLoginAt)), "PPPpp")}</p>
+            <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between mb-10'>
+                <p className='lg:text-2xl text-accent font-medium flex-1'>lastLoginAt</p>
+                <p className='lg:text-2xl text-accent font-medium'>{format(new Date(Number(user?.metadata?.lastLoginAt)), "PPPpp")}</p>
 
             </div>
             <div className=''>
