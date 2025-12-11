@@ -39,10 +39,11 @@ const Register = () => {
             profileImage: photo,
             createdAt: new Date()
         }
-
+        console.log(userInfo);
         try {
             await createUser(email, password)
-            await updateUserProfile(updateInfo)
+            const updateUser = await updateUserProfile(updateInfo)
+            console.log("after update user:", updateUser);
             const res = await axiosSecure.post('/users', userInfo)
             console.log("from register page", res);
             navigate(location.state || '/')
@@ -51,11 +52,11 @@ const Register = () => {
             toast.error(error.code)
         }
 
-
     }
 
     const handleOnchange = async (e) => {
         const file = e.target.files[0];
+        console.log(file);
         if (!file) {
             return
         }

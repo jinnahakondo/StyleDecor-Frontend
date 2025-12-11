@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../Components/Header/Navbar';
 import SideBar from '../../Components/SideBar/SideBar';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, Outlet } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import { AiOutlineHome } from "react-icons/ai";
@@ -17,8 +17,8 @@ import { FaUserPlus } from "react-icons/fa";
 
 const DashBoardLayout = () => {
     const { user, SignOUtUser } = useAuth()
-    // const { role, isLoading } = useRole()
-    const role = 'admin'
+    const { role, isLoading } = useRole()
+    // const role = 'admin'
 
     const handelLogout = () => {
         SignOUtUser()
@@ -38,7 +38,7 @@ const DashBoardLayout = () => {
         <li><NavLink to={'/contact'}> Contact</NavLink></li>
     </>
 
-    // if (isLoading) <Loader />
+    if (isLoading) <Loader />
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -90,7 +90,9 @@ const DashBoardLayout = () => {
                         </div>
                     </div>
                     {/* Page content here */}
-                    <div className="p-4">Page Content</div>
+                    <div className="px-10 py-4 ">
+                        <Outlet />
+                    </div>
                 </div>
 
                 <div className="drawer-side is-drawer-close:overflow-visible">

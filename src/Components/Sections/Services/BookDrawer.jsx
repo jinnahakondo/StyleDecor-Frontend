@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
 
 const BookDrawer = ({ openBookDrawer, service }) => {
+    const navigate = useNavigate(null)
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
     const timeSlots = [
@@ -18,11 +20,13 @@ const BookDrawer = ({ openBookDrawer, service }) => {
     const bookServiceInfo = {
         serviceName: service?.title,
         servicePrice: service?.price,
+        serviceImage: service?.image,
         customerName: user?.displayName,
         customerEmail: user?.email,
         customerAddress: address,
         bookingDate: selectedDate,
         bookingTime: selectedTimeSlot,
+        paymentStatus: 'pending'
     }
 
     const handelBookingService = async () => {
@@ -32,6 +36,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
             toast.success("service booked");
         }
         openBookDrawer.current.checked = false;
+        navigate('/dashboard/my-bookings')
     }
     return (
         <div>

@@ -8,11 +8,15 @@ import ServiceDetails from "../Pages/Service Details/ServiceDetails";
 import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
 import BeaDecorator from "../Pages/Be A Decorator/BeaDecorator";
 import PrivateRoutes from "./PrivateRoutes";
+import MyBookings from "../Pages/DashBoard/User/MyBookings";
+import Loader from "../Components/Loader/Loader";
+import PaymentSuccess from "../Pages/DashBoard/User/PaymentSuccess";
 
 export const router = createBrowserRouter([
     {
         path: '/',
         Component: MainLayout,
+        hydrateFallbackElement: <Loader />,
         children: [
             {
                 index: true,
@@ -46,8 +50,19 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
+        hydrateFallbackElement: <Loader />,
         element: <PrivateRoutes>
             <DashBoardLayout />
-        </PrivateRoutes>
+        </PrivateRoutes>,
+        children: [
+            {
+                path: 'my-bookings',
+                Component: MyBookings
+            },
+            {
+                path: 'payment-success',
+                Component: PaymentSuccess
+            }
+        ]
     }
 ])
