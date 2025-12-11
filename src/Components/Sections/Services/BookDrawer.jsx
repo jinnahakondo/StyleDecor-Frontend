@@ -18,9 +18,11 @@ const BookDrawer = ({ openBookDrawer, service }) => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState('')
     const [selectedDate, setSelectedDate] = useState("");
     const bookServiceInfo = {
-        serviceName: service?.title,
-        servicePrice: service?.price,
-        serviceImage: service?.image,
+        serviceId: service?._id,
+        title: service?.title,
+        price: service?.price,
+        image: service?.image,
+        description: service?.description,
         customerName: user?.displayName,
         customerEmail: user?.email,
         customerAddress: address,
@@ -28,7 +30,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
         bookingTime: selectedTimeSlot,
         paymentStatus: 'pending'
     }
-
+    console.log(bookServiceInfo);
     const handelBookingService = async () => {
 
         const res = await axiosSecure.post('/bookings', bookServiceInfo);

@@ -18,9 +18,13 @@ const MyBookings = () => {
     })
     // pay for service 
     const handelPay = async (service) => {
-        const res = await axiosSecure.post('/create-checkout-session', service);
-        const url = res.data;
-        location.assign(url)
+        try {
+            const res = await axiosSecure.post('/create-checkout-session', service);
+            const url = res.data;
+            window.location.assign(url)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // cancel booking 
@@ -78,11 +82,11 @@ const MyBookings = () => {
                                         <td>
                                             <div className='flex gap-5 items-center'>
                                                 <p> serviceName:</p>
-                                                <p className='font-semibold'>{booking.serviceName}</p>
+                                                <p className='font-semibold'>{booking.title}</p>
                                             </div>
                                             <div className='flex gap-5 items-center '>
                                                 <p>servicePrice:</p>
-                                                <p className='font-semibold  '> {booking.servicePrice}</p>
+                                                <p className='font-semibold  '> {booking.price}</p>
                                             </div>
                                         </td>
                                         <td>
