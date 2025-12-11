@@ -130,13 +130,13 @@ const DashBoardLayout = () => {
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <button className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History
+                                        <NavLink to={'/dashboard/payment-history'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History
 ">
                                             {/* payment icon */}
                                             <ReceiptText className='text-2xl' />
                                             <span className="is-drawer-close:hidden">Payment History
                                             </span>
-                                        </button>
+                                        </NavLink>
                                     </li>
                                 </>
                             }

@@ -11,6 +11,8 @@ import PrivateRoutes from "./PrivateRoutes";
 import MyBookings from "../Pages/DashBoard/User/MyBookings";
 import Loader from "../Components/Loader/Loader";
 import PaymentSuccess from "../Pages/DashBoard/User/PaymentSuccess";
+import PaymentHistroy from "../Pages/DashBoard/User/PaymentHistroy";
+import TrackService from "../Pages/DashBoard/User/TrackService";
 
 export const router = createBrowserRouter([
     {
@@ -62,7 +64,15 @@ export const router = createBrowserRouter([
             {
                 path: 'payment-success',
                 Component: PaymentSuccess
-            }
+            },
+            {
+                path: 'payment-history',
+                Component: PaymentHistroy
+            },
         ]
+    },
+    {
+        path: '/track-service/:id',
+        Component: TrackService
     }
 ])

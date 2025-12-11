@@ -64,13 +64,14 @@ const MyBookings = () => {
                 <input type="radio" name="my_tabs_2" className="tab" aria-label="Booked" defaultChecked />
                 <div className="tab-content  border-t-gray-400 mt-3 rounded-none  p-10">
                     <div className="overflow-x-auto">
-                        <table className="table">
+                        <table className="table ">
                             {/* head */}
                             <thead>
                                 <tr>
                                     <th>Service Info</th>
                                     <th>customer Info</th>
                                     <th>Booking Info</th>
+                                    <th>Tracking No. </th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -114,17 +115,29 @@ const MyBookings = () => {
                                             </div>
                                         </td>
                                         <td>
+                                            <p>{booking?.trakingId }</p>
+                                        </td>
+                                        <td>
                                             <div className='flex flex-col gap-4'>
-                                                <button
-                                                    onClick={() => handelPay(booking)}
-                                                    className='btn btn-outline btn-primary'>
-                                                    <span className='hidden xl:block'>Pay Now </span> <span className='xl:hidden'>Pay</span>
-                                                </button>
-                                                <button
-                                                    onClick={() => handelCancel(booking._id)}
-                                                    className='btn btn-outline btn-error'>
-                                                    <span className='hidden xl:block'>Cancel Booking </span> <span className='xl:hidden'>Cancel</span>
-                                                </button>
+                                                {
+                                                    booking.paymentStatus === 'paid' ?
+                                                        <button className='btn btn-primary btn-outline disabled:text-primary disabled:' disabled>Paid</button> :
+                                                        <>
+                                                            <button
+                                                                onClick={() => handelPay(booking)}
+                                                                className='btn btn-outline btn-primary'>
+                                                                <span className='hidden xl:block'>Pay Now </span> <span className='xl:hidden'>Pay</span>
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handelCancel(booking._id)}
+                                                                className='btn btn-outline btn-error'>
+                                                                <span className='hidden xl:block'>Cancel Booking </span> <span className='xl:hidden'>Cancel</span>
+                                                            </button>
+                                                        </>
+
+                                                }
+
+
                                             </div>
                                         </td>
                                     </tr>)
