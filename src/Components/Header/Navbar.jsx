@@ -11,6 +11,7 @@ const Navbar = ({ style }) => {
         <li><NavLink to={'/about'}>About</NavLink></li>
         <li><NavLink to={'/contact'}> Contact</NavLink></li>
         <li><NavLink to={'/be-a-decorator'}> Be A Decorator</NavLink></li>
+        <li><NavLink to={'/be-a-decorator'}> Be A JinnaH</NavLink></li>
     </>
     const { user, SignOUtUser } = useAuth()
 
