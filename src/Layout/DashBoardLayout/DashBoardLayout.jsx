@@ -112,7 +112,7 @@ const DashBoardLayout = () => {
                             {
                                 role === 'user' && <>
                                     <li>
-                                        <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
+                                        <NavLink to={"/dashboard/my-profile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
                                             {/* profile icon */}
                                             <CgProfile className="text-2xl" />
                                             <span className="is-drawer-close:hidden">

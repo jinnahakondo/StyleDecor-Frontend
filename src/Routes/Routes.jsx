@@ -13,6 +13,7 @@ import Loader from "../Components/Loader/Loader";
 import PaymentSuccess from "../Pages/DashBoard/User/PaymentSuccess";
 import PaymentHistroy from "../Pages/DashBoard/User/PaymentHistroy";
 import TrackService from "../Pages/DashBoard/User/TrackService";
+import MyProfile from "../Pages/DashBoard/User/MyProfile";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             <DashBoardLayout />
         </PrivateRoutes>,
         children: [
+            {
+                path: 'my-profile',
+                Component: MyProfile
+            },
             {
                 path: 'my-bookings',
                 Component: MyBookings
