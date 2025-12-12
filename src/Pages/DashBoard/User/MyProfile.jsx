@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 const MyProfile = () => {
     const [isEdit, setIsEdit] = useState(false)
     const { user, loading } = useAuth();
+    
     console.log(user);
     return (
         <div className='p-10 max-w-4xl mx-auto flex flex-col gap-5'>
