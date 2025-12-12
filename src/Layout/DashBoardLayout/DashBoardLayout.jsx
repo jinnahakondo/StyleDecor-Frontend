@@ -102,7 +102,7 @@ const DashBoardLayout = () => {
                         <ul className="menu w-full grow space-y-3">
                             {/* List item */}
                             <li className='mt-14'>
-                                <NavLink to={'/dashboard'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Homepage">
+                                <NavLink to={'/dashboard/home'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Homepage">
                                     {/* Home icon */}
                                     <AiOutlineHome className="text-2xl" />
                                     <span className="is-drawer-close:hidden">Homepage</span>
@@ -130,7 +130,7 @@ const DashBoardLayout = () => {
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={'/dashboard/payment-history'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment History
+                                        <NavLink to={'/dashboard/payment-history'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Payment History
 ">
                                             {/* payment icon */}
                                             <ReceiptText className='text-2xl' />
