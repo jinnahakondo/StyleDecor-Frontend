@@ -55,7 +55,7 @@ const MyBookings = () => {
 
     }
 
-    if (isLoading) <Loader />
+    if (isLoading) return <Loader />
     return (
         <div>
             {/* <h2 className='heading-one mb-10'>My Bookings</h2> */}
@@ -115,7 +115,7 @@ const MyBookings = () => {
                                             </div>
                                         </td>
                                         <td>
-                                            <p>{booking?.trakingId }</p>
+                                            <p>{booking?.trakingId}</p>
                                         </td>
                                         <td>
                                             <div className='flex flex-col gap-4'>

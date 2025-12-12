@@ -14,7 +14,7 @@ const TopDecorators = () => {
     const { data: decorators = [], isLoading } = useQuery({
         queryKey: ["home-decorators"],
         queryFn: async () => {
-            const res = await axiosSecure.get('/decorators');
+            const res = await axiosSecure.get('/decorators/home');
             return res.data;
         }
     })

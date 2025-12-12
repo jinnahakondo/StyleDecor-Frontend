@@ -38,7 +38,9 @@ const DashBoardLayout = () => {
         <li><NavLink to={'/contact'}> Contact</NavLink></li>
     </>
 
-    if (isLoading) <Loader />
+    if (isLoading) {
+        return <Loader />
+    }
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -146,7 +148,7 @@ const DashBoardLayout = () => {
                                 role === 'admin' && <>
 
                                     <li>
-                                        <NavLink to={"/dashboard/myprofile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Decorators ">
+                                        <NavLink to={"/dashboard/admin/manage-decorators"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Decorators ">
                                             {/* user icon */}
                                             <FaUserCog className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
@@ -155,7 +157,7 @@ const DashBoardLayout = () => {
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Bookings">
+                                        <NavLink to={"/dashboard/admin/manage-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Bookings">
                                             {/*manage booking icon */}
                                             <LuCalendarCog className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
@@ -164,7 +166,7 @@ const DashBoardLayout = () => {
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Manage Services">
+                                        <NavLink to={"/dashboard/admin/manage-services"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Manage Services">
                                             {/*manage service icon */}
                                             <FaScrewdriverWrench className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
@@ -172,15 +174,6 @@ const DashBoardLayout = () => {
                                             </span>
                                         </NavLink>
                                     </li>
-                                    {/* <li>
-                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Assign Decorator">
-                                            Assign Decorator icon
-                                            <FaUserPlus className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Assign Decorator
-                                            </span>
-                                        </NavLink>
-                                    </li> */}
                                 </>
                             }
                             {/* admin links */}

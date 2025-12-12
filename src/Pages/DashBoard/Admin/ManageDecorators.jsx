@@ -1,0 +1,121 @@
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import Loader from '../../../Components/Loader/Loader';
+import useAuth from '../../../Hooks/useAuth';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
+const ManageDecorators = () => {
+    const { loading } = useAuth()
+    const axiosSecure = useAxiosSecure();
+    const { data: decorators = [], isLoading, refetch } = useQuery({
+        queryKey: ['decorators'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/decorators')
+            return res.data;
+        }
+    })
+
+    // manage decorators applications
+    const handelDecorator = async (decorator, status) => {
+        if (status === 'reject') {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "do you want to reject this application?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await axiosSecure.delete(`/decorators/${decorator?.email}`)
+                    refetch()
+                    Swal.fire({
+                        title: "Rejected!",
+                        text: "user application has been rejected.",
+                        icon: "success"
+                    });
+                }
+            });
+            return;
+        }
+        if (status === 'approve') {
+            const status = 'approved'
+            const role = "decorator";
+            await axiosSecure.patch(`/decorators/${decorator?.email}`, { status })
+            await axiosSecure.patch(`/users/${decorator?.email}`, { role })
+            refetch()
+            toast.success("user updated as decorator")
+
+        }
+
+    }
+
+    if (isLoading || loading) {
+        return <Loader />
+    }
+
+    return (
+        <div>
+            manage decorators {decorators.length}
+
+            <div className="overflow-x-auto">
+                <table className="table">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>category</th>
+                            <th>status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            decorators.map(decorator => <tr key={decorator._id}>
+                                <td>
+                                    <div className="flex items-center gap-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle h-12 w-12">
+                                                <img
+                                                    src={decorator?.photo}
+                                                    alt="decorator photo" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold">{decorator?.name}</div>
+                                            <div className="text-sm opacity-50">{decorator?.district}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    {decorator?.category}
+                                </td>
+                                <td>{decorator?.status === 'approved' ?
+                                    <p className='text-success'>{decorator?.status}</p>
+                                    :
+                                    <p className='text-error'>{decorator?.status}</p>
+                                }</td>
+                                <th>
+                                    <button className="btn btn-ghost btn-xs">details</button>
+                                </th>
+                                <td>
+                                    <select onChange={(e) => handelDecorator(decorator, e.target.value)} className='dropdown btn rounded-none border-primary bg-purple-100 outline-0'>
+                                        <option value="" selected>Select to </option>
+                                        <option value="approve">Approve</option>
+                                        <option value="reject">Regect</option>
+                                    </select>
+                                </td>
+                            </tr>)
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
+
+export default ManageDecorators;

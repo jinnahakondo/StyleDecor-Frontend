@@ -6,8 +6,8 @@ const Decorator = ({ decorator }) => {
         <div>
             <img src="https://i.ibb.co.com/b5hfsQCf/download.jpg" className='h-80 rounded-2xl' />
             <div className='space-y-1'>
-                <h3 className='heading-two mt-5'>{decorator?.decoratorName}</h3>
-                <p className='text-primary font-bold'>Expert in: {decorator?.decoratorSpecialties[0]}</p>
+                <h3 className='heading-two mt-5'>{decorator?.name}</h3>
+                <p className='text-primary font-bold'>Expert in: {decorator?.category} decoration</p>
                 <div className='flex items-center gap-3 '>
                     <div className='flex items-center gap-1 mt-3 text-[#08AF55]'>
                         <FaRegStar />
@@ -16,7 +16,7 @@ const Decorator = ({ decorator }) => {
                         <FaRegStar />
                         <FaRegStar />
                     </div>
-                    <p className='text-accent mt-3'>{decorator?.decoratorRating}</p>
+                    <p className='text-accent mt-3'>4.6</p>
                 </div>
             </div>
         </div>

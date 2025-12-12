@@ -14,6 +14,10 @@ import PaymentSuccess from "../Pages/DashBoard/User/PaymentSuccess";
 import PaymentHistroy from "../Pages/DashBoard/User/PaymentHistroy";
 import TrackService from "../Pages/DashBoard/User/TrackService";
 import MyProfile from "../Pages/DashBoard/User/MyProfile";
+import AdminRoutes from "./AdminRoutes";
+import ManageDecorators from "../Pages/DashBoard/Admin/ManageDecorators";
+import ManageBookings from "../Pages/DashBoard/Admin/ManageBookings";
+import ManageServices from "../Pages/DashBoard/Admin/ManageServices";
 
 export const router = createBrowserRouter([
     {
@@ -77,6 +81,24 @@ export const router = createBrowserRouter([
             {
                 path: 'payment-history',
                 Component: PaymentHistroy
+            },
+            {
+                path: 'admin/manage-decorators',
+                element: <AdminRoutes>
+                    <ManageDecorators />
+                </AdminRoutes>
+            },
+            {
+                path: 'admin/manage-bookings',
+                element: <AdminRoutes>
+                    <ManageBookings />
+                </AdminRoutes>
+            },
+            {
+                path: 'admin/manage-services',
+                element: <AdminRoutes>
+                    <ManageServices />
+                </AdminRoutes>
             },
         ]
     },
