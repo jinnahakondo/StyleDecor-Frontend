@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import ShowDecorators from '../../../Components/Modals/ShowDecorators';
 
 const ManageDecorators = () => {
-    const [showDecorators, setShowDecorators] = useState();
+    const [showDecorators, setShowDecorators] = useState([]);
     const showDecoratorRef = useRef(null)
     const { loading } = useAuth()
     const axiosSecure = useAxiosSecure();

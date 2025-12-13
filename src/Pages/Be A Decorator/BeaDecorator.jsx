@@ -43,6 +43,7 @@ const BeaDecorator = () => {
     // form submit function 
     const handelBeADecorator = async (data) => {
         data.photo = user?.photoURL;
+        data.createdAt = new Date()
         const res = await axiosSecure.post('/decorators', data);
         if (res.data.insertedId) {
             reset()
