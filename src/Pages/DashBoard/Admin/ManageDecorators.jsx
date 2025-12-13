@@ -1,16 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loader from '../../../Components/Loader/Loader';
 import useAuth from '../../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import ShowDecorators from '../../../Components/Modals/ShowDecorators';
 
 const ManageDecorators = () => {
+    const [showDecorators, setShowDecorators] = useState();
+    const showDecoratorRef = useRef(null)
     const { loading } = useAuth()
     const axiosSecure = useAxiosSecure();
     const { data: decorators = [], isLoading, refetch } = useQuery({
-        queryKey: ['decorators'],
+        queryKey: ['decorators', "admin-dashboard"],
         queryFn: async () => {
             const res = await axiosSecure.get('/decorators')
             return res.data;
@@ -64,6 +67,14 @@ const ManageDecorators = () => {
 
     }
 
+    //handelFindDecorator for asign
+    const handelFindDecorator = async (booking) => {
+        const { category, district } = booking;
+        const res = await axiosSecure.get(`/decorators?category=${category}&district=${district}`,)
+        setShowDecorators(res.data);
+        showDecoratorRef.current.showModal()
+    }
+    console.log(showDecorators);
     if (isLoading || loading) {
         return <Loader />
     }
@@ -176,7 +187,9 @@ const ManageDecorators = () => {
                                     }</td>
 
                                     <td>
-                                        <button className='btn btn-primary'>Find Decorator</button>
+                                        <button className='btn btn-primary'
+                                            onClick={() => handelFindDecorator(booking)}
+                                        >Find Decorator</button>
                                     </td>
                                 </tr>)
                             }
@@ -185,7 +198,8 @@ const ManageDecorators = () => {
                     </table>
                 </div>
             </div>
-
+            {/* modal  */}
+            <ShowDecorators showDecoratorRef={showDecoratorRef} showDecorators={showDecorators} />
 
         </div>
     );
