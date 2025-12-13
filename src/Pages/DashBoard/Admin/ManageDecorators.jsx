@@ -74,8 +74,8 @@ const ManageDecorators = () => {
         setShowDecorators(res.data);
         showDecoratorRef.current.showModal()
     }
-    console.log(showDecorators);
-    if (isLoading || loading) {
+
+    if (isLoading || loading || booingLoding) {
         return <Loader />
     }
 

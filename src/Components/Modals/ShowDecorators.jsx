@@ -1,6 +1,17 @@
 import React from 'react';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators }) => {
+    const axiosSecure = useAxiosSecure()
+    const handelAsign = async (decorator) => {
+        const workingStatus = 'Assigned'
+        const res = await axiosSecure.patch(`/asign/decorator/${decorator._id}`, { workingStatus })
+        console.log(res.data);
+        toast.success(`${decorator.name} has benn asigned for this service`)
+
+
+    }
     return (
         <div>
             <dialog ref={showDecoratorRef} className="modal">
@@ -20,7 +31,10 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators }) => {
                                     <td>{d?.name}</td>
                                     <td>{d?.district}</td>
                                     <td>{d?.category}</td>
-                                    <td><button className='btn btn-primary btn-sm'>Asign</button></td>
+                                    <td><button
+                                        onClick={() => handelAsign(d)}
+                                        disabled={d?.workingStatus !== 'available'}
+                                        className='btn btn-primary btn-sm'>Asign</button></td>
                                 </tr>)}
                             </tbody>
                         </table>
