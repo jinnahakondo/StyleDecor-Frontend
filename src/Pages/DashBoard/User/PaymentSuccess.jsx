@@ -8,9 +8,11 @@ const PaymentSuccess = () => {
     const sessionId = searchParams.get("session_id")
 
     useEffect(() => {
-        axiosSecure.patch('/payment-success', { sessionId })
-            .then(res => console.log(res.data))
-            .catch((error) => console.log(error.message))
+        if (sessionId) {
+            axiosSecure.patch('/payment-success', { sessionId })
+                .then(res => console.log(res.data))
+                .catch((error) => console.log(error.message))
+        }
     }, [axiosSecure, sessionId])
     return (
         <div>
