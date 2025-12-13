@@ -2,9 +2,20 @@ import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { useForm, useWatch } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const BookDrawer = ({ openBookDrawer, service }) => {
+    const {
+        register,
+        reset,
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm()
+
     const navigate = useNavigate(null)
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
@@ -32,7 +43,35 @@ const BookDrawer = ({ openBookDrawer, service }) => {
         paymentStatus: 'pending'
     }
     // console.log(bookServiceInfo);
-    const handelBookingService = async () => {
+
+    const { data = [] } = useQuery({
+        queryKey: ["divisons", 'be-a-decorator'],
+        queryFn: async () => {
+            const res = await axios.get('/serviceCenters.json')
+            return res.data;
+        }
+
+    })
+
+
+
+    // get divisions
+    const duplicateDivisions = data.map(d => d.division);
+    const divisions = [...new Set(duplicateDivisions)]
+
+    // watching division 
+    const division = useWatch({
+        control,
+        name: 'region'
+    })
+
+    //get districts
+    const districtsObj = data.filter(d => d.division === division)
+    const districts = districtsObj.map(d => d.district)
+
+
+    const handelBookingService = async (data) => {
+        bookServiceInfo.district = data.district;
 
         const res = await axiosSecure.post('/bookings', bookServiceInfo);
         if (res.data.insertedId) {
@@ -54,7 +93,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                         {/* Sidebar content here */}
                         <h2 className='heading-one mt-5'>Book Service</h2>
                         {/* <p className='text-accent font-medium mt-2'>Select date & time slot to book a service </p> */}
-                        <form className='space-y-5'>
+                        <form className='space-y-5' onSubmit={handleSubmit(handelBookingService)}>
                             {/* customer name  */}
                             <div className='flex flex-col gap-2 mt-4'>
                                 <label className='font-bold '> Name</label>
@@ -95,6 +134,30 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                                 />
                             </div>
 
+                            {/* region  */}
+                            <div className='flex flex-col gap-2 mt-4'>
+                                <label htmlFor="region" className='font-bold'>Region</label>
+                                < select className='input outline-0 border border-accent w-full'
+                                    {...register('region')}  >
+                                    <option value='' >Select Your Region</option>
+                                    {
+                                        divisions.map(division => <option key={division} value={division}>{division}</option>)
+                                    }
+
+                                </select>
+                            </div>
+
+                            {/* district  */}
+                            <div className='flex flex-col gap-2 mt-4'>
+                                <label htmlFor="district" className='font-bold'>District</label>
+                                < select className='input outline-0 border border-accent w-full'  {...register('district')}  >
+                                    <option value=''>Select Your District</option>
+                                    {
+                                        districts.map(district => <option key={district} value={district}>{district}</option>)
+                                    }
+                                </select>
+                            </div>
+
                             {/* customer address */}
                             <div className='flex flex-col gap-2 mt-4'>
                                 <label className='font-bold '> customer address</label>
@@ -112,25 +175,25 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                                     onChange={(e) => setSelectedDate(e.target.value)}
                                 />
                             </div>
+                            <div className='mt-10'>
+                                <h2 className=' font-bold mb-4'>Select Time Slot</h2>
+                                <div className='grid grid-cols-2 gap-5 '>
+                                    {
+                                        timeSlots.map(slot => <Link key={slot} className={`btn rounded-full hover:btn-primary ${selectedTimeSlot === slot && 'btn-primary'}`}
+                                            onClick={() => setSelectedTimeSlot(slot)}
+                                        >
+                                            {slot}
+                                        </Link>)
+                                    }
+                                </div>
+                                <div className='mt-7 flex justify-end'>
+                                    <button className='btn btn-primary'
+                                        disabled={!selectedDate || !selectedTimeSlot}
+                                        type='submit'
+                                    >Book Service</button>
+                                </div>
+                            </div>
                         </form>
-                        <div className='mt-10'>
-                            <h2 className=' font-bold mb-4'>Select Time Slot</h2>
-                            <div className='grid grid-cols-2 gap-5 '>
-                                {
-                                    timeSlots.map(slot => <button key={slot} className={`btn rounded-full hover:btn-primary ${selectedTimeSlot === slot && 'btn-primary'}`}
-                                        onClick={() => setSelectedTimeSlot(slot)}
-                                    >
-                                        {slot}
-                                    </button>)
-                                }
-                            </div>
-                            <div className='mt-7 flex justify-end'>
-                                <button className='btn btn-primary'
-                                    disabled={!selectedDate || !selectedTimeSlot}
-                                    onClick={handelBookingService}
-                                >Book Service</button>
-                            </div>
-                        </div>
 
                     </ul>
                 </div>

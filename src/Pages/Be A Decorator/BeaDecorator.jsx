@@ -18,7 +18,7 @@ const BeaDecorator = () => {
     } = useForm()
 
     const { data = [] } = useQuery({
-        queryKey: ["divisons"],
+        queryKey: ["divisons", 'be-a-decorator'],
         queryFn: async () => {
             const res = await axios.get('/serviceCenters.json')
             return res.data;
