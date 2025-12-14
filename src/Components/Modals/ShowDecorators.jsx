@@ -2,16 +2,16 @@ import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 
-const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators }) => {
+const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decoratorsRefetch }) => {
     const axiosSecure = useAxiosSecure()
+
     const handelAsign = async (decorator) => {
         const workingStatus = 'Assigned'
-        const res = await axiosSecure.patch(`/asign/decorator/${decorator._id}`, { workingStatus })
-        console.log(res.data);
+        await axiosSecure.patch(`/asign/decorator/${decorator._id}`, { workingStatus })
+        decoratorsRefetch()
         toast.success(`${decorator.name} has benn asigned for this service`)
-
-
     }
+    
     return (
         <div>
             <dialog ref={showDecoratorRef} className="modal">
