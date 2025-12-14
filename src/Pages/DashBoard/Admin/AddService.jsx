@@ -4,9 +4,10 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import PostImage from '../../../Utils/PostImage';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const AddService = () => {
+    const queryClient = useQueryClient();
     const [serviceImage, setServiceImage] = useState(null)
     const [uploading, setUploading] = useState(false)
 
@@ -16,7 +17,6 @@ const AddService = () => {
         register,
         handleSubmit,
         reset,
-        watch,
         formState: { errors },
     } = useForm()
 
@@ -29,6 +29,7 @@ const AddService = () => {
             reset()
             setServiceImage(null)
             toast.success('service added successfully')
+            queryClient.invalidateQueries({ queryKey: ['manage-services'] })
         },
         onError: () => {
             console.log("failed to add service");
