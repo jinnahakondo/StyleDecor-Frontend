@@ -4,6 +4,7 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import PostImage from '../../../Utils/PostImage';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query';
 
 const AddService = () => {
     const [serviceImage, setServiceImage] = useState(null)
@@ -19,14 +20,34 @@ const AddService = () => {
         formState: { errors },
     } = useForm()
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: async (service) => {
+            await axiosSecure.post('/services', service);
+
+        },
+        onSuccess: () => {
+            reset()
+            setServiceImage(null)
+            toast.success('service added successfully')
+        },
+        onError: () => {
+            console.log("failed to add service");
+        }
+    })
+
     const handelAddService = async (data) => {
-        data.image = serviceImage;
-        data.rating = 4;
-        data.createdAt = new Date();
-        await axiosSecure.post('/services', data);
-        reset()
-        setServiceImage(null)
-        toast.success('service added successfully')
+        if (!serviceImage) {
+            return toast.error('Please upload service image');
+        }
+        const serviceInfo = {
+            ...data,
+            image: serviceImage,
+            rating: 4,
+            createdAt: new Date(),
+            price: Number(data.price)
+        }
+
+        mutate(serviceInfo)
     }
 
     return (
@@ -52,9 +73,19 @@ const AddService = () => {
                         <input id='serviceImage' type="file" accept='image/*' onChange={async (e) => {
                             setUploading(true)
                             const file = e.target.files[0]
-                            const imageUrl = await PostImage(file)
-                            setUploading(false)
-                            setServiceImage(imageUrl)
+                            if (!file) {
+                                return
+                            }
+                            try {
+                                const imageUrl = await PostImage(file)
+                                setServiceImage(imageUrl)
+                            } catch (error) {
+                                console.log("image uploading failed", error.code);
+                            }
+                            finally {
+                                setUploading(false)
+                            }
+
                         }} className='hidden' />
 
                     </div>
@@ -62,20 +93,28 @@ const AddService = () => {
                     <div className='flex flex-col gap-2'>
                         <label className='font-bold'>Service Name</label>
                         <input type="text" className='input outline-0 border border-accent w-full' placeholder='Service Name'
-                            {...register('title')} />
+                            {...register('title', { required: 'please enter service name' })} />
+                        {
+                            errors?.title &&
+                            <p className='text-red-500'>{errors?.title?.message}</p>
+                        }
                     </div>
                     {/* service description  */}
                     <div className='flex flex-col gap-2'>
                         <label className='font-bold'>Service description</label>
                         <textarea type="text" className='textarea outline-0 border border-accent w-full' placeholder='Type here'
-                            {...register('description')} />
+                            {...register('description', { required: "please add a description" })} />
+                        {
+                            errors?.description &&
+                            <p className='text-red-500'>{errors?.description?.message}</p>
+                        }
                     </div>
                     {/* service category & price  */}
                     <div >
                         <div className='grid grid-cols-2 gap-7'>
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>Service Category</label>
-                                <select {...register('category')} className='dropdown input outline-0'>
+                                <select {...register('category', { required: "please select a category" })} className='dropdown input outline-0'>
                                     <option value="">Select a category</option>
                                     <option value="home">Home</option>
                                     <option value="wedding">Wedding</option>
@@ -83,14 +122,30 @@ const AddService = () => {
                                     <option value="seminar">Seminar</option>
                                     <option value="meeting">Meeting</option>
                                 </select>
+                                {
+                                    errors?.category &&
+                                    <p className='text-red-500'>{errors?.category?.message}</p>
+                                }
                             </div>
+                            {/* price  */}
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>Service Price</label>
-                                <input type="number" defaultValue={'0'} className='input outline-0' {...register('price')} />
+                                <input type="number" defaultValue={'0'} className='input outline-0' {...register('price',
+                                    {
+                                        required: "please enter service price", min: {
+                                            value: 1,
+                                            message: "price must be greater than 0"
+                                        }
+                                    })} />
+                                {
+                                    errors?.price &&
+                                    <p className='text-red-500'>{errors?.price?.message}</p>
+                                }
                             </div>
                         </div>
                     </div>
-                    <button className='btn btn-primary px-10' type='submit'>Add</button>
+                    <button className='btn btn-primary px-10' type='submit' disabled={!serviceImage || uploading || isPending}>
+                        {isPending ? "Adding..." : "Add"}</button>
                 </div>
             </form>
         </div>
