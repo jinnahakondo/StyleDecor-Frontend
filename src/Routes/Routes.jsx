@@ -18,6 +18,7 @@ import AdminRoutes from "./AdminRoutes";
 import ManageDecorators from "../Pages/DashBoard/Admin/ManageDecorators";
 import ManageBookings from "../Pages/DashBoard/Admin/ManageBookings";
 import ManageServices from "../Pages/DashBoard/Admin/ManageServices";
+import AddService from "../Pages/DashBoard/Admin/AddService";
 
 export const router = createBrowserRouter([
     {
@@ -92,6 +93,12 @@ export const router = createBrowserRouter([
                 path: 'admin/manage-bookings',
                 element: <AdminRoutes>
                     <ManageBookings />
+                </AdminRoutes>
+            },
+            {
+                path: 'admin/add-services',
+                element: <AdminRoutes>
+                    <AddService />
                 </AdminRoutes>
             },
             {

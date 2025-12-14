@@ -7,8 +7,8 @@ const PostImage = async (image) => {
     formData.append("image", image);
 
     const res = await axios.post(import.meta.env.VITE_IMAGEBB_API, formData)
-    
-    const imageUrl =res.data.data.url
+
+    const imageUrl = res.data.data.url
     return imageUrl;
 };
 

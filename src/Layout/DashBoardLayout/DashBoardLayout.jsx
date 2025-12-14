@@ -14,6 +14,8 @@ import Loader from '../../Components/Loader/Loader';
 import { LuCalendarCog } from "react-icons/lu";
 import { FaScrewdriverWrench } from "react-icons/fa6";
 import { FaUserPlus } from "react-icons/fa";
+import { IoIosAddCircleOutline } from "react-icons/io";
+
 
 const DashBoardLayout = () => {
     const { user, SignOUtUser } = useAuth()
@@ -166,12 +168,23 @@ const DashBoardLayout = () => {
                                         </NavLink>
                                     </li>
                                     <li>
+                                        <NavLink to={"/dashboard/admin/add-services"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Add Services">
+                                            {/*manage service icon */}
+                                            <IoIosAddCircleOutline className="text-3xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Add Services
+                                            </span>
+
+                                        </NavLink>
+                                    </li>
+                                    <li>
                                         <NavLink to={"/dashboard/admin/manage-services"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Manage Services">
                                             {/*manage service icon */}
                                             <FaScrewdriverWrench className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
                                                 Manage Services
                                             </span>
+
                                         </NavLink>
                                     </li>
                                 </>
