@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import PostImage from '../../../Utils/PostImage';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { format } from "date-fns";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 
 const ManageServices = () => {
@@ -115,7 +116,7 @@ const ManageServices = () => {
                                 services.map(service => <tr key={service._id}>
                                     <td>{service?.title}</td>
                                     <td>{service?.category}</td>
-                                    <td>${service?.price}</td>
+                                    <td className='flex gap-1 items-center'><FaBangladeshiTakaSign />{service?.price}</td>
                                     <td>{format(service?.createdAt, 'dd MMMM yy')}</td>
                                     <td>
                                         <div className='flex items-center gap-5'>
@@ -229,8 +230,8 @@ const ManageServices = () => {
                                                 {...register('price',
                                                     {
                                                         required: "please enter service price", min: {
-                                                            value: 1,
-                                                            message: "price must be greater than 0"
+                                                            value: 65,
+                                                            message: "price must be at least 65 Taka"
                                                         }
                                                     })}
 

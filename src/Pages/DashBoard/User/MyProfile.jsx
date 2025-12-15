@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import { format } from 'date-fns';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useRole from '../../../Hooks/useRole';
 
 const MyProfile = () => {
     const [isEdit, setIsEdit] = useState(false)
     const { user, loading } = useAuth();
-    
+    const role = useRole()
+
+
+
     console.log(user);
     return (
         <div className='p-10 max-w-4xl mx-auto flex flex-col gap-5'>
@@ -29,6 +35,7 @@ const MyProfile = () => {
                 <div className='space-y-1'>
                     <p className='text-accent font-medium lg:text-2xl max-lg:text-center'>{user?.displayName}</p>
                     <p className='text-accent font-medium lg:text-2xl'>{user?.email}</p>
+                    <p className=' font-medium  text-primary'>{role.role}</p>
                 </div>
             </div>
             <div className='divider'></div>

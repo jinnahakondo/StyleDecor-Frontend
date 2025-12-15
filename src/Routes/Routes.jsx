@@ -19,6 +19,11 @@ import ManageDecorators from "../Pages/DashBoard/Admin/ManageDecorators";
 import ManageBookings from "../Pages/DashBoard/Admin/ManageBookings";
 import ManageServices from "../Pages/DashBoard/Admin/ManageServices";
 import AddService from "../Pages/DashBoard/Admin/AddService";
+import DecoratorRoutes from "./DecoratorRoutes";
+import AssignedProjects from "../Pages/DashBoard/Deocrator/AssignedProjects";
+import UpdateStatus from "../Pages/DashBoard/Deocrator/UpdateStatus";
+import TodaysSchedule from "../Pages/DashBoard/Deocrator/TodaysSchedule";
+import Earnings from "../Pages/DashBoard/Deocrator/Earnings";
 
 export const router = createBrowserRouter([
     {
@@ -106,6 +111,36 @@ export const router = createBrowserRouter([
                 element: <AdminRoutes>
                     <ManageServices />
                 </AdminRoutes>
+            },
+            {
+                path: 'decorator/asigned-projects',
+                element: <DecoratorRoutes>
+                    <AssignedProjects />
+                </DecoratorRoutes>
+            },
+            {
+                path: 'decorator/asigned-projects',
+                element: <DecoratorRoutes>
+                    <AssignedProjects />
+                </DecoratorRoutes>
+            },
+            {
+                path: 'decorator/update-status',
+                element: <DecoratorRoutes>
+                    <UpdateStatus />
+                </DecoratorRoutes>
+            },
+            {
+                path: 'decorator/todays-schedule',
+                element: <DecoratorRoutes>
+                    <TodaysSchedule />
+                </DecoratorRoutes>
+            },
+            {
+                path: 'decorator/earnings',
+                element: <DecoratorRoutes>
+                    <Earnings />
+                </DecoratorRoutes>
             },
         ]
     },

@@ -12,7 +12,8 @@ const ManageDecorators = () => {
     const [booking, setBooking] = useState(null)
     const showDecoratorRef = useRef(null)
     const { loading } = useAuth()
-    const axiosSecure = useAxiosSecure();
+    const axiosSecure = useAxiosSecure()
+
     const { data: decorators = [], isLoading, refetch } = useQuery({
         queryKey: ['decorators', "admin-dashboard"],
         queryFn: async () => {
@@ -22,7 +23,7 @@ const ManageDecorators = () => {
     })
 
     //get booking info
-    const { data: bookings = [], isLoading: booingLoding } = useQuery({
+    const { data: bookings = [], isLoading: booingLoding, refetch: bookingsRefetch } = useQuery({
         queryKey: ['bookings', 'admindashboard'],
         queryFn: async () => {
             const res = await axiosSecure.get('/bookings')
@@ -30,7 +31,6 @@ const ManageDecorators = () => {
         }
     })
 
-    console.log(bookings);
 
     // manage decorators applications
     const handelDecorator = async (decorator, status) => {
@@ -63,10 +63,35 @@ const ManageDecorators = () => {
             await axiosSecure.patch(`/users/${decorator?.email}`, { role })
             refetch()
             toast.success("user updated as decorator")
+        }
+        if (status === 'user') {
+            const status = ''
+            const role = 'user'
+
+            Swal.fire({
+                text: "do you want to change this as a user?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await axiosSecure.patch(`/decorators/${decorator?.email}`, { status })
+                    await axiosSecure.patch(`/users/${decorator?.email}`, { role })
+                    refetch()
+                    Swal.fire({
+                        title: "Role has been Changed!",
+                        icon: "success"
+                    });
+                }
+            });
+
 
         }
 
     }
+    console.log(booking);
     // find decorators 
     const { data: showDecorators = [], isLoading: decoratosLoading, refetch: decoratorsRefetch } = useQuery({
         queryKey: ['findDecorators'],
@@ -138,6 +163,10 @@ const ManageDecorators = () => {
                                             <option value="" selected>Select to </option>
                                             <option value="approve">Approve</option>
                                             <option value="reject">Regect</option>
+                                            {
+                                                decorator?.status === 'approved' &&
+                                                <option value="user">Set As User</option>
+                                            }
                                         </select>
                                     </td>
                                 </tr>)
@@ -159,6 +188,7 @@ const ManageDecorators = () => {
                                 <th>Customer Info</th>
                                 <th>Category</th>
                                 <th>Payment status</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -193,9 +223,10 @@ const ManageDecorators = () => {
                                         :
                                         <p className='text-error'>{booking?.paymentStatus}</p>
                                     }</td>
-
+                                    <td>{booking?.status}</td>
                                     <td>
                                         <button className='btn btn-primary'
+                                            disabled={booking?.status !== "pending"}
                                             onClick={() => handelFindDecorator(booking)}
                                         >Find Decorator</button>
                                     </td>
@@ -207,7 +238,7 @@ const ManageDecorators = () => {
                 </div>
             </div>
             {/* modal  */}
-            <ShowDecorators showDecoratorRef={showDecoratorRef} showDecorators={showDecorators} decoratorsRefetch={decoratorsRefetch} />
+            <ShowDecorators showDecoratorRef={showDecoratorRef} showDecorators={showDecorators} decoratorsRefetch={decoratorsRefetch} booking={booking} bookingsRefetch={bookingsRefetch} booingLoding={booingLoding} />
 
         </div>
     );

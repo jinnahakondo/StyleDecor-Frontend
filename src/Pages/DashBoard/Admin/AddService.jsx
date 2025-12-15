@@ -134,8 +134,8 @@ const AddService = () => {
                                 <input type="number" defaultValue={'0'} className='input outline-0' {...register('price',
                                     {
                                         required: "please enter service price", min: {
-                                            value: 1,
-                                            message: "price must be greater than 0"
+                                            value: 65,
+                                            message: "price must be at least 65 Taka"
                                         }
                                     })} />
                                 {

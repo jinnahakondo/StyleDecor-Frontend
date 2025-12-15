@@ -6,7 +6,7 @@ import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import { AiOutlineHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { FaCalendarCheck } from "react-icons/fa6";
+import { FaCalendarCheck, FaClock } from "react-icons/fa6";
 import { ReceiptText } from 'lucide-react';
 import useRole from '../../Hooks/useRole';
 import { FaUserCog } from "react-icons/fa";
@@ -15,12 +15,14 @@ import { LuCalendarCog } from "react-icons/lu";
 import { FaScrewdriverWrench } from "react-icons/fa6";
 import { FaUserPlus } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { FaTasks } from "react-icons/fa";
+import { BsCheckCircle } from "react-icons/bs";
+import { BiSolidCoinStack } from "react-icons/bi";
 
 
 const DashBoardLayout = () => {
     const { user, SignOUtUser } = useAuth()
     const { role, isLoading } = useRole()
-    // const role = 'admin'
 
     const handelLogout = () => {
         SignOUtUser()
@@ -183,6 +185,49 @@ const DashBoardLayout = () => {
                                             <FaScrewdriverWrench className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
                                                 Manage Services
+                                            </span>
+
+                                        </NavLink>
+                                    </li>
+                                </>
+                            }
+                            {/* decorators link  */}
+                            {
+                                role === 'decorator' && <>
+
+                                    <li>
+                                        <NavLink to={"/dashboard/decorator/asigned-projects"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Assigned Projects">
+                                            {/*  icon */}
+                                            <FaTasks className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Assigned Projects
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/dashboard/decorator/update-status"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Update Status">
+                                            {/* icon */}
+                                            <BsCheckCircle className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Update Status
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/dashboard/decorator/todays-schedule"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Today’s Schedule">
+                                            {/* icon */}
+                                            <FaClock className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Today’s Schedule
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/dashboard/decorator/earnings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Earnings">
+                                            {/*manage service icon */}
+                                            <BiSolidCoinStack className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Earnings
                                             </span>
 
                                         </NavLink>

@@ -2,16 +2,48 @@ import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 
-const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decoratorsRefetch }) => {
+const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decoratorsRefetch, booking, bookingsRefetch, booingLoding }) => {
     const axiosSecure = useAxiosSecure()
 
+    console.log("decorators from modal", decorators);
+
     const handelAsign = async (decorator) => {
-        const workingStatus = 'Assigned'
-        await axiosSecure.patch(`/asign/decorator/${decorator._id}`, { workingStatus })
-        decoratorsRefetch()
-        toast.success(`${decorator.name} has benn asigned for this service`)
+        const bookingInfoUpdate = {
+            decoratorName: decorator?.name,
+            decoratorEmail: decorator?.email,
+            status: "Assigned"
+        }
+        const { serviceId, title, price, category, customerName, customerEmail, customerAddress, bookingDate, bookingTime, paymentStatus, district, decoratorEmail } = booking;
+
+        const assignedBookingInfo = {
+            serviceId,
+            title,
+            price,
+            category,
+            customerName,
+            customerEmail,
+            customerAddress,
+            bookingDate,
+            bookingTime,
+            paymentStatus,
+            district,
+            decoratorEmail,
+            status: 'Assigned',
+        }
+
+        try {
+            await axiosSecure.patch(`/bookings/${booking._id}`, bookingInfoUpdate)
+            await axiosSecure.post('/assigned-bookings', assignedBookingInfo)
+            decoratorsRefetch()
+            toast.success(`${decorator.name} has benn asigned for this service`)
+            bookingsRefetch()
+            showDecoratorRef.current.close()
+        } catch (error) {
+            toast.error(error.code)
+        }
+
     }
-    
+
     return (
         <div>
             <dialog ref={showDecoratorRef} className="modal">
@@ -25,19 +57,24 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
                         <span> {decorators.length > 1 && " deorators found"}</span>
                     </h3>
                     <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-                        <table className="table">
-                            <tbody>
-                                {decorators.map(d => <tr key={d._id}>
-                                    <td>{d?.name}</td>
-                                    <td>{d?.district}</td>
-                                    <td>{d?.category}</td>
-                                    <td><button
-                                        onClick={() => handelAsign(d)}
-                                        disabled={d?.workingStatus !== 'available'}
-                                        className='btn btn-primary btn-sm'>Asign</button></td>
-                                </tr>)}
-                            </tbody>
-                        </table>
+                        {
+                            booingLoding ? 'loading...'
+                                :
+                                <table className="table">
+                                    <tbody>
+                                        {decorators.map(d => <tr key={d._id}>
+                                            <td>{d?.name}</td>
+                                            <td>{d?.district}</td>
+                                            <td>{d?.category}</td>
+                                            <td><button
+                                                onClick={() => handelAsign(d)}
+                                                disabled={d?.workingStatus !== 'available'}
+                                                className='btn btn-primary btn-sm'>Asign</button></td>
+                                        </tr>)}
+                                    </tbody>
+                                </table>
+                        }
+
                     </div>
                     <p className="py-4"></p>
                 </div>

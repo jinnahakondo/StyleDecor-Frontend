@@ -40,7 +40,8 @@ const BookDrawer = ({ openBookDrawer, service }) => {
         customerAddress: address,
         bookingDate: selectedDate,
         bookingTime: selectedTimeSlot,
-        paymentStatus: 'pending'
+        paymentStatus: 'pending',
+        status: 'pending'
     }
     // console.log(bookServiceInfo);
 
