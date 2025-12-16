@@ -3,6 +3,7 @@ import ServiceCard from '../../ServiceCard/ServiceCard';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loader from '../../Loader/Loader';
+import { Link } from 'react-router';
 
 const Services = () => {
 
@@ -11,7 +12,7 @@ const Services = () => {
     const { data: services, isLoading } = useQuery({
         queryKey: ['home-services'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/services');
+            const res = await axiosSecure.get('/services/home');
             return res.data;
         }
     })
@@ -29,7 +30,7 @@ const Services = () => {
                 }
             </div>
             <div className='grid place-items-center'>
-                <button className='btn btn-primary mt-10 '>See All Decorations</button>
+                <Link to='/services' className='btn btn-primary mt-10 '>See All Decorations</Link>
             </div>
         </div>
     );

@@ -25,6 +25,7 @@ import UpdateStatus from "../Pages/DashBoard/Deocrator/UpdateStatus";
 import TodaysSchedule from "../Pages/DashBoard/Deocrator/TodaysSchedule";
 import Earnings from "../Pages/DashBoard/Deocrator/Earnings";
 import UserRoutes from "./UserRoutes";
+import Services from "../Pages/Services/Services";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: '/services',
+                Component: Services
             },
             {
                 path: '/service-details/:id',

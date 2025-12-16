@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 const ServiceCard = ({ service }) => {
 
     return (
-        <div>
-            <div className=" bg-white rounded-2xl shadow-md transition-all overflow-hidden border hover:shadow-primary hover:shadow-lg hover:scale-105 border-gray-100">
+        <div className='h-full'>
+            <div className=" bg-white rounded-2xl shadow-md transition-all overflow-hidden border hover:shadow-primary hover:shadow-lg hover:scale-105 border-gray-100 h-full flex flex-col">
                 {/* Image */}
                 <figure className='rounded-lg'>
                     <img
@@ -16,7 +16,7 @@ const ServiceCard = ({ service }) => {
                 </figure>
 
                 {/* Content */}
-                <div className="p-5 space-y-3">
+                <div className="p-5 space-y-3 mt-auto">
                     <div className="badge badge-soft badge-primary">{service.category}</div>
 
                     <h2 className="heading-two">{service.title}</h2>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GoogleLogin from '../../Components/Social Login/GoogleLogin';
 import { Link, useNavigate, useLocation, Navigate } from 'react-router';
 import { useForm } from "react-hook-form"
@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 const Login = () => {
 
     const { signInUser, user } = useAuth();
+
+    const [isSubmiting, setIsSubmiting] = useState(false)
 
     const navigate = useNavigate();
 
@@ -21,14 +23,17 @@ const Login = () => {
     } = useForm()
 
     const handelLogin = (data) => {
+        setIsSubmiting(true)
         const { email, password } = data;
         signInUser(email, password)
             .then(() => {
                 navigate(location.state || '/')
                 toast.success("signed in successfull")
+                setIsSubmiting(false)
             })
             .catch(error => {
                 toast.error(error.code)
+                setIsSubmiting(false)
             })
     }
 
@@ -113,7 +118,9 @@ const Login = () => {
                             </div>
                         </div>
                         <div>
-                            <button className='btn w-full btn-primary'>Sign in</button>
+                            <button className='btn w-full btn-primary'>{
+                                isSubmiting ? 'loading...' : 'Sign in'
+                            }</button>
                         </div>
                     </form>
                     <div className="mt-6">
