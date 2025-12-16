@@ -8,6 +8,7 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
     console.log("decorators from modal", decorators);
 
     const handelAsign = async (decorator) => {
+
         const bookingInfoUpdate = {
             decoratorName: decorator?.name,
             decoratorEmail: decorator?.email,
@@ -27,13 +28,23 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
             bookingTime,
             paymentStatus,
             district,
-            decoratorEmail,
+            decoratorEmail: decorator?.email,
             status: 'Assigned',
+        }
+
+        const trackingInfo = {
+            serviceId,
+            title,
+            price,
+            customerName,
+            customerEmail,
+            trackingStatus: ["Assigned"]
         }
 
         try {
             await axiosSecure.patch(`/bookings/${booking._id}`, bookingInfoUpdate)
             await axiosSecure.post('/assigned-bookings', assignedBookingInfo)
+            await axiosSecure.post('/trackings', trackingInfo)
             decoratorsRefetch()
             toast.success(`${decorator.name} has benn asigned for this service`)
             bookingsRefetch()

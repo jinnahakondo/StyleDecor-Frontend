@@ -13,7 +13,8 @@ const AssignedProjects = () => {
         queryFn: async () => {
             const res = await axiosSecure.get(`/assigned-bookings/${user?.email}`)
             return res.data;
-        }
+        },
+        enabled: !!user?.email
     })
     console.log(data);
     return (
