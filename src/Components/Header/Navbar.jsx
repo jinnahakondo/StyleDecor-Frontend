@@ -3,16 +3,20 @@ import { Link, NavLink } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import Container from '../Container/Container';
+import useRole from '../../Hooks/useRole';
 
 const Navbar = ({ style }) => {
+    const { role, } = useRole()
+    const { user, SignOUtUser } = useAuth()
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/services'}> Services</NavLink></li>
         <li><NavLink to={'/about'}>About</NavLink></li>
         <li><NavLink to={'/contact'}> Contact</NavLink></li>
-        <li><NavLink to={'/be-a-decorator'}> Be A Decorator</NavLink></li>
+        {role === 'user' &&
+            <li><NavLink to={'/be-a-decorator'}> Be A Decorator</NavLink></li
+            >}
     </>
-    const { user, SignOUtUser } = useAuth()
 
     const handelLogout = () => {
         SignOUtUser()
@@ -38,7 +42,7 @@ const Navbar = ({ style }) => {
                                 {links}
                             </ul>
                         </div>
-                        <a className="btn btn-ghost  lg:text-2xl text-primary font-bold">StyleDecor</a>
+                        <Link to={'/'} className="btn btn-ghost  lg:text-2xl text-primary font-bold">StyleDecor</Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1 font-bold">

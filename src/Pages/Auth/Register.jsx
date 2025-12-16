@@ -11,6 +11,7 @@ import PostImage from '../../Utils/PostImage';
 const Register = () => {
 
     const { createUser, updateUserProfile, loading, user } = useAuth();
+    const [isSubmiting, setIsSubmiting] = useState(false)
 
     const [profilePic, setProfilePic] = useState(userPic)
 
@@ -28,6 +29,7 @@ const Register = () => {
     const axiosSecure = useAxiosSecure()
 
     const handleCreateUser = async (data) => {
+        setIsSubmiting(true)
         const { name, email, password, photo } = data;
 
         const updateInfo = { displayName: name, photoURL: photo }
@@ -50,6 +52,8 @@ const Register = () => {
             toast.success("account created successfully")
         } catch (error) {
             toast.error(error.code)
+        } finally {
+            setIsSubmiting(false)
         }
 
     }
@@ -186,7 +190,7 @@ const Register = () => {
                         </div>
                         <div>
                             <button className='btn w-full btn-primary'>
-                                {loading ? "loading..." : "Create Account"}
+                                {isSubmiting ? "loading..." : "Create Account"}
                             </button>
                         </div>
                     </form>

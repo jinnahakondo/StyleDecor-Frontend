@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../../Hooks/useAuth';
 import { format } from 'date-fns';
-import { Link } from 'react-router';
+import { IoEyeOutline } from "react-icons/io5";
+import RecieptModal from './RecieptModal';
 
 const PaymentHistroy = () => {
+    const [paymentInfo, setPaymentInfo] = useState({})
     const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const showReciept = useRef(null)
     const { data: paymentHistory = [], isLoading } = useQuery({
         queryKey: ["payment-history"],
         queryFn: async () => {
@@ -29,6 +32,7 @@ const PaymentHistroy = () => {
                             <th>paidAt</th>
                             <th>Transection Id</th>
                             <th>Payment Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,15 +41,19 @@ const PaymentHistroy = () => {
                                 <td>{history?.serviceName}</td>
                                 <td>{history?.amount}</td>
                                 <td>{format(history?.paidAt, 'd MMM yyyy')}</td>
-                                <td className='text-primary'><Link to={`/track-service/${history.serviceId}`}>{history?.transectionId}</Link></td>
+                                <td>{history?.transectionId}</td>
                                 <td>{history?.paymentStatus}</td>
-
+                                <td onClick={() => {
+                                    setPaymentInfo(history)
+                                    showReciept.current.showModal();
+                                }}><IoEyeOutline className='text-2xl cursor-pointer' /></td>
                             </tr>)
                         }
 
                     </tbody>
                 </table>
             </div>
+            <RecieptModal showReciept={showReciept} paymentInfo={paymentInfo}/>
         </div>
     );
 };

@@ -57,7 +57,7 @@ const DashBoardLayout = () => {
                                 <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost ">
                                     <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 `} fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                                 </label>
-                                <a className="btn btn-ghost text-xl text-primary font-bold">StyleDecor</a>
+                                <Link to={'/'} className="btn btn-ghost text-xl text-primary font-bold">StyleDecor</Link>
                             </div>
                             <div className="navbar-center hidden lg:flex">
                                 <ul className="menu menu-horizontal px-1">
@@ -73,7 +73,7 @@ const DashBoardLayout = () => {
                                                 <div className="w-10 rounded-full">
                                                     <img
                                                         alt="Tailwind CSS Navbar component"
-                                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                                        src={user?.email} />
                                                 </div>
                                             </div>
                                             <ul
@@ -114,18 +114,18 @@ const DashBoardLayout = () => {
                                     <span className="is-drawer-close:hidden">Homepage</span>
                                 </NavLink>
                             </li>
+                            <li>
+                                <NavLink to={"/dashboard/my-profile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
+                                    {/* profile icon */}
+                                    <CgProfile className="text-2xl" />
+                                    <span className="is-drawer-close:hidden">
+                                        My Profile
+                                    </span>
+                                </NavLink>
+                            </li>
                             {/* user links */}
                             {
                                 role === 'user' && <>
-                                    <li>
-                                        <NavLink to={"/dashboard/my-profile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
-                                            {/* profile icon */}
-                                            <CgProfile className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                My Profile
-                                            </span>
-                                        </NavLink>
-                                    </li>
                                     <li>
                                         <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Bookings">
                                             {/* booking icon */}

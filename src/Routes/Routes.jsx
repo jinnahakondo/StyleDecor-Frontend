@@ -24,6 +24,7 @@ import AssignedProjects from "../Pages/DashBoard/Deocrator/AssignedProjects";
 import UpdateStatus from "../Pages/DashBoard/Deocrator/UpdateStatus";
 import TodaysSchedule from "../Pages/DashBoard/Deocrator/TodaysSchedule";
 import Earnings from "../Pages/DashBoard/Deocrator/Earnings";
+import UserRoutes from "./UserRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -78,15 +79,21 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'my-bookings',
-                Component: MyBookings
+                element: <UserRoutes>
+                    <MyBookings />
+                </UserRoutes>
             },
             {
                 path: 'payment-success',
-                Component: PaymentSuccess
+                element: <UserRoutes>
+                    <PaymentSuccess />
+                </UserRoutes>
             },
             {
                 path: 'payment-history',
-                Component: PaymentHistroy
+                element: <UserRoutes>
+                    <PaymentHistroy />
+                </UserRoutes>
             },
             {
                 path: 'admin/manage-decorators',
@@ -145,7 +152,7 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: '/track-service/:id',
+        path: '/track-service/:trakingId',
         Component: TrackService
     }
 ])

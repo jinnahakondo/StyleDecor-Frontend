@@ -4,6 +4,7 @@ import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loader from '../../../Components/Loader/Loader';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const MyBookings = () => {
     const { user } = useAuth();
@@ -115,7 +116,7 @@ const MyBookings = () => {
                                             </div>
                                         </td>
                                         <td>
-                                            <p>{booking?.trakingId}</p>
+                                            <p><Link to={`/track-service/${booking?.trakingId}`} className='text-primary cursor-pointer'>{booking?.trakingId}</Link></p>
                                         </td>
                                         <td>
                                             <div className='flex flex-col gap-4'>
