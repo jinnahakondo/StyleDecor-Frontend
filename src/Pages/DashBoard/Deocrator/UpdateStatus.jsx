@@ -30,6 +30,7 @@ const UpdateStatus = () => {
 
             await axiosSecure.patch(`/assigned-bookings/${booking?._id}`, { status })
             await axiosSecure.patch(`/bookings/update-status/${booking?.serviceId}`, { status })
+            await axiosSecure.patch(`/trackings/${booking?.serviceId}`, { status })
             return status
         },
         onSuccess: (status) => {
