@@ -26,12 +26,14 @@ import TodaysSchedule from "../Pages/DashBoard/Deocrator/TodaysSchedule";
 import Earnings from "../Pages/DashBoard/Deocrator/Earnings";
 import UserRoutes from "./UserRoutes";
 import Services from "../Pages/Services/Services";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: '/',
         Component: MainLayout,
         hydrateFallbackElement: <Loader />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -159,5 +161,6 @@ export const router = createBrowserRouter([
     {
         path: '/track-service/:trakingId',
         Component: TrackService
-    }
+    },
+
 ])

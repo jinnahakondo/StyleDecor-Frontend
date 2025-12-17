@@ -7,11 +7,14 @@ import { toast } from 'react-toastify';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import userPic from '../../assets/user.png'
 import PostImage from '../../Utils/PostImage';
+import ButtonLoader from '../../Components/Loader/buttonLoader';
 
 const Register = () => {
 
-    const { createUser, updateUserProfile, loading, user } = useAuth();
+    const { createUser, updateUserProfile, user } = useAuth();
     const [isSubmiting, setIsSubmiting] = useState(false)
+
+    const [ischecked, setIsChecked] = useState(false)
 
     const [profilePic, setProfilePic] = useState(userPic)
 
@@ -178,6 +181,7 @@ const Register = () => {
                                     name="remember_me"
                                     type="checkbox"
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:text-white dark:border-gray-600 dark:focus:ring-indigo-400 disabled:cursor-wait disabled:opacity-50"
+                                    onChange={(e) => setIsChecked(e.target.checked)}
                                 />
                                 <label
                                     htmlFor="remember_me"
@@ -189,8 +193,9 @@ const Register = () => {
 
                         </div>
                         <div>
-                            <button className='btn w-full btn-primary'>
-                                {isSubmiting ? "loading..." : "Create Account"}
+
+                            <button className='btn w-full btn-primary' disabled={!ischecked}>
+                                {isSubmiting ? <ButtonLoader /> : "Create Account"}
                             </button>
                         </div>
                     </form>

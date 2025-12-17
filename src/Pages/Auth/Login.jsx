@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation, Navigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
+import ButtonLoader from '../../Components/Loader/buttonLoader';
 
 
 const Login = () => {
@@ -11,6 +12,8 @@ const Login = () => {
     const { signInUser, user } = useAuth();
 
     const [isSubmiting, setIsSubmiting] = useState(false)
+
+    const [ischecked, setIsChecked] = useState(false)
 
     const navigate = useNavigate();
 
@@ -102,6 +105,7 @@ const Login = () => {
                                     name="remember_me"
                                     type="checkbox"
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 dark:text-white dark:border-gray-600 dark:focus:ring-indigo-400 disabled:cursor-wait disabled:opacity-50"
+                                    onChange={(e) => setIsChecked(e.target.checked)}
                                 />
 
                                 <label
@@ -118,9 +122,9 @@ const Login = () => {
                             </div>
                         </div>
                         <div>
-                            <button className='btn w-full btn-primary'>{
-                                isSubmiting ? 'loading...' : 'Sign in'
-                            }</button>
+                            <button className='btn w-full btn-primary' disabled={!ischecked}>
+                                {isSubmiting ? <ButtonLoader /> : "Create Account"}
+                            </button>
                         </div>
                     </form>
                     <div className="mt-6">

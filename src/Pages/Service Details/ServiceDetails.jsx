@@ -10,6 +10,8 @@ import Tab from './Tab/Tab';
 import { format } from "date-fns";
 import BookDrawer from '../../Components/Sections/Services/BookDrawer';
 import useAuth from '../../Hooks/useAuth';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 
 const ServiceDetails = () => {
@@ -47,7 +49,7 @@ const ServiceDetails = () => {
                             <p>Ragings: {service?.rating}</p>
                             <p className='text-accent font-medium'>{service?.reviews?.length} Reviews</p>
                         </div>
-                        <p className='heading-one'>${service?.price}</p>
+                        <p className='heading-one flex items-center '><FaBangladeshiTakaSign />{service?.price}</p>
                         <p className='text-accent font-medium'>
                             Created At: {service?.createdAt && format(new Date(service?.createdAt), "dd MMM yyyy")} </p>
 

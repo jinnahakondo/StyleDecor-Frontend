@@ -4,6 +4,7 @@ import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import ButtonLoader from '../Loader/buttonLoader';
 
 const GoogleLogin = () => {
     const [isSubmiting, setIsSubmiting] = useState(false)
@@ -50,7 +51,7 @@ const GoogleLogin = () => {
         <button
             onClick={handelLogin}
             className="btn bg-white text-black border-[#e5e5e5] w-full  ">
-            {isSubmiting ? 'loading...' :
+            {isSubmiting ? <ButtonLoader /> :
                 <>
                     <FcGoogle className='text-xl' /> <span> Login with Google</span>
                 </>
