@@ -74,7 +74,7 @@ const UpdateStatus = () => {
                                 <td>{a?.customerAddress}</td>
                                 <td>{a?.bookingDate}</td>
                                 <td>{a?.bookingTime}</td>
-                                <td className='flex items-center gap-1'><FaBangladeshiTakaSign /> {a?.price}</td>
+                                <td className='flex items-center gap-1'><FaBangladeshiTakaSign /> {a?.totalPrice}</td>
                                 <td >{a?.status}</td>
                                 <td>
                                     <select className='select lg:w-fit' onChange={(e) => handelChangeStatus(e.target.value, a)}>

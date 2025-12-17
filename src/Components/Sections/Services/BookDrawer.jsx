@@ -78,6 +78,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
         const cost = Number(service?.price) * Number(data.unit)
         bookServiceInfo.district = data.district;
         bookServiceInfo.totalPrice = cost;
+        bookServiceInfo.createdAt = new Date();
 
         Swal.fire({
             text: `Your total cost will be ${cost}`,
