@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import PostImage from '../../../Utils/PostImage';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const AddService = () => {
+
     const queryClient = useQueryClient();
     const [serviceImage, setServiceImage] = useState(null)
     const [uploading, setUploading] = useState(false)
@@ -17,8 +18,24 @@ const AddService = () => {
         register,
         handleSubmit,
         reset,
+        control,
         formState: { errors },
     } = useForm()
+
+    // category wise units
+    const CATEGORY_UNITS = {
+        home: ["per sqr-ft", "per floor", "fixed"],
+        wedding: ["per event", "fixed"],
+        office: ["per sqr-ft", "per floor"],
+        seminar: ["per event", "per day"],
+        meeting: ["per event", "per hour"]
+    };
+
+    const units = useWatch({
+        control,
+        name: "category"
+    })
+
 
     const { mutate, isPending } = useMutation({
         mutationFn: async (service) => {
@@ -112,7 +129,8 @@ const AddService = () => {
                     </div>
                     {/* service category & price  */}
                     <div >
-                        <div className='grid grid-cols-2 gap-7'>
+                        <div className='grid grid-cols-3 gap-7'>
+                            {/* category  */}
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>Service Category</label>
                                 <select {...register('category', { required: "please select a category" })} className='dropdown input outline-0'>
@@ -128,9 +146,23 @@ const AddService = () => {
                                     <p className='text-red-500'>{errors?.category?.message}</p>
                                 }
                             </div>
+                            {/* units  */}
+                            <div className='flex flex-col gap-2'>
+                                <label className='font-bold'> Unit</label>
+                                <select {...register('unit', { required: "please select a category" })} className='dropdown input outline-0'>
+                                    <option value="">Select a Unit</option>
+                                    {
+                                        CATEGORY_UNITS[units]?.map(unit => <option value={unit}>{unit}</option>)
+                                    }
+                                </select>
+                                {
+                                    errors?.category &&
+                                    <p className='text-red-500'>{errors?.category?.message}</p>
+                                }
+                            </div>
                             {/* price  */}
                             <div className='flex flex-col gap-2'>
-                                <label className='font-bold'>Service Price</label>
+                                <label className='font-bold'> Cost</label>
                                 <input type="number" defaultValue={'0'} className='input outline-0' {...register('price',
                                     {
                                         required: "please enter service price", min: {
