@@ -5,6 +5,8 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loader from '../../../Components/Loader/Loader';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 const MyBookings = () => {
     const { user } = useAuth();
@@ -69,10 +71,10 @@ const MyBookings = () => {
                             {/* head */}
                             <thead>
                                 <tr>
-                                    <th>Service Info</th>
-                                    <th>customer Info</th>
+                                    <th>Service Name</th>
                                     <th>Booking Info</th>
                                     <th>Tracking No. </th>
+                                    <th>Total Price</th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -82,30 +84,14 @@ const MyBookings = () => {
                                 {
                                     bookings.map(booking => <tr key={booking._id}>
                                         <td>
-                                            <div className='flex gap-5 items-center'>
-                                                <p> serviceName:</p>
-                                                <p className='font-semibold'>{booking.title}</p>
-                                            </div>
-                                            <div className='flex gap-5 items-center '>
-                                                <p>servicePrice:</p>
-                                                <p className='font-semibold  '> {booking.price}</p>
-                                            </div>
+                                            <p className='font-semibold'>{booking.title}</p>
                                         </td>
+
                                         <td>
-                                            <div className='flex gap-5 items-center'>
-                                                <p> customerName:</p>
-                                                <p className='font-semibold'>{booking.customerName}</p>
-                                            </div>
-                                            <div className='flex gap-5 items-center '>
-                                                <p>customerEmail:</p>
-                                                <p className='font-semibold  '> {booking.customerEmail}</p>
-                                            </div>
-                                            <div className='flex gap-5 items-center '>
-                                                <p>customerAddress:</p>
-                                                <p className='font-semibold  '> {booking.customerEmail}</p>
-                                            </div>
-                                        </td>
-                                        <td>
+                                            <p>{booking?.customerName}</p>
+                                            <p>{booking?.customerEmail}</p>
+                                            <p>{booking?.district}</p>
+                                            <p>{booking?.customerAddress}</p>
                                             <div className='flex gap-5 items-center '>
                                                 <p>bookingDate:</p>
                                                 <p className='font-semibold  '> {booking.bookingDate}</p>
@@ -117,6 +103,11 @@ const MyBookings = () => {
                                         </td>
                                         <td>
                                             <p><Link to={`/track-service/${booking?.trakingId}`} className='text-primary cursor-pointer'>{booking?.trakingId}</Link></p>
+                                        </td>
+                                        <td>
+                                            <p className='font-semibold flex items-center gap-1'>                              <span><FaBangladeshiTakaSign /></span>
+                                                {booking.totalPrice}</p>
+
                                         </td>
                                         <td>
                                             <div className='flex flex-col gap-4'>

@@ -5,9 +5,11 @@ import PostImage from '../../../Utils/PostImage';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useAuth from '../../../Hooks/useAuth';
 
 const AddService = () => {
 
+    const { user } = useAuth()
     const queryClient = useQueryClient();
     const [serviceImage, setServiceImage] = useState(null)
     const [uploading, setUploading] = useState(false)
@@ -62,7 +64,8 @@ const AddService = () => {
             image: serviceImage,
             rating: 4,
             createdAt: new Date(),
-            price: Number(data.price)
+            price: Number(data.price),
+            createdByEmail: user?.email,
         }
 
         mutate(serviceInfo)

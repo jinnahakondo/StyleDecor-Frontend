@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router';
 import { useForm, useWatch } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import getUnitLabel from '../../../Utils/getUnitLabel';
+import Swal from 'sweetalert2';
 
 const BookDrawer = ({ openBookDrawer, service }) => {
     const {
@@ -28,6 +30,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
     const [address, setAddress] = useState('')
     const [selectedTimeSlot, setSelectedTimeSlot] = useState('')
     const [selectedDate, setSelectedDate] = useState("");
+
     const bookServiceInfo = {
         serviceId: service?._id,
         title: service?.title,
@@ -71,16 +74,33 @@ const BookDrawer = ({ openBookDrawer, service }) => {
     const districts = districtsObj.map(d => d.district)
 
 
-    const handelBookingService = async (data) => {
+    const handelBookingService = (data) => {
+        const cost = Number(service?.price) * Number(data.unit)
         bookServiceInfo.district = data.district;
+        bookServiceInfo.totalPrice = cost;
 
-        const res = await axiosSecure.post('/bookings', bookServiceInfo);
-        if (res.data.insertedId) {
-            toast.success("service booked");
-        }
-        openBookDrawer.current.checked = false;
-        navigate('/dashboard/my-bookings')
+        Swal.fire({
+            text: `Your total cost will be ${cost}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirm Booking"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.post('/bookings', bookServiceInfo);
+                if (res.data.insertedId) {
+                    toast.success("service booked");
+                }
+                openBookDrawer.current.checked = false;
+                navigate('/dashboard/my-bookings')
+            }
+        });
+
+
     }
+
+    const unitLabel = getUnitLabel("per sqr-ft")
     return (
         <div>
             <div className="drawer drawer-end">
@@ -125,16 +145,31 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                                 />
                             </div>
 
+
                             {/* service Price */}
                             <div className='flex flex-col gap-2 mt-4'>
-                                <label className='font-bold '> Service Price</label>
+                                <label className='font-bold '> Cost</label>
                                 <input type="text"
                                     className='input'
+
                                     defaultValue={service?.price}
                                     readOnly
                                 />
                             </div>
+                            {/* service unit */}
+                            <div className='flex flex-col gap-2 mt-4'>
+                                <label className='font-bold '> {unitLabel}</label>
 
+                                {service?.unit !== "fixed" && (
+                                    <input
+                                        type="number"
+                                        required
+                                        className="input"
+                                        placeholder={unitLabel}
+                                        {...register('unit')}
+                                    />
+                                )}
+                            </div>
                             {/* region  */}
                             <div className='flex flex-col gap-2 mt-4'>
                                 <label htmlFor="region" className='font-bold'>Region</label>

@@ -14,12 +14,13 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
             decoratorEmail: decorator?.email,
             status: "Assigned"
         }
-        const { serviceId, title, price, category, customerName, customerEmail, customerAddress, bookingDate, bookingTime, paymentStatus, district, trakingId } = booking;
+        const { serviceId, title, price, category, customerName, customerEmail, customerAddress, bookingDate, bookingTime, paymentStatus, district, trakingId, totalPrice } = booking;
 
         const assignedBookingInfo = {
             serviceId,
             title,
             price,
+            totalPrice,
             category,
             customerName,
             customerEmail,
@@ -36,7 +37,7 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
         const trackingInfo = {
             trakingId,
             title,
-            price,
+            totalPrice,
             customerName,
             customerEmail,
             trackingStatus: ["Assigned"]
