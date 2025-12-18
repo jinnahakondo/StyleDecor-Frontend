@@ -27,6 +27,7 @@ import Earnings from "../Pages/DashBoard/Deocrator/Earnings";
 import UserRoutes from "./UserRoutes";
 import Services from "../Pages/Services/Services";
 import ErrorPage from "../Pages/ErrorPage";
+import DecoratorHome from "../Pages/DashBoard/Deocrator/DecoratorHome";
 
 export const router = createBrowserRouter([
     {
@@ -76,10 +77,7 @@ export const router = createBrowserRouter([
             <DashBoardLayout />
         </PrivateRoutes>,
         children: [
-            {
-                path: 'home',
-                element: <p>Home</p>
-            },
+
             {
                 path: 'my-profile',
                 Component: MyProfile
@@ -125,6 +123,14 @@ export const router = createBrowserRouter([
                 element: <AdminRoutes>
                     <ManageServices />
                 </AdminRoutes>
+            },
+            //decorator 
+
+            {
+                path: 'decorator/home',
+                element: <DecoratorRoutes>
+                    <DecoratorHome />
+                </DecoratorRoutes>
             },
             {
                 path: 'decorator/asigned-projects',
