@@ -40,7 +40,7 @@ const MyBookings = () => {
         });
     };
 
-    if (isLoading) return <Loader />;
+    if (isLoading) return <div className='h-screen grid place-items-center'><Loader /></div>;
 
     return (
         <div className=" px-4">
