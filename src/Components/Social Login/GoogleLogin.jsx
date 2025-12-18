@@ -3,15 +3,15 @@ import { FcGoogle } from 'react-icons/fc';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import ButtonLoader from '../Loader/buttonLoader';
+import useAxios from '../../Hooks/useAxios';
+import Loader from '../Loader/Loader';
 
 const GoogleLogin = () => {
     const [isSubmiting, setIsSubmiting] = useState(false)
 
     const { googleLogin, } = useAuth();
 
-    const axiosSecure = useAxiosSecure();
+    const instance = useAxios();
 
     const navigate = useNavigate()
 
@@ -28,11 +28,9 @@ const GoogleLogin = () => {
                     profileImage: res?.user.photoURL,
                     createdAt: new Date()
                 }
-                console.log("before save db", userInfo);
 
-                axiosSecure.post('/users', userInfo)
-                    .then(res => {
-                        console.log(res.data);
+                instance.post('/users', userInfo)
+                    .then(() => {
                         navigate(location.state || '/');
                     })
                     .catch(error => console.log(error.code))
@@ -51,7 +49,7 @@ const GoogleLogin = () => {
         <button
             onClick={handelLogin}
             className="btn bg-white text-black border-[#e5e5e5] w-full  ">
-            {isSubmiting ? <ButtonLoader /> :
+            {isSubmiting ? <Loader size={20} /> :
                 <>
                     <FcGoogle className='text-xl' /> <span> Login with Google</span>
                 </>

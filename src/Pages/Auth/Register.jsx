@@ -4,10 +4,10 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import userPic from '../../assets/user.png'
 import PostImage from '../../Utils/PostImage';
-import ButtonLoader from '../../Components/Loader/buttonLoader';
+import useAxios from '../../Hooks/useAxios';
+import Loader from '../../Components/Loader/Loader';
 
 const Register = () => {
 
@@ -29,7 +29,7 @@ const Register = () => {
         formState: { errors },
     } = useForm()
 
-    const axiosSecure = useAxiosSecure()
+    const instance = useAxios()
 
     const handleCreateUser = async (data) => {
         setIsSubmiting(true)
@@ -47,10 +47,9 @@ const Register = () => {
         console.log(userInfo);
         try {
             await createUser(email, password)
-            const updateUser = await updateUserProfile(updateInfo)
-            console.log("after update user:", updateUser);
-            const res = await axiosSecure.post('/users', userInfo)
-            console.log("from register page", res);
+            await updateUserProfile(updateInfo)
+            await instance.post('/users', userInfo)
+
             navigate(location.state || '/')
             toast.success("account created successfully")
         } catch (error) {
@@ -112,7 +111,7 @@ const Register = () => {
                                 htmlFor="Name"
                                 className="block text-sm font-medium text-gray-700 dark:text-white"
                             >
-                                YOur Name
+                                Your Name
                             </label>
                             <div className="mt-1">
                                 <input
@@ -195,7 +194,7 @@ const Register = () => {
                         <div>
 
                             <button className='btn w-full btn-primary' disabled={!ischecked}>
-                                {isSubmiting ? <ButtonLoader /> : "Create Account"}
+                                {isSubmiting ? <span className='w-7 h7'><Loader size={20} /></span> : "Create Account"}
                             </button>
                         </div>
                     </form>

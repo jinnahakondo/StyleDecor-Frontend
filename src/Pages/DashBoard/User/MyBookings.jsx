@@ -7,145 +7,143 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router';
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
-
 const MyBookings = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     const { data: bookings = [], isLoading, refetch } = useQuery({
-        queryKey: ["my-bookings", 'booked', user?.email],
+        queryKey: ["my-bookings", user?.email],
+        enabled: !!user?.email,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/bookings/${user?.email}`);
+            const res = await axiosSecure.get(`/bookings/${user.email}`);
             return res.data;
         }
-    })
-    // pay for service 
-    const handelPay = async (service) => {
-        try {
-            const res = await axiosSecure.post('/create-checkout-session', service);
-            const url = res.data;
-            window.location.assign(url)
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    });
 
-    // cancel booking 
+    const handelPay = async (service) => {
+        const res = await axiosSecure.post('/create-checkout-session', service);
+        window.location.assign(res.data);
+    };
+
     const handelCancel = async (id) => {
         Swal.fire({
-            text: "Do you want to cancel this booking?",
+            text: "Cancel this booking?",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, cancel",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                try {
-                    const res = await axiosSecure.delete(`/bookings/delete/${id}`)
-                    refetch()
-                    Swal.fire({
-                        title: "Canceled!",
-                        text: "Your booking has been cancled.",
-                        icon: "success"
-                    });
-                    console.log(res.data);
-                } catch (error) {
-                    console.log(error);
-                }
+                await axiosSecure.delete(`/bookings/delete/${id}`);
+                refetch();
+                Swal.fire("Canceled!", "Booking has been canceled.", "success");
             }
         });
+    };
 
-    }
+    if (isLoading) return <Loader />;
 
-    if (isLoading) return <Loader />
     return (
-        <div>
-            {/* <h2 className='heading-one mb-10'>My Bookings</h2> */}
-            {/* name of each tab group should be unique */}
-            <div className="tabs tabs-border">
-                <input type="radio" name="my_tabs_2" className="tab" aria-label="Booked" defaultChecked />
-                <div className="tab-content  border-t-gray-400 mt-3 rounded-none  p-10">
-                    <div className="overflow-x-auto">
-                        <table className="table ">
-                            {/* head */}
-                            <thead>
-                                <tr>
-                                    <th>Service Name</th>
-                                    <th>Booking Info</th>
-                                    <th>Tracking No. </th>
-                                    <th>Total Price</th>
-                                    <th>Actions</th>
+        <div className=" px-4">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* row 1 */}
-                                {
-                                    bookings.map(booking => <tr key={booking._id}>
-                                        <td>
-                                            <p className='font-semibold'>{booking.title}</p>
-                                        </td>
+            {/* Header */}
+            <div className="mb-6">
+                <h2 className="text-2xl font-semibold text-gray-800">
+                    My Bookings
+                </h2>
+                <p className="text-sm text-gray-500">
+                    Manage and track your booked services
+                </p>
+            </div>
 
-                                        <td>
-                                            <p>{booking?.customerName}</p>
-                                            <p>{booking?.customerEmail}</p>
-                                            <p>{booking?.district}</p>
-                                            <p>{booking?.customerAddress}</p>
-                                            <div className='flex gap-5 items-center '>
-                                                <p>bookingDate:</p>
-                                                <p className='font-semibold  '> {booking.bookingDate}</p>
-                                            </div>
-                                            <div className='flex gap-5 items-center '>
-                                                <p>bookingTime:</p>
-                                                <p className='font-semibold  '> {booking.bookingTime}</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p><Link to={`/track-service/${booking?.trackingId}`} className='text-primary cursor-pointer'>{booking?.trackingId}</Link></p>
-                                        </td>
-                                        <td>
-                                            <p className='font-semibold flex items-center gap-1'>                              <span><FaBangladeshiTakaSign /></span>
-                                                {booking.totalPrice}</p>
+            {/* Tabs */}
+            <div className="tabs tabs-bordered mb-6">
+                <a className="tab tab-active">Booked</a>
+                <a className="tab">Completed</a>
+            </div>
 
-                                        </td>
-                                        <td>
-                                            <div className='flex flex-col gap-4'>
-                                                {
-                                                    booking.paymentStatus === 'paid' ?
-                                                        <button className='btn btn-primary btn-outline disabled:text-primary disabled:' disabled>Paid</button> :
-                                                        <>
-                                                            <button
-                                                                onClick={() => handelPay(booking)}
-                                                                className='btn btn-outline btn-primary'>
-                                                                <span className='hidden xl:block'>Pay Now </span> <span className='xl:hidden'>Pay</span>
-                                                            </button>
-                                                            <button
-                                                                onClick={() => handelCancel(booking._id)}
-                                                                className='btn btn-outline btn-error'>
-                                                                <span className='hidden xl:block'>Cancel Booking </span> <span className='xl:hidden'>Cancel</span>
-                                                            </button>
-                                                        </>
+            {/* Empty State */}
+            {bookings.length === 0 && (
+                <div className="text-center py-16 text-gray-400">
+                    No bookings found
+                </div>
+            )}
 
-                                                }
+            {/* Booking Cards */}
+            <div className="space-y-5">
+                {bookings.map(booking => (
+                    <div
+                        key={booking._id}
+                        className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6"
+                    >
+                        <div className="flex flex-col lg:flex-row justify-between gap-6">
+
+                            {/* Left */}
+                            <div className="space-y-2">
+                                <h3 className="text-lg font-semibold text-gray-800">
+                                    {booking.title}
+                                </h3>
+
+                                <p className="text-sm text-gray-500">
+                                    {booking.customerName} • {booking.customerEmail}
+                                </p>
+                                <p className="text-sm text-gray-500 wrap-break-word">
+                                    {booking.customerAddress}, {booking.district}
+                                </p>
 
 
-                                            </div>
-                                        </td>
-                                    </tr>)
-                                }
+                                <div className="flex gap-6 text-sm text-gray-600">
+                                    <p>
+                                        <span className="font-medium">Date:</span> {booking.bookingDate}
+                                    </p>
+                                    <p>
+                                        <span className="font-medium">Time:</span> {booking.bookingTime}
+                                    </p>
+                                </div>
 
+                                <Link
+                                    to={`/track-service/${booking.trackingId}`}
+                                    className="inline-block text-sm text-primary hover:underline"
+                                >
+                                    Track Service #{booking.trackingId}
+                                </Link>
+                            </div>
 
-                            </tbody>
+                            {/* Right */}
+                            <div className="flex flex-col items-end justify-between gap-4">
 
-                        </table>
+                                <div className="text-right">
+                                    <p className="text-sm text-gray-500">Total</p>
+                                    <p className="text-xl font-semibold flex items-center gap-1">
+                                        <FaBangladeshiTakaSign />
+                                        {booking.totalPrice}
+                                    </p>
+                                </div>
+
+                                {booking.paymentStatus === 'paid' ? (
+                                    <span className="px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-700">
+                                        Paid
+                                    </span>
+                                ) : (
+                                    <div className="flex gap-3">
+                                        <button
+                                            onClick={() => handelPay(booking)}
+                                            className="btn btn-sm btn-outline btn-primary rounded-full px-5"
+                                        >
+                                            Pay
+                                        </button>
+                                        <button
+                                            onClick={() => handelCancel(booking._id)}
+                                            className="btn btn-sm btn-outline btn-error rounded-full px-5"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
                     </div>
-
-                </div>
-                <input type="radio" name="my_tabs_2" className="tab" aria-label="Completed" />
-                <div className="tab-content  border-t-gray-400 mt-3 rounded-none p-10">
-                    Completed
-                </div>
+                ))}
             </div>
         </div>
     );

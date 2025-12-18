@@ -11,6 +11,7 @@ import Loader from '../../Components/Loader/Loader';
 const Home = () => {
     const { loading } = useAuth()
     if (loading)return <Loader />
+
     return (
         <div className='margin space-y-20'>
             <Hero />

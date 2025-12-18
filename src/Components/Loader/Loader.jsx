@@ -1,9 +1,11 @@
 import React from 'react';
+import ClipLoader from "react-spinners/ClipLoader";
 
-const Loader = () => {
+
+const Loader = ({size}) => {
     return (
-        <div className='h-screen grid place-items-center'>
-            loading...
+        <div className='grid place-items-center'>
+            <ClipLoader size={size} />
         </div>
     );
 };

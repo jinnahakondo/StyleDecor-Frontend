@@ -4,7 +4,8 @@ import { Link, useNavigate, useLocation, Navigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
-import ButtonLoader from '../../Components/Loader/buttonLoader';
+import Loader from '../../Components/Loader/Loader';
+
 
 
 const Login = () => {
@@ -123,7 +124,7 @@ const Login = () => {
                         </div>
                         <div>
                             <button className='btn w-full btn-primary' disabled={!ischecked}>
-                                {isSubmiting ? <ButtonLoader /> : "Create Account"}
+                                {isSubmiting ? <Loader size={20} /> : " Sign in"}
                             </button>
                         </div>
                     </form>
