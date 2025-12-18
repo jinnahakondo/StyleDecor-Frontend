@@ -5,12 +5,12 @@ import useAxios from '../../../Hooks/useAxios';
 
 const TrackService = () => {
     const instance = useAxios()
-    const { trakingId } = useParams()
+    const { trackingId } = useParams()
 
     const { data = {}, isLoading } = useQuery({
-        queryKey: ['track-servie', trakingId],
+        queryKey: ['track-servie', trackingId],
         queryFn: async () => {
-            const res = await instance.get(`/track-service/${trakingId}`)
+            const res = await instance.get(`/track-service/${trackingId}`)
             return res.data;
         }
     })

@@ -109,7 +109,7 @@ const DashBoardLayout = () => {
                             {/* List item */}
 
                             <li>
-                                <NavLink to={"/dashboard/my-profile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Profile">
+                                <NavLink to={"/dashboard/my-profile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard mt-20" data-tip="My Profile">
                                     {/* profile icon */}
                                     <CgProfile className="text-2xl" />
                                     <span className="is-drawer-close:hidden">
@@ -188,13 +188,6 @@ const DashBoardLayout = () => {
                             {/* decorators link  */}
                             {
                                 role === 'decorator' && <>
-                                    <li className='mt-14'>
-                                        <NavLink to={'/dashboard/decorator/home'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Homepage">
-                                            {/* Home icon */}
-                                            <AiOutlineHome className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">Homepage</span>
-                                        </NavLink>
-                                    </li>
 
                                     <li>
                                         <NavLink to={"/dashboard/decorator/asigned-projects"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Assigned Projects">

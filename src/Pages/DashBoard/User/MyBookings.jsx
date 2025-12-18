@@ -102,7 +102,7 @@ const MyBookings = () => {
                                             </div>
                                         </td>
                                         <td>
-                                            <p><Link to={`/track-service/${booking?.trakingId}`} className='text-primary cursor-pointer'>{booking?.trakingId}</Link></p>
+                                            <p><Link to={`/track-service/${booking?.trackingId}`} className='text-primary cursor-pointer'>{booking?.trackingId}</Link></p>
                                         </td>
                                         <td>
                                             <p className='font-semibold flex items-center gap-1'>                              <span><FaBangladeshiTakaSign /></span>

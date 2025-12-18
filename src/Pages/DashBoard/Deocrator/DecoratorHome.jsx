@@ -1,36 +1,55 @@
-import { useQuery } from '@tanstack/react-query';
-import React from 'react';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
-import Container from '../../../Components/Container/Container';
+import { BsThreeDots } from "react-icons/bs";
+import { BiDollar } from "react-icons/bi";
+import { FiUsers } from "react-icons/fi";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
-const DecoratorHome = () => {
-
-    const axiosSecure = useAxiosSecure()
-
-    const { data: status = [] } = useQuery({
-        queryKey: ['statusOfBookingsBookings'],
-        queryFn: async () => {
-            const res = await axiosSecure.get('/assigned-books/status')
-            return res.data;
-        }
-    })
-
-    console.log(status);
+const DashboardStats = () => {
     return (
-        <div className='w-full mt-10'>
-            <Container>
-                <div className="stats shadow w-full">
-                    {status.map(stats =>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                        <div className="stat grid place-items-center p-10" key={stats._id}>
-                            <div className="stat-title text-xl">{stats._id}</div>
-                            <div className="stat-value text-primary">{stats.count}</div>
-                        </div>
-                    )}
-                </div>
-            </Container>
+            {/* Earned */}
+            <StatCard
+                icon={<BiDollar size={28} />}
+                value="$4,350"
+                label="Earned this month"
+            />
+
+            {/* Clients */}
+            <StatCard
+                icon={<FiUsers size={26} />}
+                value="583"
+                label="New Clients"
+            />
+
+            {/* Sales */}
+            <StatCard
+                icon={<AiOutlineShoppingCart size={26} />}
+                value="1289"
+                label="New Sales"
+            />
+
         </div>
     );
 };
 
-export default DecoratorHome;
+const StatCard = ({ icon, value, label }) => {
+    return (
+        <div className="bg-white rounded-xl shadow-sm p-6 flex items-center justify-between">
+
+            <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                    {icon}
+                </div>
+
+                <div>
+                    <h2 className="text-2xl font-bold">55</h2>
+                    <p className="text-gray-500 text-sm">Total</p>
+                </div>
+            </div>
+
+            <BsThreeDots className="text-gray-400 cursor-pointer" />
+        </div>
+    );
+};
+
+export default DashboardStats;

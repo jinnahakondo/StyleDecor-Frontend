@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -8,13 +8,11 @@ import { toast } from 'react-toastify';
 const UpdateStatus = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
-
     const queryClient = useQueryClient()
-
 
     //get assigned project
     const { data = [], isLoading } = useQuery({
-        queryKey: ['update-assigned-project'],
+        queryKey: ['update-assigned-project', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/assigned-bookings/${user?.email}`)
             return res.data;
@@ -28,23 +26,42 @@ const UpdateStatus = () => {
         mutationFn: async (bookingStatus) => {
             const { status, booking } = bookingStatus;
 
-            await axiosSecure.patch(`/assigned-bookings/${booking?._id}`, { status })
-            await axiosSecure.patch(`/bookings/update-status/${booking?.serviceId}`, { status })
-            await axiosSecure.patch(`/trackings/${booking?.trakingId}`, { status })
-            return status
+            try {
+
+                const assignedBookingRes = axiosSecure.patch(`/assigned-bookings/${booking?._id}`, { status })
+
+                const bookingRes = axiosSecure.patch(`/bookings/update-status/${booking?.serviceId}`, { status })
+
+                const trackingRes = axiosSecure.patch(`/trackings/${booking?.trackingId}`, { status })
+
+                await Promise.all([assignedBookingRes, bookingRes, trackingRes])
+
+                return status
+            } catch (error) {
+                console.log(error);
+                throw error
+            }
+
         },
         onSuccess: (status) => {
             toast.success(`project status has been changed to ${status}`)
-            queryClient.invalidateQueries({ queryKey: ['update-assigned-project'] })
+            queryClient.invalidateQueries({ queryKey: ['update-assigned-project', user?.email] })
         },
-        onError: (error) => {
-            console.log(error.code);
+        onError: () => {
+            toast.error('faild to update status')
         }
     })
 
     // handel change status 
     const handelChangeStatus = (status, booking) => {
         if (status && booking) {
+            if (booking.status === 'Completed') {
+                return toast.error('status already completed')
+            }
+            if (status === booking.status) {
+                return toast.error('status already updated')
+            }
+
             mutate({ status, booking })
         }
     }
@@ -101,8 +118,8 @@ const UpdateStatus = () => {
                                 <td>
                                     <span
                                         className={`font-medium whitespace-nowrap ${a.status === 'Completed'
-                                                ? 'text-success'
-                                                : 'text-info'
+                                            ? 'text-success'
+                                            : 'text-info'
                                             }`}
                                     >
                                         {a.status.replaceAll('-', ' ')}

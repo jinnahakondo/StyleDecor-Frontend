@@ -17,30 +17,36 @@ const Earnings = () => {
         },
         enabled: !!user?.email
     })
-    console.log(data);
+ 
+ 
+    
     return (
         <div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="stat-card ">
-                    <p>Total Earnings</p>
-                    <h2>৳50000</h2>
+
+            <div className="max-w-md  p-10 rounded-2xl shadow-md flex flex-col gap-6 bg-white">
+
+                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
+                    <p className="text-sm font-medium">Total Earnings</p>
+                    <h2 className="text-lg font-semibold">৳50,000</h2>
                 </div>
 
-                <div className="stat-card">
-                    <p>This Month</p>
-                    <h2>৳50</h2>
+                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
+                    <p className="text-sm font-medium">Pending Amount</p>
+                    <h2 className="text-lg font-semibold">৳2,000</h2>
                 </div>
 
-                <div className="stat-card">
-                    <p>Completed Jobs</p>
-                    <h2>22</h2>
+                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
+                    <p className="text-sm font-medium">This Month</p>
+                    <h2 className="text-lg font-semibold">৳50</h2>
                 </div>
 
-                <div className="stat-card">
-                    <p>Pending Amount</p>
-                    <h2>৳2,000</h2>
+                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
+                    <p className="text-sm font-medium">Completed Jobs</p>
+                    <h2 className="text-lg font-semibold">22</h2>
                 </div>
+
             </div>
+
 
         </div>
     );

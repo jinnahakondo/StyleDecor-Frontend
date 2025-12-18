@@ -165,7 +165,7 @@ export const router = createBrowserRouter([
         ]
     },
     {
-        path: '/track-service/:trakingId',
+        path: '/track-service/:trackingId',
         Component: TrackService
     },
 
