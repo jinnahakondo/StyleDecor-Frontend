@@ -29,6 +29,7 @@ import Services from "../Pages/Services/Services";
 import ErrorPage from "../Pages/ErrorPage";
 import DecoratorHome from "../Pages/DashBoard/Deocrator/DecoratorHome";
 import PendingDecoratorPayments from "../Pages/DashBoard/Admin/PendingDecoratorPayments";
+import PaymentHistoryDecorator from "../Pages/DashBoard/Deocrator/PaymentHistoryDecorator";
 
 export const router = createBrowserRouter([
     {
@@ -167,6 +168,12 @@ export const router = createBrowserRouter([
                 path: 'decorator/earnings',
                 element: <DecoratorRoutes>
                     <Earnings />
+                </DecoratorRoutes>
+            },
+            {
+                path: 'decorator-payment-history',
+                element: <DecoratorRoutes>
+                    <PaymentHistoryDecorator />
                 </DecoratorRoutes>
             },
         ]

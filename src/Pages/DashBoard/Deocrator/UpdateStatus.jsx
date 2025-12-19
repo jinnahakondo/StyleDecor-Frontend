@@ -69,6 +69,7 @@ const UpdateStatus = () => {
                     decoratorEarning: Number(booking?.totalPrice) * 0.8,
                     adminEarning: Number(booking?.totalPrice) * 0.2,
                     currency: 'bdt',
+                    serviceName: booking?.title,
                     bookingId: booking?._id,
                     paymentStatus: 'pending',
                     createdAt: new Date()

@@ -236,7 +236,7 @@ const DashBoardLayout = () => {
                                             {/*manage service icon */}
                                             <FaMoneyCheckAlt className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
-                                               Pending Decorator Payments
+                                                Pending Decorator Payments
                                             </span>
 
                                         </NavLink>
@@ -282,6 +282,15 @@ const DashBoardLayout = () => {
                                                 Earnings
                                             </span>
 
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={'/dashboard/decorator-payment-history'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Payment History
+">
+                                            {/* payment icon */}
+                                            <ReceiptText className='text-2xl' />
+                                            <span className="is-drawer-close:hidden">Payment History
+                                            </span>
                                         </NavLink>
                                     </li>
                                 </>

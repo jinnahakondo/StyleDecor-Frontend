@@ -3,18 +3,51 @@ import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loader from '../../../Components/Loader/Loader';
 import { format } from 'date-fns';
+import { toast } from 'react-toastify';
 
 const PendingDecoratorPayments = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data = [], isLoading } = useQuery({
+    const { data = [], isLoading, refetch } = useQuery({
         queryKey: ['pending-payments', 'admin'],
         queryFn: async () => {
             const res = await axiosSecure.get("/total-earnings/admin")
             return res.data
         }
     })
-    console.log(data);
+
+    // accept payment
+    const handelAccept = async (paymentInfo) => {
+        if (paymentInfo.paymentStatus === 'paid') {
+            return
+        }
+        const updateInfo = {
+            paymentStatus: "paid",
+            paidAt: new Date(),
+        }
+        const res = await axiosSecure.patch(`/total-earnings/admin/update/${paymentInfo.bookingId}`, updateInfo)
+        if (res.data.modifiedCount) {
+            toast.success('payment approved')
+            refetch()
+        }
+    }
+
+    //reject payment
+    const handelCancel = async (paymentInfo) => {
+        if (paymentInfo.paymentStatus === 'rejected') {
+            return
+        }
+        const updateInfo = {
+            paymentStatus: "rejected",
+            rejectedAt: new Date(),
+        }
+        const res = await axiosSecure.patch(`/total-earnings/admin/update/${paymentInfo.bookingId}`, updateInfo)
+        if (res.data.modifiedCount) {
+            toast.success('payment rejected')
+            refetch()
+        }
+    }
+
     return (
         <div>
             <div className="mt-4 px-4">
@@ -53,7 +86,7 @@ const PendingDecoratorPayments = () => {
                                 )}
                                 {
                                     isLoading ?
-                                        <Loader />
+                                        <tr><td>  <Loader /></td></tr>
                                         :
                                         data.map(payment => (
                                             <tr
@@ -75,7 +108,7 @@ const PendingDecoratorPayments = () => {
                                                 </td>
 
                                                 <td className="text-gray-500">
-                                                    {/* {format(new Date(payment?.paidAt), 'dd MMM yyyy')} */}
+                                                    {format(new Date(payment?.createdAt), 'dd MMM yyyy')}
                                                 </td>
 
                                                 <td>
@@ -88,9 +121,18 @@ const PendingDecoratorPayments = () => {
                                                     </span>
                                                 </td>
 
-                                                <td className="text-center">
+                                                <td className="text-center flex items-center gap-5">
 
-                                                    <button className='btn-success'>Accept</button>
+                                                    <button
+                                                        disabled={payment?.paymentStatus === 'rejected'}
+                                                        onClick={() => handelCancel(payment)}
+                                                        className={`btn btn-sm btn-error ${payment?.paymentStatus === 'paid' && 'hidden'}`}>Reject</button>
+                                                    <button
+                                                        disabled={payment?.paymentStatus === 'paid'}
+                                                        onClick={() => handelAccept(payment)}
+                                                        className={`btn btn-sm btn-success ${payment?.paymentStatus === 'rejected' && 'hidden'}`}>
+                                                        Accept
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))
