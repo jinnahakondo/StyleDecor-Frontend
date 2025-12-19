@@ -30,9 +30,9 @@ const UpdateStatus = () => {
 
                 const assignedBookingRes = axiosSecure.patch(`/assigned-bookings/${booking?._id}?email=${user?.email}`, { status })
 
-                const bookingRes = axiosSecure.patch(`/bookings/update-status/${booking?.serviceId}`, { status })
+                const bookingRes = axiosSecure.patch(`/bookings/update-status/${booking?.serviceId}?email=${user?.email}`, { status })
 
-                const trackingRes = axiosSecure.patch(`/trackings/${booking?.trackingId}`, { status })
+                const trackingRes = axiosSecure.patch(`/trackings/${booking?.trackingId}?email=${user?.email}`, { status })
 
                 await Promise.all([assignedBookingRes, bookingRes, trackingRes])
 

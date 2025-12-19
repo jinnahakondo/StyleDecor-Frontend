@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import Loader from '../../../Components/Loader/Loader';
 import { IoEyeOutline } from 'react-icons/io5';
 
-const earnignHistoryDecorator = () => {
+const PaymentHistoryDecorator = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
@@ -97,4 +97,4 @@ const earnignHistoryDecorator = () => {
     );
 };
 
-export default earnignHistoryDecorator;
+export default PaymentHistoryDecorator;
