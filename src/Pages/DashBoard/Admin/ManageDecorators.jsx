@@ -18,7 +18,7 @@ const ManageDecorators = () => {
     const { data: decorators = [], isLoading, refetch } = useQuery({
         queryKey: ['decorators', 'admin-dashboard'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/decorators?email=${user?.email}`);
+            const res = await axiosSecure.get(`/decorators`);
             return res.data;
         }
     });
@@ -93,7 +93,7 @@ const ManageDecorators = () => {
         queryFn: async () => {
             const { category, district } = booking;
             const res = await axiosSecure.get(
-                `/decorators?category=${category}&district=${district}&email=${user?.email}`
+                `/decorators?category=${category}&district=${district}`
             );
             return res.data;
         },

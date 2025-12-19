@@ -60,13 +60,13 @@ const DashBoardLayout = () => {
     const handelUpdateWorkingStatus = async (checked) => {
         console.log(checked);
         if (checked) {
-            const res = await axiosSecure.patch(`/decorators/${user?.email}`, { workingStatus: 'working' })
+            const res = await axiosSecure.patch(`/decorators/update/${user?.email}`, { workingStatus: 'working' })
             console.log(res.data);
             refetch()
             return
         }
         if (!checked) {
-            const res = await axiosSecure.patch(`/decorators/${user?.email}`, { workingStatus: 'available' })
+            const res = await axiosSecure.patch(`/decorators/update/${user?.email}`, { workingStatus: 'available' })
             console.log(res.data);
             refetch()
             return
