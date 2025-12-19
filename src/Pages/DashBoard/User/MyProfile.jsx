@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import { format } from 'date-fns';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import useRole from '../../../Hooks/useRole';
+import Loader from '../../../Components/Loader/Loader';
 
 const MyProfile = () => {
     const [isEdit, setIsEdit] = useState(false)
     const { user, loading } = useAuth();
     const role = useRole()
-
-
-
-    console.log(user);
+    if (loading) {
+        return <span className='h-screen grid place-items-center'><Loader /></span>
+    }
     return (
         <div className="max-w-4xl mx-auto p-4 lg:p-8">
             <div className="bg-base-100 rounded-2xl shadow-sm border border-base-200 p-6 lg:p-8 space-y-8">

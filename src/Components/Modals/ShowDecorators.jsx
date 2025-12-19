@@ -31,7 +31,8 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
             district,
             decoratorEmail: decorator?.email,
             status: 'Assigned',
-            trackingId
+            trackingId,
+            createdAt: new Date()
         }
 
         const trackingInfo = {

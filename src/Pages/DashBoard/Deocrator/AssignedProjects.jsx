@@ -80,8 +80,8 @@ const AssignedProjects = () => {
                                 <td>
                                     <span
                                         className={`font-medium whitespace-nowrap ${a.status === 'Completed'
-                                                ? 'text-success'
-                                                : 'text-info'
+                                            ? 'text-success'
+                                            : 'text-info'
                                             }`}
                                     >
                                         {a.status.replaceAll('-', ' ')}

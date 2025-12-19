@@ -18,10 +18,12 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaTasks } from "react-icons/fa";
 import { BsCheckCircle } from "react-icons/bs";
 import { BiSolidCoinStack } from "react-icons/bi";
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 
 const DashBoardLayout = () => {
-    const { user, SignOUtUser } = useAuth()
+    const { user, SignOUtUser, loading } = useAuth()
     const { role, isLoading } = useRole()
 
     const handelLogout = () => {
@@ -42,9 +44,40 @@ const DashBoardLayout = () => {
         <li><NavLink to={'/contact'}> Contact</NavLink></li>
     </>
 
+    const axiosSecure = useAxiosSecure()
+
+    const { data = [], isLoading: statusLoading, isPending, refetch } = useQuery({
+        queryKey: ['workingStatus', user?.email],
+        queryFn: async () => {
+            const result = axiosSecure.get(`/decorator/${user?.email}`)
+            return (await result).data
+        },
+        enabled: !!user
+    })
+    const { workingStatus } = data;
+
+    //toggle working status
+    const handelUpdateWorkingStatus = async (checked) => {
+        console.log(checked);
+        if (checked) {
+            const res = await axiosSecure.patch(`/decorators/${user?.email}`, { workingStatus: 'working' })
+            console.log(res.data);
+            refetch()
+            return
+        }
+        if (!checked) {
+            const res = await axiosSecure.patch(`/decorators/${user?.email}`, { workingStatus: 'available' })
+            console.log(res.data);
+            refetch()
+            return
+        }
+    }
+
     if (isLoading) {
         return <Loader />
     }
+
+
     return (
         <div>
             <div className="drawer lg:drawer-open">
@@ -107,9 +140,24 @@ const DashBoardLayout = () => {
                         {/* Sidebar content here */}
                         <ul className="menu w-full grow space-y-3">
                             {/* List item */}
+                            {/* toggle button  */}
+                            {
+                                role === 'decorator' &&
+                                <div className='flex items-center gap-2 mt-10'>
+                                    <span className='text-green-600 font-medium text-lg is-drawer-close:hidden'>{workingStatus}</span>
+                                    <input
+                                        disabled={statusLoading || isPending || loading}
+                                        checked={workingStatus === 'working'}
+                                        onChange={(e) => handelUpdateWorkingStatus(e.target.checked)}
+                                        type="checkbox"
 
+                                        className="toggle border-indigo-600 bg-indigo-500 checked:border-orange-500 checked:bg-orange-400 checked:text-primary "
+                                    />
+                                </div>
+                            }
                             <li>
-                                <NavLink to={"/dashboard/my-profile"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard mt-20" data-tip="My Profile">
+                                <NavLink to={"/dashboard/my-profile"} className={`is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard
+                                     ${role === "decorator" || "mt-20"}`} data-tip="My Profile">
                                     {/* profile icon */}
                                     <CgProfile className="text-2xl" />
                                     <span className="is-drawer-close:hidden">
