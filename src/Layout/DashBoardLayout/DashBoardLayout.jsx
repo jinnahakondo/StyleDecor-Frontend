@@ -9,7 +9,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaCalendarCheck, FaClock } from "react-icons/fa6";
 import { ReceiptText } from 'lucide-react';
 import useRole from '../../Hooks/useRole';
-import { FaUserCog } from "react-icons/fa";
+import { FaMoneyCheckAlt, FaUserCog } from "react-icons/fa";
 import Loader from '../../Components/Loader/Loader';
 import { LuCalendarCog } from "react-icons/lu";
 import { FaScrewdriverWrench } from "react-icons/fa6";
@@ -74,7 +74,7 @@ const DashBoardLayout = () => {
     }
 
     if (isLoading) {
-        return <Loader />
+        return <span className='h-screen grid place-items-center'><Loader /></span>
     }
 
 
@@ -227,6 +227,16 @@ const DashBoardLayout = () => {
                                             <FaScrewdriverWrench className="text-2xl" />
                                             <span className="is-drawer-close:hidden">
                                                 Manage Services
+                                            </span>
+
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to={"/dashboard/admin/pending-decorator-payments"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Pending Decorator Payments">
+                                            {/*manage service icon */}
+                                            <FaMoneyCheckAlt className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                               Pending Decorator Payments
                                             </span>
 
                                         </NavLink>

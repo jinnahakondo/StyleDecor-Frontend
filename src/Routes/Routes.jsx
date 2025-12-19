@@ -28,6 +28,7 @@ import UserRoutes from "./UserRoutes";
 import Services from "../Pages/Services/Services";
 import ErrorPage from "../Pages/ErrorPage";
 import DecoratorHome from "../Pages/DashBoard/Deocrator/DecoratorHome";
+import PendingDecoratorPayments from "../Pages/DashBoard/Admin/PendingDecoratorPayments";
 
 export const router = createBrowserRouter([
     {
@@ -122,6 +123,12 @@ export const router = createBrowserRouter([
                 path: 'admin/manage-services',
                 element: <AdminRoutes>
                     <ManageServices />
+                </AdminRoutes>
+            },
+            {
+                path: 'admin/pending-decorator-payments',
+                element: <AdminRoutes>
+                    <PendingDecoratorPayments />
                 </AdminRoutes>
             },
             //decorator 

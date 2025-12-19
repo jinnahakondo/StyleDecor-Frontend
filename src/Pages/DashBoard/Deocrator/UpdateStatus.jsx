@@ -53,13 +53,30 @@ const UpdateStatus = () => {
     })
 
     // handel change status 
-    const handelChangeStatus = (status, booking) => {
+    const handelChangeStatus = async (status, booking) => {
         if (status && booking) {
+
             if (booking.status === 'Completed') {
                 return toast.error('status already completed')
             }
             if (status === booking.status) {
                 return toast.error('status already updated')
+            }
+            if (status === 'Completed') {
+                const decoratorPaymentinfo = {
+                    paymentType: "earning",
+                    decoratorEmail: booking?.decoratorEmail,
+                    decoratorEarning: Number(booking?.totalPrice) * 0.8,
+                    adminEarning: Number(booking?.totalPrice) * 0.2,
+                    currency: 'bdt',
+                    bookingId: booking?._id,
+                    paymentStatus: 'pending',
+                    createdAt: new Date()
+                }
+                const res = await axiosSecure.post('/total-earnings', decoratorPaymentinfo)
+                if (res.data.insertedId) {
+                    toast.success('data added')
+                }
             }
 
             mutate({ status, booking })
