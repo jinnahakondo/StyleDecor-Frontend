@@ -10,8 +10,11 @@ import PostImage from '../../../Utils/PostImage';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { format } from "date-fns";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import useAuth from '../../../Hooks/useAuth';
 
 const ManageServices = () => {
+
+    const { user } = useAuth()
 
     const modalRef = useRef(null);
     const [serviceImage, setServiceImage] = useState(null);
@@ -44,7 +47,7 @@ const ManageServices = () => {
     ======================= */
     const { mutate: updateService, isPending: updating } = useMutation({
         mutationFn: async (updateInfo) => {
-            const res = await axiosSecure.patch(`/services/${service._id}`, updateInfo);
+            const res = await axiosSecure.patch(`/services/${service._id}?email=${user?.email}`, updateInfo);
             return res.data;
         },
         onSuccess: (data) => {
@@ -70,7 +73,7 @@ const ManageServices = () => {
     ======================= */
     const { mutate: deleteService } = useMutation({
         mutationFn: async (service) => {
-            await axiosSecure.delete(`/services/${service._id}`);
+            await axiosSecure.delete(`/services/${service._id}?email=${user?.email}`);
             return service;
         },
         onSuccess: (service) => {

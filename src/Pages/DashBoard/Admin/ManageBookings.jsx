@@ -2,14 +2,17 @@ import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import useAuth from '../../../Hooks/useAuth';
 
 const ManageBookings = () => {
+    const { user } = useAuth();
+
     const axiosSecure = useAxiosSecure();
 
     const { data: bookings = [], isLoading } = useQuery({
         queryKey: ['all-bookings', 'admin-dashboard'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/bookings');
+            const res = await axiosSecure.get(`/bookings?email=${user?.email}`);
             return res.data;
         }
     });

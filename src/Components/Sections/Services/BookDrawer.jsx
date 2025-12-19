@@ -89,7 +89,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
             confirmButtonText: "Confirm Booking"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await axiosSecure.post('/bookings', bookServiceInfo);
+                const res = await axiosSecure.post(`/bookings?email=${user?.email}`, bookServiceInfo);
                 if (res.data.insertedId) {
                     toast.success("service booked");
                 }

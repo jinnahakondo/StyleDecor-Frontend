@@ -8,6 +8,7 @@ import userPic from '../../assets/user.png'
 import PostImage from '../../Utils/PostImage';
 import useAxios from '../../Hooks/useAxios';
 import Loader from '../../Components/Loader/Loader';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const Register = () => {
 
@@ -29,7 +30,7 @@ const Register = () => {
         formState: { errors },
     } = useForm()
 
-    const instance = useAxios()
+    const instance = useAxiosSecure()
 
     const handleCreateUser = async (data) => {
         setIsSubmiting(true)

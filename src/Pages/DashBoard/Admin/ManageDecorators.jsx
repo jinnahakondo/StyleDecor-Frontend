@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import ShowDecorators from '../../../Components/Modals/ShowDecorators';
 
 const ManageDecorators = () => {
+    const { user } = useAuth();
     const [booking, setBooking] = useState(null);
     const showDecoratorRef = useRef(null);
     const { loading } = useAuth();
@@ -17,7 +18,7 @@ const ManageDecorators = () => {
     const { data: decorators = [], isLoading, refetch } = useQuery({
         queryKey: ['decorators', 'admin-dashboard'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/decorators');
+            const res = await axiosSecure.get(`/decorators?email=${user?.email}`);
             return res.data;
         }
     });
@@ -30,7 +31,7 @@ const ManageDecorators = () => {
     } = useQuery({
         queryKey: ['bookings', 'admin-dashboard'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/bookings');
+            const res = await axiosSecure.get(`/bookings?email=${user?.email}`);
             return res.data;
         }
     });
@@ -46,7 +47,7 @@ const ManageDecorators = () => {
                 confirmButtonText: 'Yes, reject'
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    await axiosSecure.delete(`/decorators/${decorator?.email}`);
+                    await axiosSecure.delete(`/asign/decorator/${decorator?.email}`);
                     refetch();
                     Swal.fire('Rejected!', '', 'success');
                 }
@@ -92,7 +93,7 @@ const ManageDecorators = () => {
         queryFn: async () => {
             const { category, district } = booking;
             const res = await axiosSecure.get(
-                `/decorators?category=${category}&district=${district}`
+                `/decorators?category=${category}&district=${district}&email=${user?.email}`
             );
             return res.data;
         },

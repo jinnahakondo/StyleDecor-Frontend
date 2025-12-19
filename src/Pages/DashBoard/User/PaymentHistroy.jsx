@@ -64,52 +64,52 @@ const PaymentHistroy = () => {
                                 isLoading ?
                                     <Loader />
                                     :
-                                        paymentHistory.map(history => (
-                                            <tr
-                                                key={history._id}
-                                                className="hover:bg-gray-50 transition"
-                                            >
-                                                <td className="font-medium text-gray-800">
-                                                    {history?.serviceName}
-                                                </td>
+                                    paymentHistory.map(history => (
+                                        <tr
+                                            key={history._id}
+                                            className="hover:bg-gray-50 transition"
+                                        >
+                                            <td className="font-medium text-gray-800">
+                                                {history?.serviceName}
+                                            </td>
 
-                                                <td className="font-semibold text-gray-700">
-                                                    ৳ {history?.amount}
-                                                </td>
+                                            <td className="font-semibold text-gray-700">
+                                                ৳ {history?.amount}
+                                            </td>
 
-                                                <td className="text-gray-500">
-                                                    {format(new Date(history?.paidAt), 'dd MMM yyyy')}
-                                                </td>
+                                            <td className="text-gray-500">
+                                                {format(new Date(history?.paidAt), 'dd MMM yyyy')}
+                                            </td>
 
-                                                <td className="text-xs text-gray-500">
-                                                    {history?.transectionId}
-                                                </td>
+                                            <td className="text-xs text-gray-500">
+                                                {history?.transectionId}
+                                            </td>
 
-                                                <td>
-                                                    <span className={`px-3 py-1 rounded-full text-xs font-medium
+                                            <td>
+                                                <span className={`px-3 py-1 rounded-full text-xs font-medium
                                             ${history?.paymentStatus === 'paid'
-                                                            ? 'bg-green-100 text-green-700'
-                                                            : 'bg-red-100 text-red-700'}
+                                                        ? 'bg-green-100 text-green-700'
+                                                        : 'bg-red-100 text-red-700'}
                                         `}>
-                                                        {history?.paymentStatus}
-                                                    </span>
-                                                </td>
+                                                    {history?.paymentStatus}
+                                                </span>
+                                            </td>
 
-                                                <td className="text-center">
-                                                    <button
-                                                        onClick={() => {
-                                                            setPaymentInfo(history)
-                                                            showReciept.current.showModal()
-                                                        }}
-                                                        className="p-2 rounded-full hover:bg-gray-100 transition"
-                                                    >
-                                                        <IoEyeOutline className="text-xl text-gray-600" />
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
-                            
+                                            <td className="text-center">
+                                                <button
+                                                    onClick={() => {
+                                                        setPaymentInfo(history)
+                                                        showReciept.current.showModal()
+                                                    }}
+                                                    className="p-2 rounded-full hover:bg-gray-100 transition"
+                                                >
+                                                    <IoEyeOutline className="text-xl text-gray-600" />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))
+                            }
+
 
                         </tbody>
                     </table>

@@ -1,8 +1,12 @@
 import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import useAuth from '../../Hooks/useAuth';
 
 const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decoratorsRefetch, booking, bookingsRefetch, booingLoding }) => {
+
+    const { user } = useAuth()
+
     const axiosSecure = useAxiosSecure()
 
     console.log("decorators from modal", decorators);
@@ -45,9 +49,9 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
         }
 
         try {
-            await axiosSecure.patch(`/bookings/${booking._id}`, bookingInfoUpdate)
-            await axiosSecure.post('/assigned-bookings', assignedBookingInfo)
-            await axiosSecure.post('/trackings', trackingInfo)
+            await axiosSecure.patch(`/bookings/${booking._id}?email=${user?.email}`, bookingInfoUpdate)
+            await axiosSecure.post(`/assigned-bookings?email=${user?.email}`, assignedBookingInfo)
+            await axiosSecure.post(`/trackings?email=${user?.email}`, trackingInfo)
             decoratorsRefetch()
             toast.success(`${decorator.name} has benn asigned for this service`)
             bookingsRefetch()

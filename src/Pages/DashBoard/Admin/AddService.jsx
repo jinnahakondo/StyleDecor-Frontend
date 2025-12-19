@@ -38,10 +38,9 @@ const AddService = () => {
         name: "category"
     })
 
-
     const { mutate, isPending } = useMutation({
         mutationFn: async (service) => {
-            await axiosSecure.post('/services', service);
+            await axiosSecure.post(`/services?email=${user?.email}`, service);
 
         },
         onSuccess: () => {
@@ -155,7 +154,7 @@ const AddService = () => {
                                 <select {...register('unit', { required: "please select a category" })} className='dropdown input outline-0'>
                                     <option value="">Select a Unit</option>
                                     {
-                                        CATEGORY_UNITS[units]?.map(unit => <option value={unit}>{unit}</option>)
+                                        CATEGORY_UNITS[units]?.map((unit, i) => <option key={i} value={unit}>{unit}</option>)
                                     }
                                 </select>
                                 {

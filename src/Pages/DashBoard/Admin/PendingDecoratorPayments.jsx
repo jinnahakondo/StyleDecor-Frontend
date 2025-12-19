@@ -4,14 +4,16 @@ import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loader from '../../../Components/Loader/Loader';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
+import useAuth from '../../../Hooks/useAuth';
 
 const PendingDecoratorPayments = () => {
+    const { user } = useAuth()
     const axiosSecure = useAxiosSecure();
 
     const { data = [], isLoading, refetch } = useQuery({
         queryKey: ['pending-payments', 'admin'],
         queryFn: async () => {
-            const res = await axiosSecure.get("/total-earnings/admin")
+            const res = await axiosSecure.get(`/total-earnings/admin/${user?.email}`)
             return res.data
         }
     })
@@ -25,7 +27,7 @@ const PendingDecoratorPayments = () => {
             paymentStatus: "paid",
             paidAt: new Date(),
         }
-        const res = await axiosSecure.patch(`/total-earnings/admin/update/${paymentInfo.bookingId}`, updateInfo)
+        const res = await axiosSecure.patch(`/total-earnings/admin/update/${paymentInfo.bookingId}?email=${user?.email}`, updateInfo)
         if (res.data.modifiedCount) {
             toast.success('payment approved')
             refetch()
@@ -41,7 +43,7 @@ const PendingDecoratorPayments = () => {
             paymentStatus: "rejected",
             rejectedAt: new Date(),
         }
-        const res = await axiosSecure.patch(`/total-earnings/admin/update/${paymentInfo.bookingId}`, updateInfo)
+        const res = await axiosSecure.patch(`/total-earnings/admin/update/${paymentInfo.bookingId}?email=${user?.email}`, updateInfo)
         if (res.data.modifiedCount) {
             toast.success('payment rejected')
             refetch()

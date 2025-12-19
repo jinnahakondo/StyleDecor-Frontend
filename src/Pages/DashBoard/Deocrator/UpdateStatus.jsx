@@ -28,7 +28,7 @@ const UpdateStatus = () => {
 
             try {
 
-                const assignedBookingRes = axiosSecure.patch(`/assigned-bookings/${booking?._id}`, { status })
+                const assignedBookingRes = axiosSecure.patch(`/assigned-bookings/${booking?._id}?email=${user?.email}`, { status })
 
                 const bookingRes = axiosSecure.patch(`/bookings/update-status/${booking?.serviceId}`, { status })
 
