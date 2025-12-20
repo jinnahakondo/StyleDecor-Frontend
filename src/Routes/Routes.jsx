@@ -30,6 +30,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import DecoratorHome from "../Pages/DashBoard/Deocrator/DecoratorHome";
 import PendingDecoratorPayments from "../Pages/DashBoard/Admin/PendingDecoratorPayments";
 import PaymentHistoryDecorator from "../Pages/DashBoard/Deocrator/PaymentHistoryDecorator";
+import AdminDashBoard from "../Layout/Admin/AdminDashBoard";
 
 export const router = createBrowserRouter([
     {
@@ -101,6 +102,12 @@ export const router = createBrowserRouter([
                 element: <UserRoutes>
                     <PaymentHistroy />
                 </UserRoutes>
+            },
+            {
+                path: 'admin-dashboard',
+                element: <AdminRoutes>
+                    <AdminDashBoard />
+                </AdminRoutes>
             },
             {
                 path: 'admin/manage-decorators',

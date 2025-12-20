@@ -11,38 +11,40 @@ const Earnings = () => {
     const axiosSecure = useAxiosSecure()
 
     //get only completed for total earnings 
-    const { data: bookings = [] } = useQuery({
+    const { data: payments = [] } = useQuery({
         queryKey: ["decorator-earnigns", user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/assigned-bookings/${user?.email}?status=Completed`)
+            const res = await axiosSecure.get(`/total-earnings/decorator/${user?.email}`)
             return res.data
         },
         enabled: !!user?.email
     })
 
+
     // for get assigned but !completed to calculate pending  earnings
-    const { data: pendingbookings = [] } = useQuery({
+    const { data: pendingPayments = [] } = useQuery({
         queryKey: ["decorator-earnigns-pending", user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/assigned-bookings/decorator-earnings-pending/${user?.email}?status=Completed`)
+            const res = await axiosSecure.get(`/pending-earnings/decorator/${user?.email}`)
             return res.data
         },
         enabled: !!user?.email
     })
 
     // calculate total earnings 
-    const bookingsCompleted = bookings.map(booking => booking.totalPrice)
+    const completedPayments = payments.map(payment => payment.decoratorEarning)
     let totalEarning = 0;
-    bookingsCompleted.forEach(price => {
+    completedPayments.forEach(price => {
         totalEarning = totalEarning + price
     });
 
     //calculate pending earnings
-    const bookingsPending = pendingbookings.map(booking => booking.totalPrice)
+    const pendingEarnigns = pendingPayments.map(payment => payment.decoratorEarning)
     let pendingEarning = 0;
-    bookingsPending.forEach(price => {
-        pendingEarning = pendingEarning + price
+    pendingEarnigns.forEach(earning => {
+        pendingEarning = pendingEarning + earning
     });
+
 
     return (
         <div>
@@ -59,14 +61,14 @@ const Earnings = () => {
                     <h2 className="text-lg font-semibold">৳ {pendingEarning}</h2>
                 </div>
 
-                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
+                {/* <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
                     <p className="text-sm font-medium">This Month</p>
                     <h2 className="text-lg font-semibold">৳50</h2>
-                </div>
+                </div> */}
 
                 <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
                     <p className="text-sm font-medium">Completed Jobs</p>
-                    <h2 className="text-lg font-semibold">{bookings?.length}</h2>
+                    <h2 className="text-lg font-semibold">{completedPayments?.length}</h2>
                 </div>
 
             </div>

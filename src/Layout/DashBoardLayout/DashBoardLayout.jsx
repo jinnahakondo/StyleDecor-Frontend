@@ -20,6 +20,7 @@ import { BsCheckCircle } from "react-icons/bs";
 import { BiSolidCoinStack } from "react-icons/bi";
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { MdDashboard } from "react-icons/md";
 
 
 const DashBoardLayout = () => {
@@ -155,16 +156,7 @@ const DashBoardLayout = () => {
                                     />
                                 </div>
                             }
-                            <li>
-                                <NavLink to={"/dashboard/my-profile"} className={`is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard
-                                     ${role === "decorator" || "mt-20"}`} data-tip="My Profile">
-                                    {/* profile icon */}
-                                    <CgProfile className="text-2xl" />
-                                    <span className="is-drawer-close:hidden">
-                                        My Profile
-                                    </span>
-                                </NavLink>
-                            </li>
+
                             {/* user links */}
                             {
                                 role === 'user' && <>
@@ -192,6 +184,16 @@ const DashBoardLayout = () => {
                             {/* admin links */}
                             {
                                 role === 'admin' && <>
+
+                                    <li>
+                                        <NavLink to={"/dashboard/admin-dashboard"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard mt-20" data-tip="Dashboard">
+                                            {/* user icon */}
+                                            <MdDashboard className="text-2xl" />
+                                            <span className="is-drawer-close:hidden">
+                                                Dashboard
+                                            </span>
+                                        </NavLink>
+                                    </li>
 
                                     <li>
                                         <NavLink to={"/dashboard/admin/manage-decorators"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Decorators ">
@@ -295,6 +297,16 @@ const DashBoardLayout = () => {
                                     </li>
                                 </>
                             }
+                            <li>
+                                <NavLink to={"/dashboard/my-profile"} className={`is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard 
+                                     `} data-tip="My Profile">
+                                    {/* profile icon */}
+                                    <CgProfile className="text-2xl" />
+                                    <span className="is-drawer-close:hidden">
+                                        My Profile
+                                    </span>
+                                </NavLink>
+                            </li>
                             {/* admin links */}
 
                             {/* List item */}

@@ -74,9 +74,6 @@ const ManageDecorators = () => {
                 confirmButtonText: 'Yes'
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    await axiosSecure.patch(`/decorators/${decorator?.email}`, {
-                        status: ''
-                    });
                     await axiosSecure.patch(`/users/${decorator?.email}`, {
                         role: 'user'
                     });
