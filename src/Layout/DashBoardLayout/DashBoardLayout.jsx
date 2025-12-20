@@ -161,7 +161,7 @@ const DashBoardLayout = () => {
                             {
                                 role === 'user' && <>
                                     <li>
-                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="My Bookings">
+                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard mt-20" data-tip="My Bookings ">
                                             {/* booking icon */}
                                             <FaCalendarCheck className="text-2xl" />
                                             <span className="is-drawer-close:hidden">

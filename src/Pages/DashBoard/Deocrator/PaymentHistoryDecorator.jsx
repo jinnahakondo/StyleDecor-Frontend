@@ -4,7 +4,8 @@ import useAuth from '../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { format } from 'date-fns';
 import Loader from '../../../Components/Loader/Loader';
-import { IoEyeOutline } from 'react-icons/io5';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 const PaymentHistoryDecorator = () => {
     const { user } = useAuth()
@@ -65,8 +66,8 @@ const PaymentHistoryDecorator = () => {
                                                 {history?.bookingId || history?.serviceName}
                                             </td>
 
-                                            <td className="font-semibold text-gray-700">
-                                                ৳ {history?.decoratorEarning}
+                                            <td className="font-semibold text-gray-700 flex items-center gap-1">
+                                                <FaBangladeshiTakaSign/> {history?.decoratorEarning}
                                             </td>
 
                                             <td className="text-gray-500">

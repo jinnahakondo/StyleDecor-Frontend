@@ -5,6 +5,8 @@ import Loader from '../../../Components/Loader/Loader';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
 import useAuth from '../../../Hooks/useAuth';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 const PendingDecoratorPayments = () => {
     const { user } = useAuth()
@@ -102,11 +104,11 @@ const PendingDecoratorPayments = () => {
                                                 <td className="font-semibold text-gray-700">
                                                     {payment?.decoratorEmail}
                                                 </td>
-                                                <td className="font-semibold text-gray-700">
-                                                    ৳ {payment?.decoratorEarning}
+                                                <td className="font-semibold text-gray-700 flex items-center gap-1">
+                                                    <FaBangladeshiTakaSign/> {payment?.decoratorEarning}
                                                 </td>
-                                                <td className="font-semibold text-gray-700">
-                                                    ৳ {payment?.adminEarning}
+                                                <td className="font-semibold text-gray-700 flex items-center gap-1">
+                                                    <FaBangladeshiTakaSign/> {payment?.adminEarning}
                                                 </td>
 
                                                 <td className="text-gray-500">

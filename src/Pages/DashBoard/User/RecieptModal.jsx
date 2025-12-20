@@ -1,5 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 const RecieptModal = ({ showReciept, paymentInfo }) => {
 
@@ -56,8 +58,8 @@ const RecieptModal = ({ showReciept, paymentInfo }) => {
                         <span className="text-gray-600 font-medium">
                             Total Amount
                         </span>
-                        <span className="text-2xl font-semibold text-gray-900">
-                            ৳{paymentInfo?.amount}
+                        <span className="text-2xl font-semibold text-gray-900 flex items-center gap-1">
+                            <FaBangladeshiTakaSign />{paymentInfo?.amount}
                         </span>
                     </div>
                 </div>

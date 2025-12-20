@@ -4,6 +4,8 @@ import useAuth from '../../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Loader from '../../Components/Loader/Loader';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 const AdminDashBoard = () => {
 
@@ -56,7 +58,7 @@ const AdminDashBoard = () => {
 
 
     const stats = [
-        { title: "Total Revenue", value: totalRevenue },
+        { title: "Total Revenue", value: <span className='flex items-center gap-1'><FaBangladeshiTakaSign />{totalRevenue}</span> },
         { title: "Total Bookings", value: totalBookings.length },
         { title: "Total Decorators", value: totalDecorators.length },
         { title: "Total Users", value: totalUsers.length }
@@ -68,8 +70,8 @@ const AdminDashBoard = () => {
         <div className='bg-gray-50'>
             Admin Dashbord
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 ">
-                {stats.map((item) => (
-                    <div key={item.id} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                {stats.map((item, i) => (
+                    <div key={i} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
                         <div className="p-6 flex justify-between items-start">
                             <div>
                                 <p className="text-gray-500 text-sm font-medium">{item.title}</p>

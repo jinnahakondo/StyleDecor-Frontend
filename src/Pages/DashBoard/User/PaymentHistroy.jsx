@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 import { IoEyeOutline } from "react-icons/io5";
 import RecieptModal from './RecieptModal';
 import Loader from '../../../Components/Loader/Loader';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 const PaymentHistroy = () => {
     const [paymentInfo, setPaymentInfo] = useState({})
@@ -73,8 +75,8 @@ const PaymentHistroy = () => {
                                                 {history?.serviceName}
                                             </td>
 
-                                            <td className="font-semibold text-gray-700">
-                                                ৳ {history?.amount}
+                                            <td className="font-semibold text-gray-700 flex items-center gap-1">
+                                                <FaBangladeshiTakaSign /> {history?.amount}
                                             </td>
 
                                             <td className="text-gray-500">

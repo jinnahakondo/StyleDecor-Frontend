@@ -2,6 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import useAuth from '../../../Hooks/useAuth';
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
+
 
 
 const Earnings = () => {
@@ -53,18 +56,13 @@ const Earnings = () => {
 
                 <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
                     <p className="text-sm font-medium">Total Earnings</p>
-                    <h2 className="text-lg font-semibold">৳ {totalEarning}</h2>
+                    <h2 className="text-lg font-semibold flex items-center gap-1"><FaBangladeshiTakaSign /> {totalEarning}</h2>
                 </div>
 
                 <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
                     <p className="text-sm font-medium">Pending Amount</p>
-                    <h2 className="text-lg font-semibold">৳ {pendingEarning}</h2>
+                    <h2 className="text-lg font-semibold flex items-center gap-1"><FaBangladeshiTakaSign /> {pendingEarning}</h2>
                 </div>
-
-                {/* <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
-                    <p className="text-sm font-medium">This Month</p>
-                    <h2 className="text-lg font-semibold">৳50</h2>
-                </div> */}
 
                 <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
                     <p className="text-sm font-medium">Completed Jobs</p>
