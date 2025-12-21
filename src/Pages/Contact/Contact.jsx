@@ -3,7 +3,7 @@ import Container from '../../Components/Container/Container';
 import { useForm } from "react-hook-form"
 import { Send } from 'lucide-react';
 import { IoCall } from "react-icons/io5";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitterSquare } from "react-icons/fa";
+import { FaClock, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaTwitterSquare } from "react-icons/fa";
 import { Link } from 'react-router';
 
 const Contact = () => {
@@ -25,21 +25,30 @@ const Contact = () => {
                     <div className='max-w-sm '>
                         <h2 className='text-5xl font-extrabold '>Contact us</h2>
                         <div className='space-y-7 mt-10'>
-                            <div className='flex items-center gap-3 text-lg font-bold text-accent mt-7'> <span className='text-5xl'>
-                                <Send className='text-primary w-10 h-10' />
-                            </span>
-                                <span>mdjinnahakondo@gmail.com</span>
-                            </div>
+
                             <div className='flex items-center gap-3 text-lg font-bold text-accent mt-7'> <span className='text-5xl'>
                                 <IoCall className='text-primary w-10 h-10' />
                             </span>
                                 <span>+8801773331334</span>
                             </div>
+
+                            <div className='flex items-center gap-3 text-lg font-bold text-accent mt-7'> <span className='text-5xl'>
+                                <Send className='text-primary w-10 h-10' />
+                            </span>
+                                <span>mdjinnahakondo@gmail.com</span>
+                            </div>
+
+                            <div className='flex items-center gap-3 text-lg font-bold text-accent mt-7'> <span className='text-5xl'>
+                                <FaMapMarkerAlt className='text-primary w-10 h-10' />
+                            </span>
+                                <span>Address: Dhaka, Bangladesh</span>
+                            </div>
+
                             <div className='flex items-center gap-3'>
-                                <Link to='/' className='hover:-translate-y-1 transition-all'><FaFacebook className='w-10 h-10 text-primary ' /></Link>
-                                <Link to='/' className='hover:-translate-y-1 transition-all'><FaTwitterSquare className='w-10 h-10 text-primary ' /></Link>
-                                <Link to='/' className='hover:-translate-y-1 transition-all'><FaInstagram className='w-10 h-10 text-primary ' /></Link>
-                                <Link to='/' className='hover:-translate-y-1 transition-all'><FaLinkedin className='w-10 h-10 text-primary ' /></Link>
+                                <Link to='https://www.facebook.com/RobiulislamJinnah' className='hover:-translate-y-1 transition-all'><FaFacebook className='w-10 h-10 text-primary ' /></Link>
+                                <Link to='https://x.com' className='hover:-translate-y-1 transition-all'><FaTwitterSquare className='w-10 h-10 text-primary ' /></Link>
+                                <Link to='https://www.instagram.com' className='hover:-translate-y-1 transition-all'><FaInstagram className='w-10 h-10 text-primary ' /></Link>
+                                <Link to='https://www.linkedin.com' className='hover:-translate-y-1 transition-all'><FaLinkedin className='w-10 h-10 text-primary ' /></Link>
 
                             </div>
                         </div>
