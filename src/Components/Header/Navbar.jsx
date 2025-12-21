@@ -27,6 +27,7 @@ const Navbar = ({ style }) => {
                 toast.error(error.code)
             })
     }
+    
     return (
         <div className=' bg-base-100 shadow-sm'>
             <Container>

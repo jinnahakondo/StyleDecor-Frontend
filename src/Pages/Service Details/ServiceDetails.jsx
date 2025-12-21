@@ -32,7 +32,10 @@ const ServiceDetails = () => {
         }
     })
 
-    if (isLoading) <Loader />
+
+    if (isLoading) {
+        return <span className='h-screen grid place-items-center'><Loader /></span>
+    }
 
     return (
         <div >

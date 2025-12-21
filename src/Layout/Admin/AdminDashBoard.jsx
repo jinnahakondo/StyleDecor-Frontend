@@ -5,6 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Loader from '../../Components/Loader/Loader';
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import {
+    Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, PieChart,
+    Pie,
+    Cell,
+    Legend,
+} from 'recharts';
 
 
 const AdminDashBoard = () => {
@@ -14,6 +20,7 @@ const AdminDashBoard = () => {
 
     const axiosSecure = useAxiosSecure()
 
+    // total earnings
     const { data = [], isLoading } = useQuery({
         queryKey: ['admin-revenue', 'admin-dashboard'],
         queryFn: async () => {
@@ -50,6 +57,24 @@ const AdminDashBoard = () => {
         }
     })
 
+    // get category wise booking count
+    const { data: serviceDemand = [], } = useQuery({
+        queryKey: ['booking-count', 'category-wise'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/booking-count-by-category')
+            return res.data
+        }
+    })
+
+    //get weekly bookings
+    const { data: weeklyBookings } = useQuery({
+        queryKey: ['weeklybookings', 'admin-ds'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/weekly-bookings/per-day')
+            return res.data;
+        }
+    })
+    console.log(weeklyBookings);
 
     let totalRevenue = 0;
     data.forEach(adminEarning => {
@@ -63,12 +88,21 @@ const AdminDashBoard = () => {
         { title: "Total Decorators", value: totalDecorators.length },
         { title: "Total Users", value: totalUsers.length }
     ]
+
+
+    const COLORS = [
+        '#4F46E5',
+        '#FB7185',
+        '#38BDF8',
+        '#FBBF24',
+    ];
+
     if (bookingsLoading || decoratorsLoading || usersLoading) {
         return <span className='h-screen grid place-items-center'><Loader /></span>
     }
     return (
-        <div className='bg-gray-50'>
-            Admin Dashbord
+        <div className=''>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 ">
                 {stats.map((item, i) => (
                     <div key={i} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
@@ -90,6 +124,41 @@ const AdminDashBoard = () => {
                     </div>
                 ))}
             </div>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-11/12'>
+                <ResponsiveContainer height={300} className={'mt-20 '}>
+                    <PieChart>
+                        <Pie
+                            data={serviceDemand}
+                            dataKey="count"
+                            nameKey="_id"
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={60}
+                            outerRadius={100}
+                        >
+                            {serviceDemand.map((entry, index) => (
+                                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+
+                        <Tooltip />
+                        <Legend />
+                    </PieChart>
+
+                </ResponsiveContainer>
+                <ResponsiveContainer height={300} className={'mt-20 '}>
+                    <BarChart data={weeklyBookings}
+                        barCategoryGap={'20%'}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey={'_id'} />
+                        <YAxis dataKey={'totalBooking'} />
+                        <Tooltip />
+                        <Bar dataKey={'totalBooking'} fill='blue' barSize={40} radius={[8, 8, 0, 0]} />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
+
         </div>
     );
 };

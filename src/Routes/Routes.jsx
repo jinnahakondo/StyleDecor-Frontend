@@ -31,6 +31,7 @@ import DecoratorHome from "../Pages/DashBoard/Deocrator/DecoratorHome";
 import PendingDecoratorPayments from "../Pages/DashBoard/Admin/PendingDecoratorPayments";
 import PaymentHistoryDecorator from "../Pages/DashBoard/Deocrator/PaymentHistoryDecorator";
 import AdminDashBoard from "../Layout/Admin/AdminDashBoard";
+import Contact from "../Pages/Contact/Contact";
 
 export const router = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
                 element: <PrivateRoutes>
                     <BeaDecorator />
                 </PrivateRoutes>
+            },
+            {
+                path: '/contact',
+                element: <Contact />
             },
         ]
     },

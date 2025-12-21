@@ -130,7 +130,7 @@ const DashBoardLayout = () => {
                         </div>
                     </div>
                     {/* Page content here */}
-                    <div className="px-10 py-4 ">
+                    <div className="px-10 py-4 bg-gray-50 min-h-screen">
                         <Outlet />
                     </div>
                 </div>

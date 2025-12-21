@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import useAuth from './useAuth';
 import axios from 'axios';
 const instance = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://style-decor-backend.vercel.app'
 })
 const useAxiosSecure = () => {
     const { user } = useAuth();
@@ -13,16 +13,16 @@ const useAxiosSecure = () => {
             return config;
         })
 
-        //intercept response
-        // const resInterceptor = instance.interceptors.response.use(response => {
-        //     return response;
-        // }, error => {
-        //     console.log(error);
-        // }
-        // )
+        // intercept response
+        const resInterceptor = instance.interceptors.response.use(response => {
+            return response;
+        }, error => {
+            console.log(error);
+        }
+        )
         return () => {
             instance.interceptors.request.eject(reqInterceptor);
-            // instance.interceptors.response.eject(resInterceptor);
+            instance.interceptors.response.eject(resInterceptor);
         }
     }, [user])
 
