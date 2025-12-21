@@ -54,8 +54,15 @@ const PaymentHistoryDecorator = () => {
                                 </tr>
                             )}
                             {
+
                                 isLoading ?
-                                    <tr><td><Loader /></td></tr>
+                                    (
+                                        <tr>
+                                            <td colSpan="4" className="text-center py-10">
+                                                <Loader size={20}/>
+                                            </td>
+                                        </tr>
+                                    )
                                     :
                                     earnignHistory.map(history => (
                                         <tr
@@ -67,7 +74,7 @@ const PaymentHistoryDecorator = () => {
                                             </td>
 
                                             <td className="font-semibold text-gray-700 flex items-center gap-1">
-                                                <FaBangladeshiTakaSign/> {history?.decoratorEarning}
+                                                <FaBangladeshiTakaSign /> {history?.decoratorEarning}
                                             </td>
 
                                             <td className="text-gray-500">

@@ -64,7 +64,7 @@ const PaymentHistroy = () => {
                             )}
                             {
                                 isLoading ?
-                                    <Loader />
+                                    <tr className='grid place-items-center'><td><Loader /></td></tr>
                                     :
                                     paymentHistory.map(history => (
                                         <tr

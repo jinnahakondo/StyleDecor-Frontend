@@ -4,6 +4,7 @@ import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import Container from '../Container/Container';
 import useRole from '../../Hooks/useRole';
+import Logo from '../Logo/Logo';
 
 const Navbar = ({ style }) => {
     const { role, } = useRole()
@@ -27,7 +28,7 @@ const Navbar = ({ style }) => {
                 toast.error(error.code)
             })
     }
-    
+
     return (
         <div className=' bg-base-100 shadow-sm'>
             <Container>
@@ -43,7 +44,7 @@ const Navbar = ({ style }) => {
                                 {links}
                             </ul>
                         </div>
-                        <Link to={'/'} className="btn btn-ghost  lg:text-2xl text-primary font-bold">StyleDecor</Link>
+                        <Link to={'/'} className="btn btn-ghost  lg:text-2xl text-primary font-bold"><Logo /></Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1 font-bold">

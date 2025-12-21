@@ -1,322 +1,202 @@
 import React from 'react';
-import Navbar from '../../Components/Header/Navbar';
-import SideBar from '../../Components/SideBar/SideBar';
 import { Link, NavLink, Outlet } from 'react-router';
-import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
-import { AiOutlineHome } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { FaCalendarCheck, FaClock } from "react-icons/fa6";
-import { ReceiptText } from 'lucide-react';
+import {
+    LayoutDashboard,
+    UserCircle,
+    CalendarCheck,
+    Clock,
+    Settings,
+    PlusCircle,
+    Wrench,
+    Wallet,
+    ClipboardList,
+    CheckCircle,
+    History,
+    Home,
+    LogOut,
+    Menu,
+    Coins,
+    ShieldCheck,
+    UserPlus
+} from 'lucide-react';
+
+import useAuth from '../../Hooks/useAuth';
 import useRole from '../../Hooks/useRole';
-import { FaMoneyCheckAlt, FaUserCog } from "react-icons/fa";
-import Loader from '../../Components/Loader/Loader';
-import { LuCalendarCog } from "react-icons/lu";
-import { FaScrewdriverWrench } from "react-icons/fa6";
-import { FaUserPlus } from "react-icons/fa";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { FaTasks } from "react-icons/fa";
-import { BsCheckCircle } from "react-icons/bs";
-import { BiSolidCoinStack } from "react-icons/bi";
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { MdDashboard } from "react-icons/md";
-
+import Loader from '../../Components/Loader/Loader';
+import Logo from '../../Components/Logo/Logo';
 
 const DashBoardLayout = () => {
-    const { user, SignOUtUser, loading } = useAuth()
-    const { role, isLoading } = useRole()
+    const { user, SignOUtUser, loading } = useAuth();
+    const { role, isLoading } = useRole();
+    const axiosSecure = useAxiosSecure();
 
     const handelLogout = () => {
         SignOUtUser()
-            .then(() => {
-                toast.success('sign Out Successfull')
-            })
-            .catch(error => {
-                toast.error(error.code)
-            })
-    }
+            .then(() => toast.success('Logged out successfully'))
+            .catch(error => toast.error(error.code));
+    };
 
-
-    const links = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/services'}> Services</NavLink></li>
-        <li><NavLink to={'/about'}>About</NavLink></li>
-        <li><NavLink to={'/contact'}> Contact</NavLink></li>
-    </>
-
-    const axiosSecure = useAxiosSecure()
-
-    const { data = [], isLoading: statusLoading, isPending, refetch } = useQuery({
+    const { data: decoratorData = {}, isLoading: statusLoading, refetch } = useQuery({
         queryKey: ['workingStatus', user?.email],
         queryFn: async () => {
-            const result = axiosSecure.get(`/decorator/${user?.email}`)
-            return (await result).data
+            const result = await axiosSecure.get(`/decorator/${user?.email}`);
+            return result.data;
         },
-        enabled: !!user
-    })
-    const { workingStatus } = data;
+        enabled: !!user && role === 'decorator'
+    });
 
-    //toggle working status
+    const { workingStatus } = decoratorData;
+
     const handelUpdateWorkingStatus = async (checked) => {
-        console.log(checked);
-        if (checked) {
-            const res = await axiosSecure.patch(`/decorators/update/${user?.email}`, { workingStatus: 'working' })
-            console.log(res.data);
-            refetch()
-            return
-        }
-        if (!checked) {
-            const res = await axiosSecure.patch(`/decorators/update/${user?.email}`, { workingStatus: 'available' })
-            console.log(res.data);
-            refetch()
-            return
-        }
-    }
+        const newStatus = checked ? 'available' : 'working';
+        await axiosSecure.patch(`/decorators/update/${user?.email}`, { workingStatus: newStatus });
+        refetch();
+    };
 
-    if (isLoading) {
-        return <span className='h-screen grid place-items-center'><Loader /></span>
-    }
+    if (isLoading) return <div className='h-screen flex items-center justify-center'><Loader /></div>;
 
+    const navItemClass = ({ isActive }) =>
+        `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 font-medium text-sm group ${isActive
+            ? 'bg-primary/10 text-primary border-r-4 border-primary shadow-sm'
+            : 'hover:bg-base-200 text-base-content/60 hover:text-base-content'
+        }`;
 
     return (
-        <div>
+        <div className="bg-base-100 min-h-screen">
             <div className="drawer lg:drawer-open">
-                <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content">
-                    <div className=' bg-base-100 shadow-sm'>
-                        <div className="navbar">
-                            <div className="navbar-start">
-                                {/* Sidebar toggle icon */}
-                                <label htmlFor="my-drawer-4" aria-label="open sidebar" className="btn btn-square btn-ghost ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 `} fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
-                                </label>
-                                <Link to={'/'} className="btn btn-ghost text-xl text-primary font-bold">StyleDecor</Link>
-                            </div>
-                            <div className="navbar-center hidden lg:flex">
-                                <ul className="menu menu-horizontal px-1">
-                                    {links}
-                                </ul>
-                            </div>
-                            <div className="navbar-end">
+                <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-                                {
-                                    user ?
-                                        <div className="dropdown dropdown-end">
-                                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                                <div className="w-10 rounded-full">
-                                                    <img
-                                                        alt="Tailwind CSS Navbar component"
-                                                        src={user?.email} />
-                                                </div>
-                                            </div>
-                                            <ul
-                                                tabIndex="-1"
-                                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                                <li>
-                                                    <a className="justify-between">
-                                                        Profile
-                                                        <span className="badge">New</span>
-                                                    </a>
-                                                </li>
-                                                <li><a>Settings</a></li>
-                                                <li><Link onClick={handelLogout}>Logout</Link></li>
-                                            </ul>
-                                        </div>
-                                        :
-                                        <Link className="btn btn-primary" to={'/auth'}>Login</Link>
-                                }
-                            </div>
+                <div className="drawer-content flex flex-col bg-slate-50/50">
+                    {/* --- Modern Glassmorphism Navbar --- */}
+                    <header className="navbar bg-base-100/80 backdrop-blur-md px-6 border-b border-base-200 sticky top-0 z-20 h-16">
+                        <div className="navbar-start lg:hidden">
+                            <label htmlFor="my-drawer" className="btn btn-ghost btn-circle">
+                                <Menu size={22} />
+                            </label>
                         </div>
-                    </div>
-                    {/* Page content here */}
-                    <div className="px-10 py-4 bg-gray-50 min-h-screen">
-                        <Outlet />
-                    </div>
-                </div>
 
-                <div className="drawer-side is-drawer-close:overflow-visible">
-                    <label htmlFor="my-drawer-4" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <div className="flex min-h-full flex-col items-start bg-white is-drawer-close:w-14 is-drawer-open:w-64 border-r border-gray-300">
-                        {/* Sidebar content here */}
-                        <ul className="menu w-full grow space-y-3">
-                            {/* List item */}
-                            {/* toggle button  */}
-                            {
-                                role === 'decorator' &&
-                                <div className='flex items-center gap-2 mt-10'>
-                                    <span className='text-green-600 font-medium text-lg is-drawer-close:hidden'>{workingStatus}</span>
+                        <div className="navbar-start hidden lg:flex">
+                            {/* <h1 className="text-lg font-semibold tracking-tight">Dashboard Overview</h1> */}
+                        </div>
+
+                        <div className="navbar-end gap-3">
+                            {role === 'decorator' && (
+                                <div className="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+                                    <span className={`text-[10px] font-black uppercase tracking-wider ${workingStatus === 'working' ? 'text-orange-500' : 'text-green-600'}`}>
+                                        {workingStatus}
+                                    </span>
                                     <input
-                                        disabled={statusLoading || isPending || loading}
-                                        checked={workingStatus === 'working'}
-                                        onChange={(e) => handelUpdateWorkingStatus(e.target.checked)}
                                         type="checkbox"
-
-                                        className="toggle border-indigo-600 bg-indigo-500 checked:border-orange-500 checked:bg-orange-400 checked:text-primary "
+                                        className="toggle toggle-primary toggle-sm"
+                                        checked={workingStatus === 'available'}
+                                        onChange={(e) => {
+                                            console.log(e.target.checked);
+                                            handelUpdateWorkingStatus(e.target.checked)
+                                        }}
                                     />
                                 </div>
-                            }
+                            )}
 
-                            {/* user links */}
-                            {
-                                role === 'user' && <>
-                                    <li>
-                                        <NavLink to={"/dashboard/my-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard mt-20" data-tip="My Bookings ">
-                                            {/* booking icon */}
-                                            <FaCalendarCheck className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                My Bookings
-                                            </span>
-                                        </NavLink>
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="avatar hover:opacity-80 transition-opacity">
+                                    <div className="w-9 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                        <img src={user?.photoURL || "https://ui-avatars.com/api/?name=" + user?.displayName} alt="profile" />
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-xl bg-base-100 rounded-2xl w-56 border border-base-200">
+                                    <div className="px-4 py-3 border-b border-base-100 mb-1">
+                                        <p className="text-sm font-bold truncate">{user?.displayName}</p>
+                                        <p className="text-[10px] opacity-50 truncate">{user?.email}</p>
+                                    </div>
+                                    <li><Link to="/"><Home size={16} /> Website Home</Link></li>
+                                    <li><Link to="/dashboard/my-profile"><Settings size={16} /> Account Settings</Link></li>
+                                    <li className="mt-2 pt-2 border-t border-base-100">
+                                        <button onClick={handelLogout} className="text-error"><LogOut size={16} /> Sign Out</button>
                                     </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/payment-history'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Payment History
-">
-                                            {/* payment icon */}
-                                            <ReceiptText className='text-2xl' />
-                                            <span className="is-drawer-close:hidden">Payment History
-                                            </span>
-                                        </NavLink>
-                                    </li>
-                                </>
-                            }
+                                </ul>
+                            </div>
+                        </div>
+                    </header>
 
-                            {/* admin links */}
-                            {
-                                role === 'admin' && <>
+                    {/* --- Page Area --- */}
+                    <main className="p-6">
+                        <Outlet />
+                    </main>
+                </div>
 
-                                    <li>
-                                        <NavLink to={"/dashboard/admin-dashboard"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard mt-20" data-tip="Dashboard">
-                                            {/* user icon */}
-                                            <MdDashboard className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Dashboard
-                                            </span>
-                                        </NavLink>
-                                    </li>
+                {/* --- Clean Sidebar --- */}
+                <div className="drawer-side z-30">
+                    <label htmlFor="my-drawer" className="drawer-overlay"></label>
+                    <aside className="w-64 min-h-full bg-base-100 border-r border-base-200 flex flex-col p-5">
+                        {/* StyleDecor Logo */}
+                        <Link to={'/'} className='mb-10'>
+                            <Logo />
+                        </Link>
 
-                                    <li>
-                                        <NavLink to={"/dashboard/admin/manage-decorators"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Decorators ">
-                                            {/* user icon */}
-                                            <FaUserCog className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Manage Decorators
-                                            </span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={"/dashboard/admin/manage-bookings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Manage Bookings">
-                                            {/*manage booking icon */}
-                                            <LuCalendarCog className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Manage Bookings
-                                            </span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={"/dashboard/admin/add-services"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Add Services">
-                                            {/*manage service icon */}
-                                            <IoIosAddCircleOutline className="text-3xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Add Services
-                                            </span>
+                        <nav className="flex-1 space-y-1">
+                            {/* Admin Section */}
+                            {role === 'admin' && (
+                                <div className="pb-4">
+                                    <p className="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-widest mb-3">Management</p>
+                                    <NavLink to="/dashboard/admin-dashboard" className={navItemClass}><LayoutDashboard size={18} /> Overview</NavLink>
+                                    <NavLink to="/dashboard/admin/manage-decorators" className={navItemClass}><UserPlus size={18} /> Decorators</NavLink>
+                                    <NavLink to="/dashboard/admin/manage-bookings" className={navItemClass}><CalendarCheck size={18} /> Bookings</NavLink>
+                                    <NavLink to="/dashboard/admin/add-services" className={navItemClass}><PlusCircle size={18} /> Create Service</NavLink>
+                                    <NavLink to="/dashboard/admin/manage-services" className={navItemClass}><Wrench size={18} /> Services List</NavLink>
+                                    <NavLink to="/dashboard/admin/pending-decorator-payments" className={navItemClass}><Wallet size={18} /> Payouts</NavLink>
+                                </div>
+                            )}
 
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={"/dashboard/admin/manage-services"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Manage Services">
-                                            {/*manage service icon */}
-                                            <FaScrewdriverWrench className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Manage Services
-                                            </span>
+                            {/* User Section */}
+                            {role === 'user' && (
+                                <div className="pb-4">
+                                    <p className="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-widest mb-3">Customer</p>
+                                    <NavLink to="/dashboard/my-bookings" className={navItemClass}><CalendarCheck size={18} /> My Bookings</NavLink>
+                                    <NavLink to="/dashboard/payment-history" className={navItemClass}><History size={18} /> My Payouts</NavLink>
+                                </div>
+                            )}
 
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={"/dashboard/admin/pending-decorator-payments"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Pending Decorator Payments">
-                                            {/*manage service icon */}
-                                            <FaMoneyCheckAlt className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Pending Decorator Payments
-                                            </span>
+                            {/* Decorator Section */}
+                            {role === 'decorator' && (
+                                <div className="pb-4">
+                                    <p className="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-widest mb-3">Decorator Workspace</p>
+                                    <NavLink to="/dashboard/decorator/asigned-projects" className={navItemClass}><ClipboardList size={18} /> Active Tasks</NavLink>
+                                    <NavLink to="/dashboard/decorator/update-status" className={navItemClass}><CheckCircle size={18} /> Progress</NavLink>
+                                    <NavLink to="/dashboard/decorator/todays-schedule" className={navItemClass}><Clock size={18} /> Schedule</NavLink>
+                                    <NavLink to="/dashboard/decorator/earnings" className={navItemClass}><Coins size={18} /> Income</NavLink>
+                                    <NavLink to="/dashboard/decorator-payment-history" className={navItemClass}><History size={18} /> Payout Logs</NavLink>
+                                </div>
+                            )}
 
-                                        </NavLink>
-                                    </li>
-                                </>
-                            }
-                            {/* decorators link  */}
-                            {
-                                role === 'decorator' && <>
+                            <div className="pt-4 mt-4 border-t border-base-200">
+                                <p className="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-widest mb-3">Profile</p>
+                                <NavLink to="/dashboard/my-profile" className={navItemClass}><UserCircle size={18} /> My Account</NavLink>
+                            </div>
+                        </nav>
 
-                                    <li>
-                                        <NavLink to={"/dashboard/decorator/asigned-projects"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip=" Assigned Projects">
-                                            {/*  icon */}
-                                            <FaTasks className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Assigned Projects
-                                            </span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={"/dashboard/decorator/update-status"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Update Status">
-                                            {/* icon */}
-                                            <BsCheckCircle className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Update Status
-                                            </span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={"/dashboard/decorator/todays-schedule"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Today’s Schedule">
-                                            {/* icon */}
-                                            <FaClock className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Today’s Schedule
-                                            </span>
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={"/dashboard/decorator/earnings"} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Earnings">
-                                            {/*manage service icon */}
-                                            <BiSolidCoinStack className="text-2xl" />
-                                            <span className="is-drawer-close:hidden">
-                                                Earnings
-                                            </span>
-
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink to={'/dashboard/decorator-payment-history'} className="is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard" data-tip="Payment History
-">
-                                            {/* payment icon */}
-                                            <ReceiptText className='text-2xl' />
-                                            <span className="is-drawer-close:hidden">Payment History
-                                            </span>
-                                        </NavLink>
-                                    </li>
-                                </>
-                            }
-                            <li>
-                                <NavLink to={"/dashboard/my-profile"} className={`is-drawer-close:tooltip is-drawer-close:tooltip-right dashboard 
-                                     `} data-tip="My Profile">
-                                    {/* profile icon */}
-                                    <CgProfile className="text-2xl" />
-                                    <span className="is-drawer-close:hidden">
-                                        My Profile
-                                    </span>
-                                </NavLink>
-                            </li>
-                            {/* admin links */}
-
-                            {/* List item */}
-
-                        </ul>
-                    </div>
+                        {/* User Summary at Bottom */}
+                        <div className="mt-auto pt-4 bg-slate-50 -mx-5 -mb-5 p-5 border-t border-base-200">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs uppercase">
+                                    {role?.charAt(0)}
+                                </div>
+                                <div>
+                                    <p className="text-xs font-bold capitalize">{role} Account</p>
+                                    <p className="text-[10px] opacity-50">Verified Member</p>
+                                </div>
+                            </div>
+                            <button onClick={handelLogout} className="btn btn-error btn-sm btn-block btn-outline border-none hover:bg-error/10 text-error">
+                                <LogOut size={14} /> Exit Dashboard
+                            </button>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export default DashBoardLayout;
