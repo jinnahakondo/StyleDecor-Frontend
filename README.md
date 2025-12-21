@@ -12,4 +12,16 @@ StyleDecor is a modern appointment management system for a local decoration comp
 - Service search and booking management
 - Responsive & user-friendly UI
 
+
+### NPM packages
+-- React, React Router
+- Tailwind CSS, DaisyUI
+- Firebase Authentication
+- Axios, TanStack React Query
+- Recharts for analytics
+- Leaflet & React Leaflet (Maps)
+- Lottie & Motion animations
+- React Hook Form
+- SweetAlert2 & React Toastify
+
 ## [ Live Link](https://styledecor-8cae7.web.app)
