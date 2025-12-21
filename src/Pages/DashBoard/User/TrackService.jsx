@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useParams } from 'react-router';
 import useAxios from '../../../Hooks/useAxios';
+import Loader from '../../../Components/Loader/Loader';
 
 const TrackService = () => {
     const instance = useAxios()
@@ -16,7 +17,9 @@ const TrackService = () => {
     })
     const { trackingStatus = [], title } = data;
 
-
+    if (isLoading) {
+        return <span className='grid place-items-center h-screen'><Loader /></span>
+    }
     return (
         <div className='h-screen grid place-items-center max-w-5xl mx-auto'>
 
@@ -40,7 +43,7 @@ const TrackService = () => {
                     <div className="timeline-end timeline-box">pending assign</div>
                     <hr className='bg-purple-300' />
                 </li>
-                {trackingStatus.map(status => <li>
+                {trackingStatus.map((status, i) => <li key={i}>
                     <div className="timeline-middle">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

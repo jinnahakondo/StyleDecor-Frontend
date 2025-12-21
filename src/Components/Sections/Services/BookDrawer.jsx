@@ -94,7 +94,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                     toast.success("service booked");
                 }
                 openBookDrawer.current.checked = false;
-                navigate('/dashboard/my-bookings')
+                navigate('/dashboard')
             }
         });
 

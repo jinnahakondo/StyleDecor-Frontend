@@ -96,12 +96,12 @@ export const router = createBrowserRouter([
                 path: 'my-profile',
                 Component: MyProfile
             },
-            {
-                path: 'my-bookings',
-                element: <UserRoutes>
-                    <MyBookings />
-                </UserRoutes>
-            },
+            // {
+            //     path: 'my-bookings',
+            //     element: <UserRoutes>
+            //         <MyBookings />
+            //     </UserRoutes>
+            // },
             {
                 path: 'payment-success',
                 element: <UserRoutes>

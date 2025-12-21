@@ -2,10 +2,11 @@ import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
 import useAuth from '../../Hooks/useAuth';
+import Loader from '../Loader/Loader';
 
-const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decoratorsRefetch, booking, bookingsRefetch, booingLoding }) => {
+const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decoratorsRefetch, booking, bookingsRefetch, booingLoding, decoratorLoading }) => {
 
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
 
     const axiosSecure = useAxiosSecure()
 
@@ -58,6 +59,9 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
             toast.error(error.code)
         }
 
+    }
+    if (loading || decoratorLoading) {
+        return <span className='h-screen grid place-items-center'><Loader /></span>
     }
 
     return (

@@ -85,7 +85,7 @@ const ManageDecorators = () => {
     };
 
     // find decorators for booking
-    const { data: showDecorators = [], refetch: decoratorsRefetch } = useQuery({
+    const { data: showDecorators = [], refetch: decoratorsRefetch, isLoading: decoratorLoading } = useQuery({
         queryKey: ['findDecorators', booking?._id],
         queryFn: async () => {
             const { category, district } = booking;
@@ -307,6 +307,7 @@ const ManageDecorators = () => {
                 booking={booking}
                 bookingsRefetch={bookingsRefetch}
                 booingLoding={bookingLoading}
+                decoratorLoading={decoratorLoading}
             />
         </div>
     );

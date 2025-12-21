@@ -20,7 +20,7 @@ const DashboardIndex = () => {
         return <DecoratorRoutes>< AssignedProjects /></DecoratorRoutes>
     }
     if (role === "user") {
-        <UserRoutes> < MyBookings /></UserRoutes>
+        return <UserRoutes> < MyBookings /></UserRoutes>
     }
 
 };
