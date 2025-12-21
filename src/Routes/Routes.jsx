@@ -32,6 +32,7 @@ import PendingDecoratorPayments from "../Pages/DashBoard/Admin/PendingDecoratorP
 import PaymentHistoryDecorator from "../Pages/DashBoard/Deocrator/PaymentHistoryDecorator";
 import AdminDashBoard from "../Layout/Admin/AdminDashBoard";
 import Contact from "../Pages/Contact/Contact";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact />
+            },
+            {
+                path: '/about',
+                element: <AboutUs />
             },
         ]
     },

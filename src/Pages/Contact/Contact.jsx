@@ -1,82 +1,136 @@
 import React from 'react';
 import Container from '../../Components/Container/Container';
-import { useForm } from "react-hook-form"
-import { Send } from 'lucide-react';
-import { IoCall } from "react-icons/io5";
-import { FaClock, FaFacebook, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaTwitterSquare } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { Send, Mail, Phone, MapPin } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from 'react-router';
 
 const Contact = () => {
-
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
-    } = useForm()
+    } = useForm();
 
+    const handelSendMessage = (data) => {
+        console.log(data);
+        
+    };
 
     return (
-        <div>
+        <div className="bg-base-100 py-16 lg:py-24">
             <Container>
-                <div className='grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 mt-20  items-center'>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-                    {/* left */}
-                    <div className='max-w-sm '>
-                        <h2 className='text-5xl font-extrabold '>Contact us</h2>
-                        <div className='space-y-7 mt-10'>
+                    {/* Left Side: Contact Info */}
+                    <div className="space-y-8">
+                        <div>
+                            <h2 className="text-5xl font-black text-base-content mb-4 tracking-tight">
+                                Get in <span className="text-primary">Touch</span>
+                            </h2>
+                            <p className="text-lg opacity-70">
+                                Have a question or want to plan an event? Send us a message and we'll respond as soon as possible.
+                            </p>
+                        </div>
 
-                            <div className='flex items-center gap-3 text-lg font-bold text-accent mt-7'> <span className='text-5xl'>
-                                <IoCall className='text-primary w-10 h-10' />
-                            </span>
-                                <span>+8801773331334</span>
+                        <div className="space-y-6">
+                            {/* Phone */}
+                            <div className="flex items-center gap-5 p-4 rounded-2xl bg-base-200/50 hover:bg-base-200 transition-colors duration-300">
+                                <div className="p-3 bg-primary/10 rounded-xl">
+                                    <Phone className="text-primary w-6 h-6" />
+                                </div>
+                                <div>
+                                    <p className="text-sm opacity-60 font-medium">Call Us</p>
+                                    <p className="text-lg font-bold">+8801773331334</p>
+                                </div>
                             </div>
 
-                            <div className='flex items-center gap-3 text-lg font-bold text-accent mt-7'> <span className='text-5xl'>
-                                <Send className='text-primary w-10 h-10' />
-                            </span>
-                                <span>mdjinnahakondo@gmail.com</span>
+                            {/* Email */}
+                            <div className="flex items-center gap-5 p-4 rounded-2xl bg-base-200/50 hover:bg-base-200 transition-colors duration-300">
+                                <div className="p-3 bg-primary/10 rounded-xl">
+                                    <Mail className="text-primary w-6 h-6" />
+                                </div>
+                                <div>
+                                    <p className="text-sm opacity-60 font-medium">Email Us</p>
+                                    <p className="text-lg font-bold">mdjinnahakondo@gmail.com</p>
+                                </div>
                             </div>
 
-                            <div className='flex items-center gap-3 text-lg font-bold text-accent mt-7'> <span className='text-5xl'>
-                                <FaMapMarkerAlt className='text-primary w-10 h-10' />
-                            </span>
-                                <span>Address: Dhaka, Bangladesh</span>
+                            {/* Address */}
+                            <div className="flex items-center gap-5 p-4 rounded-2xl bg-base-200/50 hover:bg-base-200 transition-colors duration-300">
+                                <div className="p-3 bg-primary/10 rounded-xl">
+                                    <MapPin className="text-primary w-6 h-6" />
+                                </div>
+                                <div>
+                                    <p className="text-sm opacity-60 font-medium">Our Location</p>
+                                    <p className="text-lg font-bold">Dhaka, Bangladesh</p>
+                                </div>
                             </div>
+                        </div>
 
-                            <div className='flex items-center gap-3'>
-                                <Link to='https://www.facebook.com/RobiulislamJinnah' className='hover:-translate-y-1 transition-all'><FaFacebook className='w-10 h-10 text-primary ' /></Link>
-                                <Link to='https://x.com' className='hover:-translate-y-1 transition-all'><FaTwitterSquare className='w-10 h-10 text-primary ' /></Link>
-                                <Link to='https://www.instagram.com' className='hover:-translate-y-1 transition-all'><FaInstagram className='w-10 h-10 text-primary ' /></Link>
-                                <Link to='https://www.linkedin.com' className='hover:-translate-y-1 transition-all'><FaLinkedin className='w-10 h-10 text-primary ' /></Link>
-
+                        {/* Social Media */}
+                        <div className="pt-6">
+                            <p className="text-sm font-bold uppercase tracking-widest opacity-50 mb-4">Follow Us</p>
+                            <div className="flex gap-4">
+                                {[
+                                    { icon: <FaFacebook />, link: 'https://facebook.com/RobiulislamJinnah' },
+                                    { icon: <FaTwitter />, link: 'https://x.com' },
+                                    { icon: <FaInstagram />, link: 'https://instagram.com' },
+                                    { icon: <FaLinkedin />, link: 'https://linkedin.com' }
+                                ].map((social, idx) => (
+                                    <Link
+                                        key={idx}
+                                        to={social.link}
+                                        className="btn btn-circle btn-outline btn-primary hover:text-white transition-all duration-300"
+                                    >
+                                        <span className="text-xl">{social.icon}</span>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </div>
 
-                    <div className=' w-full  '>
-                        <form onSubmit={handleSubmit()} className=''>
-                            <div className="  w-full flex flex-col gap-5 ">
-                                <div className='flex flex-col gap-0.5'>
-                                    <input type="email" className="input input-xl border-0 rounded-lg w-full bg-gray-100 focus:outline-0" placeholder="Full Name" />
-                                </div>
-                                <div className='flex flex-col gap-0.5'>
-                                    <input type="email" className="input input-xl  rounded-lg w-full bg-gray-100 focus:outline-0 border-0" placeholder="email" />
-                                </div>
-                                <div className='flex flex-col gap-0.5'>
-                                    <textarea
-                                        rows={5}
-                                        className="textarea textarea-xl rounded-lg w-full bg-gray-100 focus:outline-0 border-0" placeholder="write your message here" ></textarea>
-                                </div>
-
-                                <div>
-                                    <button className="btn btn-primary mt-4 px-8 py-7 rounded-md shadow text-xl">Send Message</button>
-                                </div>
-
-
+                    {/* Right Side: Form */}
+                    <div className="card bg-base-100 shadow-2xl border border-base-200 p-2">
+                        <form onSubmit={handleSubmit(handelSendMessage)} className="card-body gap-6 p-8 lg:p-12">
+                            <div className="form-control">
+                                <label className="label font-semibold mr-2">Full Name</label>
+                                <input
+                                    {...register("name", { required: true })}
+                                    type="text"
+                                    className="input input-bordered bg-base-200 focus:input-primary border-none focus:outline-offset-0"
+                                    placeholder="John Doe"
+                                />
+                                
                             </div>
+
+                            <div className="form-control">
+                                <label className="label font-semibold mr-2">Email Address</label>
+                                <input
+                                    {...register("email", { required: true })}
+                                    type="email"
+                                    className="input input-bordered bg-base-200 focus:input-primary border-none focus:outline-offset-0"
+                                    placeholder="name@example.com"
+                                />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label font-semibold mr-2">Message</label>
+                                <textarea
+                                    {...register("message", { required: true })}
+                                    rows={4}
+                                    className="textarea textarea-bordered bg-base-200 focus:textarea-primary border-none focus:outline-offset-0"
+                                    placeholder="Tell us about your event..."
+                                ></textarea>
+                            </div>
+
+                            <button className="btn btn-primary btn-block h-14 rounded-xl text-lg group">
+                                Send Message
+                                <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            </button>
                         </form>
                     </div>
+
                 </div>
             </Container>
         </div>
