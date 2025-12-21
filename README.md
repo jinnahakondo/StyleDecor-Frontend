@@ -4,9 +4,10 @@ StyleDecor is a modern appointment management system for a local decoration comp
 ### Key features
 - Users can browse decoration services and book events easily.
 - Users can book services, view booking history, and track status.
-- Event decoration booking platform
-- Role-based dashboard (Admin, Decorator, User)
 - Online payment system
+- Role-based dashboard (Admin, Decorator, User)
+- Admin can manage Decorators & Services
+- Decorator can update project status step by step
 - Earnings & revenue analytics
 - Service search and booking management
 - Responsive & user-friendly UI
