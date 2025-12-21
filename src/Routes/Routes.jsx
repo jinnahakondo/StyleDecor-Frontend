@@ -33,6 +33,7 @@ import PaymentHistoryDecorator from "../Pages/DashBoard/Deocrator/PaymentHistory
 import AdminDashBoard from "../Layout/Admin/AdminDashBoard";
 import Contact from "../Pages/Contact/Contact";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import DashboardIndex from "./DashboardIndex";
 
 export const router = createBrowserRouter([
     {
@@ -114,11 +115,17 @@ export const router = createBrowserRouter([
                 </UserRoutes>
             },
             {
-                path: 'admin-dashboard',
-                element: <AdminRoutes>
-                    <AdminDashBoard />
-                </AdminRoutes>
+                index: true,
+                element: <PrivateRoutes>
+                    <DashboardIndex />
+                </PrivateRoutes>
             },
+            // {
+            //     path: 'admin-dashboard',
+            //     element: <AdminRoutes>
+            //         <AdminDashBoard />
+            //     </AdminRoutes>
+            // },
             {
                 path: 'admin/manage-decorators',
                 element: <AdminRoutes>

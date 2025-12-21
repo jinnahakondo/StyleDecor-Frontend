@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink, Outlet } from 'react-router';
+import { Link, Navigate, NavLink, Outlet } from 'react-router';
 import { toast } from 'react-toastify';
 import {
     LayoutDashboard,
@@ -31,6 +31,8 @@ import Logo from '../../Components/Logo/Logo';
 const DashBoardLayout = () => {
     const { user, SignOUtUser, loading } = useAuth();
     const { role, isLoading } = useRole();
+
+
     const axiosSecure = useAxiosSecure();
 
     const handelLogout = () => {
@@ -93,7 +95,6 @@ const DashBoardLayout = () => {
                                         className="toggle toggle-primary toggle-sm"
                                         checked={workingStatus === 'available'}
                                         onChange={(e) => {
-                                            console.log(e.target.checked);
                                             handelUpdateWorkingStatus(e.target.checked)
                                         }}
                                     />
@@ -141,7 +142,7 @@ const DashBoardLayout = () => {
                             {role === 'admin' && (
                                 <div className="pb-4">
                                     <p className="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-widest mb-3">Management</p>
-                                    <NavLink to="/dashboard/admin-dashboard" className={navItemClass}><LayoutDashboard size={18} /> Overview</NavLink>
+                                    <NavLink end to="/dashboard" className={navItemClass}><LayoutDashboard size={18} /> Overview</NavLink>
                                     <NavLink to="/dashboard/admin/manage-decorators" className={navItemClass}><UserPlus size={18} /> Decorators</NavLink>
                                     <NavLink to="/dashboard/admin/manage-bookings" className={navItemClass}><CalendarCheck size={18} /> Bookings</NavLink>
                                     <NavLink to="/dashboard/admin/add-services" className={navItemClass}><PlusCircle size={18} /> Create Service</NavLink>
@@ -154,7 +155,7 @@ const DashBoardLayout = () => {
                             {role === 'user' && (
                                 <div className="pb-4">
                                     <p className="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-widest mb-3">Customer</p>
-                                    <NavLink to="/dashboard/my-bookings" className={navItemClass}><CalendarCheck size={18} /> My Bookings</NavLink>
+                                    <NavLink end to="/dashboard" className={navItemClass}><CalendarCheck size={18} /> My Bookings</NavLink>
                                     <NavLink to="/dashboard/payment-history" className={navItemClass}><History size={18} /> My Payouts</NavLink>
                                 </div>
                             )}
@@ -163,10 +164,15 @@ const DashBoardLayout = () => {
                             {role === 'decorator' && (
                                 <div className="pb-4">
                                     <p className="px-4 text-[11px] font-bold text-base-content/30 uppercase tracking-widest mb-3">Decorator Workspace</p>
-                                    <NavLink to="/dashboard/decorator/asigned-projects" className={navItemClass}><ClipboardList size={18} /> Active Tasks</NavLink>
+
+                                    <NavLink end to="/dashboard" className={navItemClass}><ClipboardList size={18} /> Active Tasks</NavLink>
+
                                     <NavLink to="/dashboard/decorator/update-status" className={navItemClass}><CheckCircle size={18} /> Progress</NavLink>
+
                                     <NavLink to="/dashboard/decorator/todays-schedule" className={navItemClass}><Clock size={18} /> Schedule</NavLink>
+
                                     <NavLink to="/dashboard/decorator/earnings" className={navItemClass}><Coins size={18} /> Income</NavLink>
+
                                     <NavLink to="/dashboard/decorator-payment-history" className={navItemClass}><History size={18} /> Payout Logs</NavLink>
                                 </div>
                             )}
@@ -188,9 +194,9 @@ const DashBoardLayout = () => {
                                     <p className="text-[10px] opacity-50">Verified Member</p>
                                 </div>
                             </div>
-                            <button onClick={handelLogout} className="btn btn-error btn-sm btn-block btn-outline border-none hover:bg-error/10 text-error">
+                            <Link to={'/'} className="btn btn-error btn-sm btn-block btn-outline border-none hover:bg-error/10 text-error">
                                 <LogOut size={14} /> Exit Dashboard
-                            </button>
+                            </Link>
                         </div>
                     </aside>
                 </div>

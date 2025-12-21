@@ -4,7 +4,9 @@ import Loader from '../Components/Loader/Loader';
 
 const DecoratorRoutes = ({ children }) => {
     const { role, isLoading } = useRole()
-    if (isLoading) return <Loader />
+    if (isLoading){
+         return <Loader />
+    }
     if (role !== "decorator") {
         return
     }
