@@ -9,8 +9,6 @@ const ShowDecorators = ({ showDecoratorRef, showDecorators: decorators, decorato
 
     const axiosSecure = useAxiosSecure()
 
-    console.log("decorators from modal", decorators);
-
     const handelAsign = async (decorator) => {
 
         const bookingInfoUpdate = {

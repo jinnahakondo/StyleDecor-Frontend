@@ -3,7 +3,7 @@ import React from 'react';
 import { FaRegStar } from 'react-icons/fa';
 
 const Review = ({ review }) => {
-    console.log(review);
+    // console.log(review);
     return (
         <div className='bg-base-100 shadow-sm rounded-2xl p-5'>
             <div className='flex  items-start gap-4'>

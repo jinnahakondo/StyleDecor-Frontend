@@ -13,7 +13,7 @@ const Contact = () => {
     } = useForm();
 
     const handelSendMessage = (data) => {
-        console.log(data);
+        // console.log(data);
         
     };
 

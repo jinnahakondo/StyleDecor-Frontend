@@ -50,7 +50,7 @@ const AddService = () => {
             queryClient.invalidateQueries({ queryKey: ['manage-services'] })
         },
         onError: () => {
-            console.log("failed to add service");
+            // console.log("failed to add service");
         }
     })
 

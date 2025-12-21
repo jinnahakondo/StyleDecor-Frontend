@@ -45,7 +45,7 @@ const Register = () => {
             profileImage: photo,
             createdAt: new Date()
         }
-        console.log(userInfo);
+        // console.log(userInfo);
         try {
             await createUser(email, password)
             await updateUserProfile(updateInfo)
@@ -63,7 +63,7 @@ const Register = () => {
 
     const handleOnchange = async (e) => {
         const file = e.target.files[0];
-        console.log(file);
+        // console.log(file);
         if (!file) {
             return
         }

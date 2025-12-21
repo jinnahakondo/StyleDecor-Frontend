@@ -74,7 +74,7 @@ const AdminDashBoard = () => {
             return res.data;
         }
     })
-    console.log(weeklyBookings);
+    // console.log(weeklyBookings);
 
     let totalRevenue = 0;
     data.forEach(adminEarning => {

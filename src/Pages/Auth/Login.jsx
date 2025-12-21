@@ -42,7 +42,7 @@ const Login = () => {
     }
 
     if (user) {
-        return <Navigate to={'/'} />
+        return <Navigate to={location.state || '/'} />
     }
 
     return (

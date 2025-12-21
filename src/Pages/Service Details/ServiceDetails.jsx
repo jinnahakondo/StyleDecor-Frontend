@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useRef } from 'react';
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, useLocation, useNavigate, useParams } from 'react-router';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Loader from '../../Components/Loader/Loader';
 import { FaUser } from "react-icons/fa";
@@ -17,7 +17,7 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 const ServiceDetails = () => {
     const { user } = useAuth()
     const openBookDrawer = useRef(null)
-
+    const location = useLocation()
     const axiosSecure = useAxiosSecure();
 
     const { id } = useParams();
@@ -62,7 +62,7 @@ const ServiceDetails = () => {
                                     openBookDrawer.current.checked = true;
                                 }
                                 else {
-                                    return navigate('/auth')
+                                    return navigate('/auth', { state: location.pathname })
                                 }
                             }}
                             className="btn btn-primary mt-2 w-fit">Book Now</button>

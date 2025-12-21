@@ -15,7 +15,7 @@ const TodaysSchedule = () => {
         },
         enabled: !!user
     })
-    console.log(data);
+    // console.log(data);
     return (
         <div className="bg-base-100 rounded-2xl shadow-sm border border-base-200 p-4 lg:p-6">
             <div className="flex items-center justify-between mb-4">

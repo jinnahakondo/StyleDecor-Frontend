@@ -23,7 +23,6 @@ const Coverage = () => {
         const search = e.target.search.value;
         const serarched = serviceCenters.find(c => c.district.toLowerCase().includes(search.toLowerCase()))
         mapRef.current.flyTo(serarched.coordinates, 14)
-        console.log("clicked", serarched);
     }
 
     if (isLoading) Loader
