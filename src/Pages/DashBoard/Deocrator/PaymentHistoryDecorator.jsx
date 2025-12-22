@@ -23,7 +23,7 @@ const PaymentHistoryDecorator = () => {
     return (
         <div className="mt-4 px-4">
             {/* Card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
+            <div className="bg-white md:rounded-2xl md:shadow-sm md:border border-gray-100">
                 <div className="p-6 border-b">
                     <h2 className="text-xl font-semibold text-gray-800">
                         Payment History

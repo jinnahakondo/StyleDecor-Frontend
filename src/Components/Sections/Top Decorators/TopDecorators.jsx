@@ -26,22 +26,24 @@ const TopDecorators = () => {
             <div className='mx-auto'>
                 <Swiper
                     modules={[Autoplay]}
-                    spaceBetween={50}
+                    spaceBetween={30}
                     loop
                     autoplay={{
                         delay: 3000,
                         disableOnInteraction: false
                     }}
+
                     breakpoints={{
-                        320: { slidesPerView: 1 },
-                        640: { slidesPerView: 2, },
-                        1024: { slidesPerView: 3, },
-                        1280: { slidesPerView: 4, },
+                        320: { slidesPerView: "auto" },
+                        640: { slidesPerView: 3 },
+                        1200: { slidesPerView: 4, },
                     }}
                 >
                     {
-                        decorators?.map(decorator => <SwiperSlide key={decorator._id} className='grid place-items-center'>
-                            <Decorator decorator={decorator} />
+                        decorators?.map(decorator => <SwiperSlide key={decorator._id} >
+                            <div className='grid place-items-center w-full'>
+                                <Decorator decorator={decorator} />
+                            </div>
                         </SwiperSlide>)
                     }
                 </Swiper>

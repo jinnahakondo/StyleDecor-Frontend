@@ -52,7 +52,7 @@ const Coverage = () => {
                     <button type='submit' className="btn btn-primary join-item">Search</button>
                 </div>
             </form>
-            <div className='h-[600px] w-full border'>
+            <div className='h-[350px] lg:h-[600px] w-full border'>
                 <MapContainer
                     center={position}
                     zoom={8}
