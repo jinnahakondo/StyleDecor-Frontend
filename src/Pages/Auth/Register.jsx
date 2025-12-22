@@ -76,20 +76,20 @@ const Register = () => {
         return <Navigate to={'/'} />
     }
     return (
-        <div className="flex flex-col justify-center p-10 w-11/12 lg:max-w-[500px] bg-base-100 shadow-md">
+        <div className="flex flex-col justify-center md:p-10 w-full lg:max-w-[500px] md:bg-base-100 lg:shadow-md">
             <div className="text-center sm:mx-auto sm:w-full ">
                 <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
                     Register
                 </h1>
             </div>
-            <div className="mt-8 sm:mx-auto sm:w-full ">
-                <div className=" px-4 pb-4 pt-8 sm:rounded-lg w-full sm:shadow">
+            <div className="lg:mt-8 sm:mx-auto sm:w-full ">
+                <div className=" px-4 pb-4 pt-5 lg:pt-8 sm:rounded-lg w-full sm:shadow">
                     <form onSubmit={handleSubmit(handleCreateUser)} className="space-y-6 w-full">
                         {/* photo  */}
                         <div>
                             <label
                                 htmlFor="photo"
-                                className="grid place-items-center mb-10 "
+                                className="grid place-items-center lg:mb-10 "
                             >
                                 <img src={profilePic} className='h-24 w-24 rounded-full border border-gray-300 ' />
                             </label>

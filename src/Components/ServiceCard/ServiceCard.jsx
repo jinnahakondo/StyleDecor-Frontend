@@ -11,7 +11,7 @@ const ServiceCard = ({ service }) => {
                     <img
                         src={service?.image}
                         alt="Service"
-                        className="w-full h-full object-cover"
+                        className="w-full h-52 object-cover"
                     />
                 </figure>
 

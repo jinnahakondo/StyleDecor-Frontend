@@ -3,8 +3,8 @@ import { FaRegStar } from 'react-icons/fa';
 
 const Decorator = ({ decorator }) => {
     return (
-        <div>
-            <img src="https://i.ibb.co.com/b5hfsQCf/download.jpg" className='h-80 rounded-2xl' />
+        <div className='w-64'>
+            <img src={decorator?.photo} className='h-80 rounded-2xl object-cover' />
             <div className='space-y-1'>
                 <h3 className='heading-two mt-5'>{decorator?.name}</h3>
                 <p className='text-primary font-bold'>Expert in: {decorator?.category} decoration</p>
