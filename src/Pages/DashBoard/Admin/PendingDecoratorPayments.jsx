@@ -51,7 +51,7 @@ const PendingDecoratorPayments = () => {
             refetch()
         }
     }
-    
+
 
     return (
         <div>
@@ -71,7 +71,7 @@ const PendingDecoratorPayments = () => {
                         <table className="table w-full">
                             <thead className="bg-gray-50 text-gray-600 text-sm">
                                 <tr>
-                                    <th>BookingId</th>
+                                    <th>Service Name</th>
                                     <th>DecoratorEmail</th>
                                     <th>Decorator earning</th>
                                     {/* <th>Comission</th> */}
@@ -99,7 +99,7 @@ const PendingDecoratorPayments = () => {
                                                 className="hover:bg-gray-50 transition"
                                             >
                                                 <td className="font-medium text-gray-800">
-                                                    {payment?.bookingId}
+                                                    {payment?.serviceName}
                                                 </td>
 
                                                 <td className="font-semibold text-gray-700">

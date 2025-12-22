@@ -7,11 +7,15 @@ const googleProvider = new GoogleAuthProvider()
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
+    console.log(loading);
 
     // login with google 
     const googleLogin = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
 
@@ -19,18 +23,27 @@ const AuthProvider = ({ children }) => {
     const createUser = (email, pass) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, pass)
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     //sign in with email and password
     const signInUser = (email, pass) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, pass)
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     //update userProfile
     const updateUserProfile = (updateInfo) => {
         setLoading(true);
         return updateProfile(auth.currentUser, updateInfo)
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
 

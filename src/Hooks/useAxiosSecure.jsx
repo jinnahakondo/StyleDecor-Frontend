@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import useAuth from './useAuth';
 import axios from 'axios';
 const instance = axios.create({
-    baseURL: 'https://style-decor-backend.vercel.app'
-    // baseURL: 'http://localhost:3000'
+    // baseURL: 'https://style-decor-backend.vercel.app'
+    baseURL: 'http://localhost:3000'
 })
 const useAxiosSecure = () => {
     const { user } = useAuth();

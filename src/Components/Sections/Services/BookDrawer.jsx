@@ -75,13 +75,13 @@ const BookDrawer = ({ openBookDrawer, service }) => {
 
 
     const handelBookingService = (data) => {
-        const cost = Number(service?.price) * Number(data.unit)
+        const cost = Number(service?.price) * Number(data.unit) || Number(service?.price)
         bookServiceInfo.district = data.district;
         bookServiceInfo.totalPrice = cost;
         bookServiceInfo.createdAt = new Date();
 
         Swal.fire({
-            text: `Your total cost will be ${cost}`,
+            text: `Your total cost will be ${cost} Taka`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -101,7 +101,7 @@ const BookDrawer = ({ openBookDrawer, service }) => {
 
     }
 
-    const unitLabel = getUnitLabel("per sqr-ft")
+    const unitLabel = getUnitLabel(service?.unit)
     return (
         <div>
             <div className="drawer drawer-end">
@@ -159,16 +159,18 @@ const BookDrawer = ({ openBookDrawer, service }) => {
                             </div>
                             {/* service unit */}
                             <div className='flex flex-col gap-2 mt-4'>
-                                <label className='font-bold '> {unitLabel}</label>
 
                                 {service?.unit !== "fixed" && (
-                                    <input
-                                        type="number"
-                                        required
-                                        className="input"
-                                        placeholder={unitLabel}
-                                        {...register('unit')}
-                                    />
+                                    <>
+                                        <label className='font-bold '> {unitLabel}</label>
+                                        <input
+                                            type="number"
+                                            required
+                                            className="input"
+                                            placeholder={unitLabel}
+                                            {...register('unit')}
+                                        />
+                                    </>
                                 )}
                             </div>
                             {/* region  */}

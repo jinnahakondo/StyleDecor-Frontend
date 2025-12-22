@@ -15,8 +15,6 @@ const useRole = () => {
         },
         enabled: !!user?.email
     })
-
-    console.log(role);
     return { role, isLoading, refetch }
 };
 

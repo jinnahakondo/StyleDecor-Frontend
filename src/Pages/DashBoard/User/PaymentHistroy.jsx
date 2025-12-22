@@ -31,7 +31,7 @@ const PaymentHistroy = () => {
     return (
         <div className="mt-4 px-4">
             {/* Card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
+            <div className="bg-white lg:rounded-2xl lg:shadow-sm lg:border border-gray-100">
                 <div className="p-6 border-b">
                     <h2 className="text-xl font-semibold text-gray-800">
                         Payment History

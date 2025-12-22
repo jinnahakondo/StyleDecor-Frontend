@@ -52,7 +52,10 @@ const ServiceDetails = () => {
                             <p>Ragings: {service?.rating}</p>
                             <p className='text-accent font-medium'>{service?.reviews?.length} Reviews</p>
                         </div>
-                        <p className='heading-one flex items-center '><FaBangladeshiTakaSign />{service?.price}</p>
+                        <div className='flex items-center gap-1'>
+                            <p className='heading-one flex items-center '><FaBangladeshiTakaSign />{service?.price}</p>
+                            <p>{service?.unit}</p>
+                        </div>
                         <p className='text-accent font-medium'>
                             Created At: {service?.createdAt && format(new Date(service?.createdAt), "dd MMM yyyy")} </p>
 

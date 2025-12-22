@@ -53,7 +53,7 @@ const MyBookings = () => {
     if (isLoading) return <div className='h-screen grid place-items-center'><Loader /></div>;
 
     return (
-        <div className="px-4">
+        <div className="px-4 w-full">
 
             {/* Header */}
             <div className="mb-6">
@@ -68,8 +68,8 @@ const MyBookings = () => {
 
             {/* name of each tab group should be unique */}
             <div className="tabs tabs-border">
-                <input type="radio" name="my_tabs_2" className="tab" aria-label="booked" />
-                <div className="tab-content  p-10">
+                <input type="radio" name="my_tabs_2" className="tab" aria-label="booked" defaultChecked />
+                <div className="tab-content mt-5 lg:p-10">
                     {/* Empty State */}
                     {bookings.length === 0 && (
                         <div className="text-center py-16 text-gray-400">
@@ -156,8 +156,8 @@ const MyBookings = () => {
                     </div>
                 </div>
 
-                <input type="radio" name="my_tabs_2" className="tab" aria-label="Completed" defaultChecked />
-                <div className="tab-content  p-10">
+                <input type="radio" name="my_tabs_2" className="tab" aria-label="Completed" />
+                <div className="tab-content mt-5  lg:p-10">
                     {/* Empty State */}
                     {completedBookings.length === 0 && (
                         <div className="text-center py-16 text-gray-400">

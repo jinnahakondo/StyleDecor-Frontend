@@ -39,7 +39,7 @@ export const router = createBrowserRouter([
     {
         path: '/',
         Component: MainLayout,
-        hydrateFallbackElement: <Loader />,
+        hydrateFallbackElement: <div className="h-screen grid place-items-center"> <Loader /></div>,
         errorElement: <ErrorPage />,
         children: [
             {
@@ -86,7 +86,8 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        hydrateFallbackElement: <Loader />,
+        hydrateFallbackElement: <div className="h-screen grid place-items-center"> <Loader /></div>,
+        errorElement: <ErrorPage />,
         element: <PrivateRoutes>
             <DashBoardLayout />
         </PrivateRoutes>,
@@ -96,12 +97,7 @@ export const router = createBrowserRouter([
                 path: 'my-profile',
                 Component: MyProfile
             },
-            // {
-            //     path: 'my-bookings',
-            //     element: <UserRoutes>
-            //         <MyBookings />
-            //     </UserRoutes>
-            // },
+
             {
                 path: 'payment-success',
                 element: <UserRoutes>
@@ -120,12 +116,7 @@ export const router = createBrowserRouter([
                     <DashboardIndex />
                 </PrivateRoutes>
             },
-            // {
-            //     path: 'admin-dashboard',
-            //     element: <AdminRoutes>
-            //         <AdminDashBoard />
-            //     </AdminRoutes>
-            // },
+
             {
                 path: 'admin/manage-decorators',
                 element: <AdminRoutes>
