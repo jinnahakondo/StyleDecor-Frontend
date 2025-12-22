@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 const Hero = () => {
     const navigate = useNavigate()
     return (
-        <div className="hero min-h-[70vh] bg-base-200 relative overflow-hidden">
+        <div className="hero min-h-[70vh] bg-base-200 relative mt-20">
             <div className="hero-content text-center">
 
                 <div className="max-w-3xl">

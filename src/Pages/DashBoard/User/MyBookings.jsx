@@ -53,7 +53,7 @@ const MyBookings = () => {
     if (isLoading) return <div className='h-screen grid place-items-center'><Loader /></div>;
 
     return (
-        <div className=" px-4">
+        <div className="px-4">
 
             {/* Header */}
             <div className="mb-6">

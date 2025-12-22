@@ -11,7 +11,7 @@ const MainLayout = () => {
             <header>
                 <Navbar />
             </header>
-            <main className='margin min-h-screen '>
+            <main className='space-y-20 min-h-screen '>
                 <Container>
                     <Outlet />
                 </Container>

@@ -18,9 +18,7 @@
   @apply text-lg lg:text-xl font-semibold
 }
 
-.margin {
-  @apply my-20
-}
+
 
 .dashboard.active {
   @apply bg-purple-100 border-r-4

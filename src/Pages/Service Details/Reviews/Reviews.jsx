@@ -4,7 +4,7 @@ import Review from './Review';
 const Reviews = ({ reviews }) => {
     // console.log(reviews);
     return (
-        <div className='space-y-8'>
+        <div className='my-8 space-y-5'>
             {
                 reviews?.map(review => <Review review={review} />)
             }

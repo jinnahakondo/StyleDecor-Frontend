@@ -9,7 +9,7 @@ import Logo from '../Logo/Logo';
 const Navbar = ({ style }) => {
     const { role } = useRole();
     const { user, SignOUtUser } = useAuth();
-  
+
     const links = (
         <>
             <li><NavLink to='/'>Home</NavLink></li>
@@ -33,7 +33,7 @@ const Navbar = ({ style }) => {
     };
 
     return (
-        <div className='bg-base-100 shadow-sm sticky top-0 z-50'>
+        <div className='bg-base-100 shadow-sm sticky top-0 z-50 '>
             <Container>
                 <div className="navbar px-0">
                     <div className="navbar-start">
@@ -45,7 +45,8 @@ const Navbar = ({ style }) => {
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow font-medium">
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box 
+                                z-[1] mt-3 w-52 p-2 shadow font-medium">
                                 {links}
                             </ul>
                         </div>
