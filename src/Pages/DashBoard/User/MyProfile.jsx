@@ -13,7 +13,7 @@ const MyProfile = () => {
     }
     return (
         <div className="max-w-4xl mx-auto p-4 lg:p-8">
-            <div className="bg-base-100 rounded-2xl shadow-sm border border-base-200 p-6 lg:p-8 space-y-8">
+            <div className="bg-base-100 rounded-2xl md:shadow-sm md:border border-base-200 p-6 lg:p-8 space-y-8">
 
                 {/* Header */}
                 <div className="flex flex-col lg:flex-row items-center gap-6">

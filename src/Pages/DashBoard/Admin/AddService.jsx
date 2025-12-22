@@ -71,12 +71,12 @@ const AddService = () => {
     }
 
     return (
-        <div className=''>
+        <div className='px-4'>
             <form onSubmit={handleSubmit(handelAddService)}>
                 <div className='flex flex-col gap-4 max-w-md'>
                     {/* service image  */}
                     <div className='flex flex-col gap-2'>
-                        <label className='font-bold'>Service Image</label>
+                        <label className='font-bold max-md:text-sm'>Service Image</label>
                         <label htmlFor='serviceImage'>
                             <div className='w-32 h-[70px] border border-gray-400 rounded-lg grid place-items-center overflow-hidden'>
                                 {
@@ -111,7 +111,7 @@ const AddService = () => {
                     </div>
                     {/* service name  */}
                     <div className='flex flex-col gap-2'>
-                        <label className='font-bold'>Service Name</label>
+                        <label className='font-bold max-md:text-sm'>Service Name</label>
                         <input type="text" className='input outline-0 border border-accent w-full' placeholder='Service Name'
                             {...register('title', { required: 'please enter service name' })} />
                         {
@@ -121,7 +121,7 @@ const AddService = () => {
                     </div>
                     {/* service description  */}
                     <div className='flex flex-col gap-2'>
-                        <label className='font-bold'>Service description</label>
+                        <label className='font-bold max-md:text-sm'>Service description</label>
                         <textarea type="text" className='textarea outline-0 border border-accent w-full' placeholder='Type here'
                             {...register('description', { required: "please add a description" })} />
                         {
@@ -131,11 +131,11 @@ const AddService = () => {
                     </div>
                     {/* service category & price  */}
                     <div >
-                        <div className='grid grid-cols-3 gap-7'>
+                        <div className='grid grid-cols-1 lg:grid-cols-3 gap-7'>
                             {/* category  */}
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-bold'>Service Category</label>
-                                <select {...register('category', { required: "please select a category" })} className='dropdown input outline-0'>
+                            <div className='flex flex-col gap-2 w-full'>
+                                <label className='font-bold max-md:text-sm'>Service Category</label>
+                                <select {...register('category', { required: "please select a category" })} className='dropdown input outline-0 w-full'>
                                     <option value="">Select a category</option>
                                     <option value="home">Home</option>
                                     <option value="wedding">Wedding</option>
@@ -149,9 +149,9 @@ const AddService = () => {
                                 }
                             </div>
                             {/* units  */}
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-bold'> Unit</label>
-                                <select {...register('unit', { required: "please select a category" })} className='dropdown input outline-0'>
+                            <div className='flex flex-col gap-2 w-full'>
+                                <label className='font-bold max-md:text-sm'> Unit</label>
+                                <select {...register('unit', { required: "please select a category" })} className='dropdown input outline-0 w-full'>
                                     <option value="">Select a Unit</option>
                                     {
                                         CATEGORY_UNITS[units]?.map((unit, i) => <option key={i} value={unit}>{unit}</option>)
@@ -163,9 +163,9 @@ const AddService = () => {
                                 }
                             </div>
                             {/* price  */}
-                            <div className='flex flex-col gap-2'>
-                                <label className='font-bold'> Cost</label>
-                                <input type="number" defaultValue={'0'} className='input outline-0' {...register('price',
+                            <div className='flex flex-col gap-2 w-full'>
+                                <label className='font-bold max-md:text-sm'> Cost</label>
+                                <input type="number" defaultValue={'0'} className='input outline-0 w-full' {...register('price',
                                     {
                                         required: "please enter service price", min: {
                                             value: 65,

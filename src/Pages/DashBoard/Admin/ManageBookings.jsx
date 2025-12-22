@@ -30,7 +30,7 @@ const ManageBookings = () => {
             </div>
 
             {/* table */}
-            <div className="overflow-x-auto rounded-xl border border-base-content/10 bg-base-100 shadow-sm">
+            <div className="overflow-x-auto rounded-xl lg:border border-base-content/10 lg:bg-base-100 md:shadow-sm">
                 <table className="table table-sm md:table-md">
                     <thead className="bg-base-200 text-accent">
                         <tr>

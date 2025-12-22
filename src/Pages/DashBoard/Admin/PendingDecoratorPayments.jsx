@@ -51,12 +51,13 @@ const PendingDecoratorPayments = () => {
             refetch()
         }
     }
+    
 
     return (
         <div>
             <div className="mt-4 px-4">
                 {/* Card */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100">
+                <div className="bg-white rounded-2xl md:shadow-sm md:border md:border-gray-100">
                     <div className="p-6 border-b">
                         <h2 className="text-xl font-semibold text-gray-800">
                             Pending Payment
@@ -73,7 +74,7 @@ const PendingDecoratorPayments = () => {
                                     <th>BookingId</th>
                                     <th>DecoratorEmail</th>
                                     <th>Decorator earning</th>
-                                    <th>Comission</th>
+                                    {/* <th>Comission</th> */}
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -105,11 +106,11 @@ const PendingDecoratorPayments = () => {
                                                     {payment?.decoratorEmail}
                                                 </td>
                                                 <td className="font-semibold text-gray-700 flex items-center gap-1">
-                                                    <FaBangladeshiTakaSign/> {payment?.decoratorEarning}
+                                                    <FaBangladeshiTakaSign /> {payment?.decoratorEarning}
                                                 </td>
-                                                <td className="font-semibold text-gray-700 flex items-center gap-1">
+                                                {/* <td className="font-semibold text-gray-700 flex items-center gap-1">
                                                     <FaBangladeshiTakaSign/> {payment?.adminEarning}
-                                                </td>
+                                                </td> */}
 
                                                 <td className="text-gray-500">
                                                     {format(new Date(payment?.createdAt), 'dd MMM yyyy')}

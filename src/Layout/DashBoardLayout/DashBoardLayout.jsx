@@ -123,7 +123,7 @@ const DashBoardLayout = () => {
                     </header>
 
                     {/* --- Page Area --- */}
-                    <main className="p-6">
+                    <main className="">
                         <Outlet />
                     </main>
                 </div>

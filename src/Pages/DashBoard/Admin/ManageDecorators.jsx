@@ -107,7 +107,7 @@ const ManageDecorators = () => {
     }
 
     return (
-        <div className="bg-base-100 rounded-2xl shadow-sm border border-base-200 p-4 lg:p-6">
+        <div className="bg-base-100 rounded-2xl shadow-sm border border-base-200 lg:p-6">
 
             {/* Tabs */}
             <div className="tabs tabs-lifted mb-6">
@@ -248,7 +248,7 @@ const ManageDecorators = () => {
                                                     src={b?.image}
                                                     className="w-10 h-10 rounded object-cover"
                                                 />
-                                                <p className="font-medium">
+                                                <p className="font-medium max-md:mr-4">
                                                     {b?.title}
                                                 </p>
                                             </div>
@@ -282,7 +282,7 @@ const ManageDecorators = () => {
 
                                         <td className="text-right">
                                             <button
-                                                className="btn btn-primary btn-sm"
+                                                className="btn btn-primary btn-sm text-xs lg:text-base whitespace-nowrap"
                                                 disabled={b?.status !== 'pending'}
                                                 onClick={() =>
                                                     handelFindDecorator(b)

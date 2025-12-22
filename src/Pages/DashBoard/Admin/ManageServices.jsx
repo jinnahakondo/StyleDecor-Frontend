@@ -97,14 +97,14 @@ const ManageServices = () => {
     };
 
     return (
-        <div>
+        <div className='p-4'>
             <h2 className="heading-one mb-4">Manage Services</h2>
             <p className="text-sm text-gray-500 mb-6">
                 {services.length} {services.length <= 1 ? "Service Found" : "Services Found"}
             </p>
 
             {/* ================= TABLE ================= */}
-            <div className="overflow-x-auto rounded-xl border border-base-300 bg-base-100">
+            <div className="overflow-x-auto rounded-xl md:border border-base-300 lg:bg-base-100">
                 <table className="table table-zebra">
                     <thead className="bg-base-200">
                         <tr>
