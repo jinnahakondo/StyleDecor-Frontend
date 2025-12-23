@@ -14,7 +14,9 @@ Users can explore decoration packages, check decorator availability, select a da
 - Secure online payment system
 - Role-based dashboard (Admin, Decorator, User)
 - Admin can manage decorators and services
-- Decorators can update project status step by step
+- Decorators can
+  - update his working status avilable / working
+  - update project status step by step  
 - Earnings and revenue analytics
 - Service search and booking management
 - Fully responsive and user-friendly UI
