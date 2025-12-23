@@ -1,9 +1,9 @@
 # 🎉 StyleDecor
 
 **StyleDecor** is a modern appointment and booking management platform for event decoration services.  
-It connects customers with professional decorators for both **in-studio consultations** and **on-site event decorations** such as weddings, birthdays, and ceremonies.
+It connects customers with professional decorators for events such as weddings, birthdays, and ceremonies.
 
-Users can browse decoration packages, check availability, select date & time, choose a service mode, make secure payments, and track service progress in real time.
+Users can browse decoration packages, check availability, select a date and time, make secure payments, and track service progress in real time.
 
 ---
 
@@ -11,13 +11,14 @@ Users can browse decoration packages, check availability, select date & time, ch
 
 ### 👤 User Features
 - Browse decoration services and packages
-- Book services with date, time, and mode (in-studio / on-site)
+- Book services with date and time
 - Secure online payments
 - View booking history
 - Track service status in real time
 
 ### 🎨 Decorator Features
 - Update working status (Available / Working)
+- When a decorator is **Available**, the admin can assign new projects
 - View assigned bookings
 - Update project status step-by-step
 - Track personal earnings
@@ -25,6 +26,7 @@ Users can browse decoration packages, check availability, select date & time, ch
 ### 🛠 Admin Features
 - Manage users and decorators
 - Add, update, and remove services
+- Assign projects to available decorators
 - Monitor platform revenue
 - View analytics and booking statistics
 
@@ -32,7 +34,7 @@ Users can browse decoration packages, check availability, select date & time, ch
 - Role-based dashboard (Admin / Decorator / User)
 - Earnings & revenue analytics with charts
 - Service search and booking management
-- Fully responsive, modern UI
+- Fully responsive UI
 
 ---
 
@@ -44,6 +46,11 @@ Users can browse decoration packages, check availability, select date & time, ch
 - Tailwind CSS
 - DaisyUI
 
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+
 ### Backend & Services
 - Firebase Authentication
 - Axios
@@ -52,7 +59,7 @@ Users can browse decoration packages, check availability, select date & time, ch
 ### UI & Visualization
 - Recharts (Analytics & Charts)
 - Leaflet & React Leaflet (Maps)
-- Lottie & Framer Motion (Animations)
+- Framer Motion (Animations)
 
 ### Forms & Notifications
 - React Hook Form
@@ -72,5 +79,5 @@ https://styledecor-8cae7.web.app
 
 StyleDecor aims to simplify event decoration booking by providing:
 - Easy service discovery
-- Transparent booking & tracking
+- Transparent booking and tracking
 - Smooth collaboration between customers, decorators, and admins
