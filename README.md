@@ -81,3 +81,14 @@ StyleDecor aims to simplify event decoration booking by providing:
 - Easy service discovery
 - Transparent booking and tracking
 - Smooth collaboration between customers, decorators, and admins
+
+## 🚀 How to Run Locally
+
+1. Clone the repo
+```bash
+git clone https://github.com/jinnahakondo/styledecor.git
+
+
+---bash
+cd styledecor
+
