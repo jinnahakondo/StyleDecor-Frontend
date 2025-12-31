@@ -87,8 +87,12 @@ StyleDecor aims to simplify event decoration booking by providing:
 1. Clone the repo
 ```bash
 git clone git@github.com:jinnahakondo/StyleDecor-Frontend.git
-
-
----bash
-cd styledecor
-
+```
+2. Install dependencies
+```bash
+npm install
+```
+3. Run the project
+ ```bash
+   npm run dev
+   ```
