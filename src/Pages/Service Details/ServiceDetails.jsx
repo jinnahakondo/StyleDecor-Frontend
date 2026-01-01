@@ -38,7 +38,7 @@ const ServiceDetails = () => {
     }
 
     return (
-        <div >
+        <div className='mt-20'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-10 space-y-20'>
                 {/* image  */}
                 <div className='bg-base-200 rounded-2xl grid place-items-center p-6 h-96'>

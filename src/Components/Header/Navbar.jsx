@@ -33,7 +33,7 @@ const Navbar = ({ style }) => {
     };
 
     return (
-        <div className='bg-base-100 shadow-sm sticky top-0 z-50 '>
+        <div className='bg-base-100 shadow-sm top-0 z-50 '>
             <Container>
                 <div className="navbar px-0">
                     <div className="navbar-start">
