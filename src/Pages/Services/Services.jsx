@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ServiceCard from '../../Components/ServiceCard/ServiceCard';
 import Container from '../../Components/Container/Container';
 import useAxios from '../../Hooks/useAxios';
+import ServiceCardSkeleton from '../../Components/ServiceCard/ServiceCardSkeleton';
 
 const Services = () => {
     const instance = useAxios()
@@ -48,7 +49,15 @@ const Services = () => {
                         <button type='submit' className="btn btn-primary join-item">Search</button>
                     </div>
                 </div>
-                {isLoading ? "loading..." :
+                {isLoading ?
+                    <>
+                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+                            {
+                                [...Array(8)].map((_, i) => <ServiceCardSkeleton key={i} />)
+                            }
+                        </div>
+                    </>
+                    :
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7'>
                         {services.map(service => <ServiceCard key={service._id} service={service} />)}
                     </div>

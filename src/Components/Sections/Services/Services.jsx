@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Loader from '../../Loader/Loader';
 import { Link } from 'react-router';
+import ServiceCardSkeleton from '../../ServiceCard/ServiceCardSkeleton';
 
 const Services = () => {
 
@@ -18,7 +19,13 @@ const Services = () => {
     })
 
     if (isLoading) {
-        return <Loader />
+        return <>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+                {
+                    [...Array(8)].map((_, i) => <ServiceCardSkeleton key={i} />)
+                }
+            </div>
+        </>
     }
 
     return (
