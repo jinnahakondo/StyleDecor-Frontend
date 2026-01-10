@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, NavLink, useLocation } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import Container from '../Container/Container';
 import useRole from '../../Hooks/useRole';
 import Logo from '../Logo/Logo';
+import { FiShoppingCart } from "react-icons/fi";
 
 const Navbar = ({ style }) => {
     const { role } = useRole();
@@ -33,7 +34,7 @@ const Navbar = ({ style }) => {
     };
 
     return (
-        <div className='bg-base-100 shadow-sm top-0 z-50 '>
+        <div className='bg-base-100 shadow-sm top-0 z-9999 fixed w-full'>
             <Container>
                 <div className="navbar px-0">
                     <div className="navbar-start">
@@ -62,6 +63,7 @@ const Navbar = ({ style }) => {
                     </div>
 
                     <div className="navbar-end">
+                        <span className='text-2xl text-primary mr-2 p-2'><FiShoppingCart /></span>
                         {user ? (
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border-2 border-primary">

@@ -1,37 +1,80 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from "react";
+import { Link } from "react-router";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
+import { AiFillStar } from "react-icons/ai";
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, badge }) => {
 
     return (
-        <div className='h-full px-4'>
-            <div className=" bg-white rounded-2xl shadow-md transition-all overflow-hidden border hover:shadow-primary hover:shadow-lg hover:scale-105 border-gray-100 h-full flex flex-col">
+        <div className="p-2 sm:p-0 h-full">
+            <div className="card bg-base-100 shadow hover:scale-y-105 transition-all h-full relative">
+
+                {/* Badge */}
+                {
+
+                    badge && <div className="absolute top-3 left-3 z-10">
+                        <span className="badge badge-primary badge-sm">{badge}</span>
+                    </div>
+                }
+
                 {/* Image */}
-                <figure className='rounded-lg'>
+                <figure className="px-3 pt-3">
                     <img
                         src={service?.image}
-                        alt="Service"
-                        className="w-full h-52 object-cover"
+                        alt={service?.title}
+                        className="rounded-xl h-40 w-full object-cover hover:scale-105 transition"
                     />
                 </figure>
 
                 {/* Content */}
-                <div className="p-5 space-y-3 mt-auto">
-                    <div className="badge badge-soft badge-primary">{service.category}</div>
+                <div className="card-body p-4">
+                    <h2 className="card-title text-sm">
+                        {service.title}
+                    </h2>
 
-                    <h2 className="heading-two">{service.title}</h2>
-                    <p className=" font-medium text-primary">Rating: {service.rating}</p>
-                    <p className=" text-accent font-bold flex items-center ">
-                        <span className='mr-1'>Price:</span><FaBangladeshiTakaSign /> {service.price}
+                    {/* Rating */}
+                    <div className="flex items-center gap-1 text-warning text-sm">
+                        {[...Array(5)].map((_, i) => (
+                            <AiFillStar key={i} />
+                        ))}
+                        <span className="text-xs text-base-content/60">
+                            {service.rating}
+                        </span>
+                    </div>
+
+                    {/* Stock */}
+                    <p className="text-xs text-base-content/60">
+                        Stock: {service.stock || 12} pieces
                     </p>
 
-                    {/* Button */}
-                    <Link to={`/service-details/${service._id}`} className="btn btn-primary mt-2 w-fit">Book Now</Link>
+                    {/* Price */}
+                    <div className="flex items-center gap-2">
+                        <span className=" font-bold flex items-center">
+                            <FaBangladeshiTakaSign />
+                            {service.price}
+                        </span>
+                        {/* <span className="text-xs line-through text-base-content/50">
+              ৳ {service.oldPrice || 1485}
+            </span> */}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="card-actions justify-between items-center mt-2">
+                        <Link
+                            to={`/service-details/${service._id}`}
+                            className="btn btn-primary w-full"
+                        >
+                            View Details
+                        </Link>
+
+                        {/* <button className="btn btn-primary btn-sm btn-square">
+                            <FaShoppingBag />
+                        </button> */}
+                    </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

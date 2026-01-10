@@ -14,11 +14,11 @@ const Contact = () => {
 
     const handelSendMessage = (data) => {
         // console.log(data);
-        
+
     };
 
     return (
-        <div className="bg-base-100 py-16 lg:py-24">
+        <div className="bg-base-100 lg:pb-24">
             <Container>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
@@ -101,7 +101,7 @@ const Contact = () => {
                                     className="input input-bordered bg-base-200 focus:input-primary border-none focus:outline-offset-0"
                                     placeholder="John Doe"
                                 />
-                                
+
                             </div>
 
                             <div className="form-control">

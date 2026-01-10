@@ -1,16 +1,36 @@
-import React from 'react';
-import Reviews from '../Reviews/Reviews';
+import React from "react";
+import Reviews from "../Reviews/Reviews";
 
 const Tab = ({ service }) => {
     return (
-        <div>
-            {/* name of each tab group should be unique */}
-            <div className="tabs tabs-border mt-8">
-                <input type="radio" name="my_tabs_2" className="tab" aria-label="description" />
-                <div className="tab-content border-t-base-300 bg-base-100 lg:p-10 my-8">{service?.description}</div>
+        <div className="mt-16">
 
-                <input type="radio" name="my_tabs_2" className="tab" aria-label="reivews" defaultChecked />
-                <div className="tab-content border-t-base-300 bg-base-100 lg:p-10"><Reviews reviews={service?.reviews} /></div>
+            {/* Tabs */}
+            <div className="tabs tabs-bordered">
+
+                <input
+                    type="radio"
+                    name="service_tabs"
+                    className="tab text-sm font-medium"
+                    aria-label="Description"
+                    defaultChecked
+                />
+                <div className="tab-content pt-8">
+                    <p className="text-base-content/80 leading-relaxed max-w-4xl">
+                        {service?.description}
+                    </p>
+                </div>
+
+                <input
+                    type="radio"
+                    name="service_tabs"
+                    className="tab text-sm font-medium"
+                    aria-label={`Reviews (${service?.reviews?.length || 0})`}
+                />
+                <div className="tab-content pt-8">
+                    <Reviews reviews={service?.reviews} />
+                </div>
+
             </div>
         </div>
     );

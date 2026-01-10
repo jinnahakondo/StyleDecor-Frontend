@@ -6,6 +6,7 @@ import 'swiper/css/bundle'
 import { Autoplay, } from 'swiper/modules';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { Loader } from 'lucide-react';
+import SectionTitle from '../../SectionTitle';
 
 const TopDecorators = () => {
 
@@ -22,7 +23,7 @@ const TopDecorators = () => {
 
     return (
         <div className='my-10 '>
-            <h2 className='heading-one mb-10 text-center'>Top Decorators</h2>
+            <SectionTitle >Top Decorators</SectionTitle>
             <div className='mx-auto'>
                 <Swiper
                     modules={[Autoplay]}

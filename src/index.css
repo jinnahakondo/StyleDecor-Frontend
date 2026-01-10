@@ -1,29 +1,29 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-xs: 27rem;
+  --breakpoint-md: 55rem;
+  --breakpoint-lg: 68rem;
+}
 
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #9333EA;
-  --color-secondary: teal;
-  --color-accent: '#9E9E9E'
-}
+  --color-primary: #7A9D54;
+  --color-secondary: #C2B8A3;
+  --color-accent: '#C26A5A';
+  --color-base-100: #F7F6F3;
 
-.heading-one {
-  @apply text-xl lg:text-3xl font-bold
 }
-
-.heading-two {
-  @apply text-lg lg:text-xl font-semibold
-}
-
 
 
 .dashboard.active {
-  @apply bg-purple-100 border-r-4
+  @apply bg-base-200 border-primary border-r-4
 }
 
 a.active {
-  @apply text-purple-600
+  @apply text-primary
 }

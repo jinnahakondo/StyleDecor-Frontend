@@ -71,7 +71,7 @@ const MyBookings = () => {
                 <input type="radio" name="my_tabs_2" className="tab" aria-label="booked" defaultChecked />
                 <div className="tab-content mt-5 lg:p-10">
                     {/* Empty State */}
-                    {bookings.length === 0 && (
+                    {bookings?.length === 0 && (
                         <div className="text-center py-16 text-gray-400">
                             No bookings found
                         </div>
@@ -159,7 +159,7 @@ const MyBookings = () => {
                 <input type="radio" name="my_tabs_2" className="tab" aria-label="Completed" />
                 <div className="tab-content mt-5  lg:p-10">
                     {/* Empty State */}
-                    {completedBookings.length === 0 && (
+                    {completedBookings?.length === 0 && (
                         <div className="text-center py-16 text-gray-400">
                             No bookings found
                         </div>

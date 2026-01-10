@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Loader from '../../Loader/Loader';
+import SectionTitle from '../../SectionTitle';
 
 
 const Coverage = () => {
@@ -25,10 +26,12 @@ const Coverage = () => {
         mapRef.current.flyTo(serarched.coordinates, 14)
     }
 
-    if (isLoading) Loader
+    if (isLoading) {
+        return <Loader />
+    }
     return (
         <div>
-            <h2 className='heading-one text-center mb-10'> Area Of Service Coverage</h2>
+            <SectionTitle> Area Of Service Coverage</SectionTitle>
             <form className='mb-10 flex items-center justify-center' onSubmit={handelSearch}>
                 <div className="join ">
                     <div >

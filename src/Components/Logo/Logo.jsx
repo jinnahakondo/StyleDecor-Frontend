@@ -7,7 +7,7 @@ const Logo = () => {
             <div className="p-1.5 bg-primary rounded-lg">
                 <ShieldCheck className="text-white w-5 h-5" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-base-content italic">Style<span className="text-primary">Decor</span></span>
+            <span className="text-xl font-bold tracking-tight text-base-content italic hidden md:block">Style<span className="text-primary ">Decor</span></span>
         </div>
     );
 };

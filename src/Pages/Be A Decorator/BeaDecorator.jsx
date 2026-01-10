@@ -1,147 +1,159 @@
-import React from 'react';
-import { useForm, useWatch } from 'react-hook-form';
-import useAuth from '../../Hooks/useAuth';
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import Swal from 'sweetalert2';
+import React from "react";
+import { useForm, useWatch } from "react-hook-form";
+import useAuth from "../../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import SectionTitle from "../../Components/SectionTitle";
 
 const BeaDecorator = () => {
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure()
-    const {
-        register,
-        reset,
-        handleSubmit,
-        control,
-        formState: { errors },
-    } = useForm()
+    const axiosSecure = useAxiosSecure();
+
+    const { register, reset, handleSubmit, control } = useForm();
 
     const { data = [] } = useQuery({
-        queryKey: ["divisons", 'be-a-decorator'],
+        queryKey: ["divisons", "be-a-decorator"],
         queryFn: async () => {
-            const res = await axios.get('/serviceCenters.json')
+            const res = await axios.get("/serviceCenters.json");
             return res.data;
-        }
+        },
+    });
 
-    })
+    const divisions = [...new Set(data.map(d => d.division))];
 
-    // get divisions
-    const duplicateDivisions = data.map(d => d.division);
-    const divisions = [...new Set(duplicateDivisions)]
+    const region = useWatch({ control, name: "region" });
 
-    // watching division 
-    const division = useWatch({
-        control,
-        name: 'region'
-    })
+    const districts = data
+        .filter(d => d.division === region)
+        .map(d => d.district);
 
-    //get districts
-    const districtsObj = data.filter(d => d.division === division)
-    const districts = districtsObj.map(d => d.district)
+    const handelBeADecorator = async (formData) => {
+        formData.photo = user?.photoURL;
+        formData.createdAt = new Date();
 
-    // form submit function 
-    const handelBeADecorator = async (data) => {
-        data.photo = user?.photoURL;
-        data.createdAt = new Date()
-        const res = await axiosSecure.post('/decorators', data);
+        const res = await axiosSecure.post("/decorators", formData);
         if (res.data.insertedId) {
-            reset()
+            reset();
             Swal.fire({
-                title: "your application has ben sent!",
-                text: ". We will send a confirmation email you soon!.",
-                icon: "success"
+                title: "Application Submitted",
+                text: "We will contact you soon.",
+                icon: "success",
             });
         }
-    }
+    };
 
     return (
-        <div>
-            <div className='max-w-4xl mx-auto '>
-                <h2 className='heading-one mb-10'>Be A Decorator</h2>
-                <form onSubmit={handleSubmit(handelBeADecorator)}>
-                    <div className='flex flex-col lg:flex-row gap-5 lg:gap-12'>
-                        {/* left side  */}
-                        <div className='flex flex-col gap-5 flex-1'>
-                            {/* name  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="name" className='font-medium'>Name</label>
-                                <input type="text" className='input outline-0 border border-accent w-full' placeholder='Name' {...register('name')} defaultValue={user?.displayName} readOnly />
-                            </div>
-                            {/* age  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="age" className='font-medium'>Your Age</label>
-                                <input type="number" className='input outline-0 border border-accent w-full' placeholder='your age' {...register('age')} />
-                            </div>
-                            {/* region  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="region" className='font-medium'>Region</label>
-                                < select className='input outline-0 border border-accent w-full'
-                                    {...register('region')}  >
-                                    <option value='' >Select Your Region</option>
-                                    {
-                                        divisions.map(division => <option key={division} value={division}>{division}</option>)
-                                    }
+        <div className="pb-14">
+            <div className="max-w-3xl mx-auto px-4">
 
-                                </select>
-                            </div>
-                            {/* contact no  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="contact" className='font-medium'>Contact No.</label>
-                                <input type="number" className='input outline-0 border border-accent w-full' placeholder='your contact no.' {...register('contact')} />
-                            </div>
+                <SectionTitle>Be a Decorator</SectionTitle>
 
-                        </div>
+                <form
+                    onSubmit={handleSubmit(handelBeADecorator)}
+                    className="mt-10 space-y-8"
+                >
 
-                        {/* right side  */}
-                        <div className='flex flex-col gap-5 flex-1'>
+                    {/* Personal Info */}
+                    <div className="space-y-5">
+                        <h3 className="text-sm font-semibold text-base-content/70">
+                            Personal Information
+                        </h3>
 
-                            {/* email  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="email" className='font-medium'>Email</label>
-                                <input type="email" className='input outline-0 border border-accent w-full' placeholder='Email' {...register('email')} defaultValue={user?.email} readOnly />
-                            </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <input
+                                className="input input-bordered"
+                                {...register("name")}
+                                defaultValue={user?.displayName}
+                                readOnly
+                                placeholder="Full name"
+                            />
 
-                            {/* nid  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="nid" className='font-medium'>Nid No.</label>
-                                <input type="number" className='input outline-0 border border-accent w-full' placeholder='your nid no.' {...register('nid')} />
-                            </div>
+                            <input
+                                className="input input-bordered"
+                                {...register("email")}
+                                defaultValue={user?.email}
+                                readOnly
+                                placeholder="Email address"
+                            />
 
+                            <input
+                                type="number"
+                                className="input input-bordered"
+                                {...register("age")}
+                                placeholder="Age"
+                            />
 
-                            {/* district  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="district" className='font-medium'>District</label>
-                                < select className='input outline-0 border border-accent w-full'  {...register('district')}  >
-                                    <option value=''>Select Your District</option>
-                                    {
-                                        districts.map(district => <option key={district} value={district}>{district}</option>)
-                                    }
-                                </select>
-                            </div>
-                            {/* category  */}
-                            <div className='flex flex-col gap-1'>
-                                <label htmlFor="category" className='font-medium'>Category</label>
-                                < select className='input outline-0 border border-accent w-full'  {...register('category')}  >
-
-                                    <option value=''>Select a Category</option>
-                                    <option value='home'>home</option>
-                                    <option value='wedding'>wedding</option>
-                                    <option value='office'> office</option>
-                                    <option value='seminar'> seminar</option>
-                                    <option value='meeting'> meeting</option>
-
-                                </select>
-                            </div>
+                            <input
+                                type="number"
+                                className="input input-bordered"
+                                {...register("contact")}
+                                placeholder="Contact number"
+                            />
                         </div>
                     </div>
-                    {/* additional information  */}
-                    <div className='flex flex-col gap-1 col-span-2 mt-5'>
-                        <label htmlFor="additionalInfo" className='font-medium'>Additional Info.</label>
-                        < textarea placeholder='additional information' className='textarea outline-0 border border-accent w-full'  {...register('additionalInfo')} />
 
+                    {/* Location */}
+                    <div className="space-y-5">
+                        <h3 className="text-sm font-semibold text-base-content/70">
+                            Location
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <select className="select select-bordered" {...register("region")}>
+                                <option value="">Select region</option>
+                                {divisions.map(d => (
+                                    <option key={d} value={d}>{d}</option>
+                                ))}
+                            </select>
+
+                            <select className="select select-bordered" {...register("district")}>
+                                <option value="">Select district</option>
+                                {districts.map(d => (
+                                    <option key={d} value={d}>{d}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
-                    <button className='btn btn-primary mt-5  font-bold'>Apply to be a decortor</button>
+
+                    {/* Professional */}
+                    <div className="space-y-5">
+                        <h3 className="text-sm font-semibold text-base-content/70">
+                            Professional Details
+                        </h3>
+
+                        <select className="select select-bordered w-full" {...register("category")}>
+                            <option value="">Select service category</option>
+                            <option value="home">Home</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="office">Office</option>
+                            <option value="seminar">Seminar</option>
+                            <option value="meeting">Meeting</option>
+                        </select>
+
+                        <input
+                            type="number"
+                            className="input input-bordered w-full"
+                            {...register("nid")}
+                            placeholder="National ID number"
+                        />
+                    </div>
+
+                    {/* Additional */}
+                    <div className="space-y-3">
+                        <textarea
+                            className="textarea textarea-bordered w-full"
+                            {...register("additionalInfo")}
+                            placeholder="Additional information (optional)"
+                        />
+                    </div>
+
+                    {/* Submit */}
+                    <button className="btn btn-primary w-full md:w-fit px-10">
+                        Apply to be a Decorator
+                    </button>
+
                 </form>
             </div>
         </div>
