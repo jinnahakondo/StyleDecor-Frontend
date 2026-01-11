@@ -19,8 +19,8 @@ const Services = () => {
 
 
     return (
-        <div className='my-20'>
-            <div className='w-full lg:px-5 mx-auto mb-20 lg:max-w-lg'>
+        <div className='mb-20'>
+            <div className='w-full lg:px-5 mx-auto mb-10 lg:max-w-lg'>
                 <div className="join  w-full ">
                     <div className='w-full' >
                         <label className="input validator join-item outline-0 focus:border border-gray-400 w-full ">

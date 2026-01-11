@@ -6,7 +6,7 @@ import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-toastify';
 import userPic from '../../assets/user.png'
 import PostImage from '../../Utils/PostImage';
-import useAxios from '../../Hooks/useAxios';
+
 import Loader from '../../Components/Loader/Loader';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 

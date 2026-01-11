@@ -18,7 +18,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="bg-base-100 lg:pb-24">
+        <div className="bg-base-100 lg:pb-15 min-h-screen grid place-items-center">
             <Container>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
