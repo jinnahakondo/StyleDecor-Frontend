@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import PrimaryButton from '../../buttons/PrimaryButton';
 
 const Hero = () => {
     const navigate = useNavigate()
@@ -45,13 +46,13 @@ const Hero = () => {
 
                     <div
                     >
-                        <motion.button onClick={() => navigate('/services')}
+                        <motion.Link to={'/services'}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            className="btn btn-primary btn-lg rounded-full px-10 shadow-2xl shadow-primary/30 font-bold"
+                            className='btn btn-primary btn-lg rounded-full px-10 shadow-2xl shadow-primary/30 font-bold'
                         >
                             Book Decoration Service
-                        </motion.button>
+                        </motion.Link>
                     </div>
                 </div>
             </div>

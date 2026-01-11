@@ -41,10 +41,10 @@ const ServiceDetails = () => {
         <div className="max-w-7xl mx-auto px-4 pb-16">
 
             {/* Top Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                 {/* Image */}
-                <div className="bg-base-200 rounded-2xl flex items-center justify-center p-8 overflow-hidden">
+                <div className="bg-base-200 rounded-2xl flex items-center justify-center overflow-hidden">
                     <img
                         src={service?.image}
                         alt={service?.title}

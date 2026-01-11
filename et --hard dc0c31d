@@ -1,0 +1,97 @@
+[33m0076c41[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mworking[m[33m, [m[1;31morigin/working[m[33m)[m some update
+[33md05f5de[m some update of search input in home page & services page
+[33m9fc83d4[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m card & service details page updated
+[33mdacb6c0[m some update
+[33m224aea0[m  some update
+[33mf6fb474[m some update
+[33m0526938[m Update README.md
+[33m71fb4e2[m Update README.md
+[33m3e9b053[m Update README.md
+[33mdf0241d[m Update README.md
+[33mf7cabfa[m Update README.md
+[33mea54873[m Update README.md
+[33m437860d[m some update
+[33mcc184d2[m some update
+[33m184f569[m some update
+[33mdf1c455[m some update
+[33m63154fc[m some update
+[33ma49c847[m some update
+[33mdc0c31d[m some update
+[33mdddacc3[m some update
+[33mbcb8488[m footer added
+[33mec7d4b5[m some update
+[33me4ed612[m about us page added
+[33m4793852[m some update of contact page
+[33mc133e4a[m contact page added
+[33m3a8b2d8[m Update README.md
+[33m1d58936[m Update README.md
+[33m79a0c8d[m Update README.md
+[33m70cd843[m Add NPM packages section to README
+[33medf7a64[m Update README.md
+[33m2844029[m Update README.md
+[33mbe0ed1d[m Update header level for Key features section
+[33m6f4ada3[m Update README.md
+[33m4af7fd5[m Update README.md
+[33m45bb58f[m Update README.md
+[33me16a759[m Add live link to StyleDecor-Frontend
+[33mf613c95[m some update
+[33m0ad79d8[m some update
+[33mebc10eb[m some update
+[33ma01bbfa[m some update
+[33mb925db0[m some update
+[33md6e74b7[m earning history page added
+[33m5b80f4d[m pending-payment page added
+[33m41fb163[m decorator status change toggle switch added
+[33me7e5308[m some update
+[33mc754209[m some update
+[33mac06a45[m some update
+[33m515eb8a[m some update
+[33md75e388[m some update
+[33m32acb29[m some update
+[33mf2dff80[m some update of addService
+[33m96cd708[m service search added
+[33m70c7f64[m services added
+[33mea6fc77[m some update
+[33m85e8d9e[m some update
+[33m6626190[m tracking system is working
+[33m95adbc6[m smoe update of show decorator page added tracking info when assign a decorator
+[33mcf8a690[m update status page added
+[33m2df8727[m manage services added
+[33mfdf5891[m update of add service
+[33m496c39f[m service add page and system added
+[33mfa5d678[m some updated of showdecorators
+[33m605e399[m decorator asign system updated
+[33m99bbdb0[m some update
+[33m6735e4e[m some update
+[33m8f57a8b[m decorator showing on modal for assign, when clicking find deocorators
+[33mabe3731[m some changes of book drawer
+[33m4bd064f[m bookings showed on asign task tab
+[33m4b66856[m decorator application approve and reject system added
+[33m365518b[m admin private route & decorator private route added
+[33m82f1354[m decorator aplling system added
+[33mac09750[m be a decorator page added
+[33m3b1a0e2[m some update of profile page
+[33md75baf8[m profile page added
+[33m44ebcc5[m payment history page and history added
+[33mdcf0d9d[m some test
+[33m7b13e67[m payment success api added
+[33m9e937db[m payment checkout-session created
+[33m1a2852d[m private route added
+[33m213bd1c[m useRole hook added
+[33mf7a9673[m Hero section added
+[33mb0f1e90[m service coverage section added and search system emplement
+[33m9732412[m dashboard layout added
+[33mdcd3216[m some update
+[33ma3acd07[m some update of service booking
+[33m1c0eb38[m service booking component added and secured
+[33m8ad91fd[m top decorators section added
+[33ma5d8b81[m some update
+[33m47ea1ee[m service card added
+[33mdacf365[m image post to imageBB reuseable component added
+[33m93be4a8[m save user data while google login issue fixed
+[33mf61a855[m useAxios Secure  hook adde but there is a little problem
+[33m2be7eeb[m update user info system added
+[33mca4a75a[m email password sign up system added
+[33mb351469[m google login system added
+[33mf92825c[m npm packeges installed and router setup
+[33m38c5f2a[m first commit

@@ -6,6 +6,7 @@ import Container from '../Container/Container';
 import useRole from '../../Hooks/useRole';
 import Logo from '../Logo/Logo';
 import { FiShoppingCart } from "react-icons/fi";
+import PrimaryButton from '../buttons/PrimaryButton';
 
 const Navbar = ({ style }) => {
     const { role } = useRole();
@@ -85,10 +86,10 @@ const Navbar = ({ style }) => {
                             </div>
                         ) : (
                             <div className='flex flex-row gap-2 lg:gap-5'>
-                                <Link className="btn btn-primary btn-sm lg:btn-md" to='/auth'>Login</Link>
-                                <Link className="btn btn-outline btn-primary btn-sm lg:btn-md hidden sm:flex" to='/be-a-decorator'>
+                                <PrimaryButton path='/auth'>Login</PrimaryButton>
+                                <PrimaryButton style={'btn-outline hidden sm:flex'} path='/be-a-decorator'>
                                     Join as Decorator
-                                </Link>
+                                </PrimaryButton>
                             </div>
                         )}
                     </div>

@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 import { AiFillStar } from "react-icons/ai";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 const ServiceCard = ({ service, badge }) => {
 
@@ -61,12 +62,12 @@ const ServiceCard = ({ service, badge }) => {
 
                     {/* Actions */}
                     <div className="card-actions justify-between items-center mt-2">
-                        <Link
-                            to={`/service-details/${service._id}`}
-                            className="btn btn-primary w-full"
+                        <PrimaryButton
+                            path={`/service-details/${service._id}`}
+                            style={'w-full'}
                         >
                             View Details
-                        </Link>
+                        </PrimaryButton>
 
                         {/* <button className="btn btn-primary btn-sm btn-square">
                             <FaShoppingBag />

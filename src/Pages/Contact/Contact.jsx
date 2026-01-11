@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from 'react-router';
+import PrimaryButton from '../../Components/buttons/PrimaryButton';
 
 const Contact = () => {
     const {
@@ -124,10 +125,10 @@ const Contact = () => {
                                 ></textarea>
                             </div>
 
-                            <button className="btn btn-primary btn-block h-14 rounded-xl text-lg group">
+                            <PrimaryButton style="btn-block h-14 text-lg group rounded-2xl">
                                 Send Message
                                 <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </button>
+                            </PrimaryButton>
                         </form>
                     </div>
 
