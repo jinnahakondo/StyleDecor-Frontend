@@ -33,8 +33,8 @@ const Coverage = () => {
         <div>
             <SectionTitle> Area Of Service Coverage</SectionTitle>
             <form className='mb-10 flex items-center justify-center' onSubmit={handelSearch}>
-                <div className="join ">
-                    <div >
+                <div className="join w-full lg:max-w-lg mx-auto">
+                    <div className='w-full ' >
                         <label className="input validator join-item outline-0 focus:border border-gray-400 w-full ">
                             <svg className="h-[1em] opacity-50 text-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <g
@@ -48,7 +48,7 @@ const Coverage = () => {
                                     <path d="m21 21-4.3-4.3"></path>
                                 </g>
                             </svg>
-                            <input type="text" placeholder="Serarch Service Centers" name='search' required className='' />
+                            <input type="text" placeholder="Serarch Service Centers" name='search' required className=' w-full' />
                         </label>
                         {/* <div className="validator-hint hidden">Enter valid email address</div> */}
                     </div>

@@ -16,7 +16,7 @@ const Home = () => {
         <div className=' space-y-20'>
             <Hero />
             <Services />
-            <TopDecorators />
+            {/* <TopDecorators /> */}
             <Coverage />
         </div>
     );
