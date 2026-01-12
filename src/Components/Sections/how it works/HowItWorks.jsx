@@ -3,6 +3,7 @@ import SectionTitle from '../../SectionTitle';
 import { FaBriefcase, FaCreditCard } from "react-icons/fa";
 import { LuCalendarClock } from "react-icons/lu";
 import { FaListUl } from "react-icons/fa";
+import FeatureCard from '../../Cards/FeatureCard';
 
 const HowItWorks = () => {
 
@@ -35,27 +36,7 @@ const HowItWorks = () => {
             <p className='text-center'>Book your service in just a few simple steps</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
-                {process.map((step, index) => (
-                    <div
-                        key={index}
-                        className="group flex flex-col items-center text-center gap-3 p-6 rounded-xl bg-base-100 shadow-sm hover:shadow-md transition-all duration-300"
-                    >
-                        {/* Icon */}
-                        <div className="w-14 h-14 flex items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition">
-                            {step.icon}
-                        </div>
-
-                        {/* Title */}
-                        <h4 className="text-lg font-semibold text-gray-800 dark:text-white">
-                            {step.title}
-                        </h4>
-
-                        {/* Description */}
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            {step.description}
-                        </p>
-                    </div>
-                ))}
+                {process.map((card, index) => <FeatureCard key={index} card={card} />)}
             </div>
         </section>
     );

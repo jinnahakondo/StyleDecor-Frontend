@@ -6,6 +6,8 @@ import Coverage from '../../Components/Sections/Service Coverage/Coverage';
 import Hero from '../../Components/Sections/Hero/Hero';
 import Loader from '../../Components/Loader/Loader';
 import HowItWorks from '../../Components/Sections/how it works/HowItWorks';
+import Categories from '../../Components/Sections/how it works/catetories/Categories';
+import WhyChooseStyleDecor from '../../Components/Sections/whyChoose/WhyChooseStyleDecor';
 
 
 
@@ -18,6 +20,8 @@ const Home = () => {
             <Hero />
             <Services />
             <HowItWorks />
+            <Categories />
+            <WhyChooseStyleDecor />
             {/* <TopDecorators /> */}
             <Coverage />
         </div>
