@@ -8,6 +8,7 @@ import Loader from '../../Components/Loader/Loader';
 import HowItWorks from '../../Components/Sections/how it works/HowItWorks';
 import Categories from '../../Components/Sections/how it works/catetories/Categories';
 import WhyChooseStyleDecor from '../../Components/Sections/whyChoose/WhyChooseStyleDecor';
+import Testimonials from '../../Components/Sections/Testimonials/Testimonials';
 
 
 
@@ -18,10 +19,11 @@ const Home = () => {
     return (
         <div className=' space-y-20'>
             <Hero />
+            <Categories />
             <Services />
             <HowItWorks />
-            <Categories />
             <WhyChooseStyleDecor />
+            <Testimonials />
             {/* <TopDecorators /> */}
             <Coverage />
         </div>
