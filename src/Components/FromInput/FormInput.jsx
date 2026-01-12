@@ -5,8 +5,9 @@ const FormInput = ({
     register,
     rules,
     error,
-    placeholder
+    placeholder,
 }) => {
+
     return (
         <div>
             {/* Label */}

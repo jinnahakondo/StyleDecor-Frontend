@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import SectionTitle from "../../SectionTitle";
 
 const Testimonials = () => {
 
@@ -114,6 +115,7 @@ const Testimonials = () => {
 
     return (
         <section className="py-20">
+            <SectionTitle>What our customer says</SectionTitle>
             <Swiper
                 modules={[Autoplay]}
                 spaceBetween={24}

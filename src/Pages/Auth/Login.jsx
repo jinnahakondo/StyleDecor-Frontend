@@ -18,6 +18,7 @@ const Login = () => {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm();
 
@@ -134,6 +135,24 @@ const Login = () => {
 
                         <div className="mt-6">
                             <GoogleLogin />
+                            <div className="grid grid-cols-3 gap-2 mt-6">
+                                <button className="btn btn-sm" onClick={() => {
+                                    setValue("email", 'admin@gmail.com')
+                                    setValue('password', 'Asdf@1234')
+                                }}>Admin demo</button>
+                                <button
+                                    onClick={() => {
+                                        setValue("email", 'decorator@gmail.com')
+                                        setValue('password', 'Asdf@1234')
+                                    }}
+                                    className="btn btn-sm">decorator demo</button>
+                                <button
+                                    onClick={() => {
+                                        setValue("email", 'user@gmail.com')
+                                        setValue('password', 'Asdf@1234')
+                                    }}
+                                    className="btn btn-sm">user demo</button>
+                            </div>
                         </div>
                     </div>
 
