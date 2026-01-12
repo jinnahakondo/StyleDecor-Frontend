@@ -5,6 +5,7 @@ import TopDecorators from '../../Components/Sections/Top Decorators/TopDecorator
 import Coverage from '../../Components/Sections/Service Coverage/Coverage';
 import Hero from '../../Components/Sections/Hero/Hero';
 import Loader from '../../Components/Loader/Loader';
+import HowItWorks from '../../Components/Sections/how it works/HowItWorks';
 
 
 
@@ -16,7 +17,8 @@ const Home = () => {
         <div className=' space-y-20'>
             <Hero />
             <Services />
-            <TopDecorators />
+            <HowItWorks />
+            {/* <TopDecorators /> */}
             <Coverage />
         </div>
     );
