@@ -21,7 +21,7 @@ const MyBookings = () => {
     });
 
     //get all completed bookings
-    const { data: completedBookings, isLoading: completedBookingsLoading } = useQuery({
+    const { data: completedBookings = [], isLoading: completedBookingsLoading } = useQuery({
         queryKey: ['completed-bookings', 'user', user?.email],
         enabled: !!user?.email,
         queryFn: async () => {

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Container from '../Container/Container';
 import useRole from '../../Hooks/useRole';
 import Logo from '../Logo/Logo';
-import { FiShoppingCart } from "react-icons/fi";
+// import { FiShoppingCart } from "react-icons/fi";
 import PrimaryButton from '../buttons/PrimaryButton';
 
 const Navbar = ({ style }) => {
@@ -21,6 +21,16 @@ const Navbar = ({ style }) => {
             {role === 'user' && (
                 <li><NavLink to='/be-a-decorator'>Be A Decorator</NavLink></li>
             )}
+            {
+                 role==='decorator' && (
+                <li><NavLink to='/dashboard'>My Tasks</NavLink></li>
+                 )
+            }
+            {
+                 role==='admin' && (
+                <li><NavLink to='/dashboard'>My Dashboard</NavLink></li>
+                 )
+            }
         </>
     );
 
@@ -64,7 +74,7 @@ const Navbar = ({ style }) => {
                     </div>
 
                     <div className="navbar-end">
-                        <span className='text-2xl text-primary mr-2 p-2'><FiShoppingCart /></span>
+                        {/* <span className='text-2xl text-primary mr-2 p-2'><FiShoppingCart /></span> */}
                         {user ? (
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border-2 border-primary">

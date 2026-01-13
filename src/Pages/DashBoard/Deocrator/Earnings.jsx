@@ -52,21 +52,60 @@ const Earnings = () => {
     return (
         <div>
 
-            <div className="max-w-md  p-10 rounded-2xl shadow-md flex flex-col gap-6 bg-white">
+            <div className="p-10">
 
-                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
-                    <p className="text-sm font-medium">Total Earnings</p>
-                    <h2 className="text-lg font-semibold flex items-center gap-1"><FaBangladeshiTakaSign /> {totalEarning}</h2>
-                </div>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 '>
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                        <div className="p-6 flex justify-between items-start">
+                            <div>
+                                <p className="text-gray-500 text-sm font-medium">Total Earnings</p>
+                                <h3 className="text-2xl font-bold text-gray-800 mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {totalEarning}</h3>
+                            </div>
+                            <div className={`p-3 rounded-lg`}>
+                                icon
+                            </div>
+                        </div>
 
-                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
-                    <p className="text-sm font-medium">Pending Amount</p>
-                    <h2 className="text-lg font-semibold flex items-center gap-1"><FaBangladeshiTakaSign /> {pendingEarning}</h2>
-                </div>
+                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                            <button className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
+                                View data →
+                            </button>
+                        </div>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                        <div className="p-6 flex justify-between items-start">
+                            <div>
+                                <p className="text-gray-500 text-sm font-medium">Pending Earning</p>
+                                <h3 className="text-2xl font-bold text-gray-800 mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {pendingEarning}</h3>
+                            </div>
+                            <div className={`p-3 rounded-lg`}>
+                                icon
+                            </div>
+                        </div>
 
-                <div className="flex items-center justify-between py-3 px-8 rounded-xl bg-blue-50 text-blue-700 shadow-sm">
-                    <p className="text-sm font-medium">Completed Jobs</p>
-                    <h2 className="text-lg font-semibold">{completedPayments?.length}</h2>
+                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                            <button className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
+                                View data →
+                            </button>
+                        </div>
+                    </div>
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                        <div className="p-6 flex justify-between items-start">
+                            <div>
+                                <p className="text-gray-500 text-sm font-medium">Completed Jobs</p>
+                                <h3 className="text-2xl font-bold text-gray-800 mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {completedPayments?.length}</h3>
+                            </div>
+                            <div className={`p-3 rounded-lg`}>
+                                icon
+                            </div>
+                        </div>
+
+                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                            <button className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
+                                View data →
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
             </div>

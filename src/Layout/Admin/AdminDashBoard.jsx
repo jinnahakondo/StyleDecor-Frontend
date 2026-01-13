@@ -66,15 +66,15 @@ const AdminDashBoard = () => {
         }
     })
 
-    //get weekly bookings
+    //get month bookings
     const { data: weeklyBookings } = useQuery({
-        queryKey: ['weeklybookings', 'admin-ds'],
+        queryKey: ['monthlybookings', 'admin-ds'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/weekly-bookings/per-day')
+            const res = await axiosSecure.get('/monthly-bookings/per-day')
             return res.data;
         }
     })
-    // console.log(weeklyBookings);
+    
 
     let totalRevenue = 0;
     data.forEach(adminEarning => {
@@ -124,8 +124,19 @@ const AdminDashBoard = () => {
                     </div>
                 ))}
             </div>
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-11/12'>
-                <ResponsiveContainer height={300} className={'mt-20 '}>
+            <div className='grid items-center gap-10 max-w-11/12'>
+                <ResponsiveContainer height={450} className={'mt-20 '}>
+                    <BarChart data={weeklyBookings}
+                        barCategoryGap={'20%'}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey={'_id'} />
+                        <YAxis dataKey={'totalBooking'} />
+                        <Tooltip />
+                        <Bar dataKey={'totalBooking'} fill='blue' barSize={40} radius={[8, 8, 0, 0]} />
+                    </BarChart>
+                </ResponsiveContainer>
+                <ResponsiveContainer height={300} className={'my-20 '}>
                     <PieChart>
                         <Pie
                             data={serviceDemand}
@@ -146,17 +157,7 @@ const AdminDashBoard = () => {
                     </PieChart>
 
                 </ResponsiveContainer>
-                <ResponsiveContainer height={300} className={'mt-20 '}>
-                    <BarChart data={weeklyBookings}
-                        barCategoryGap={'20%'}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey={'_id'} />
-                        <YAxis dataKey={'totalBooking'} />
-                        <Tooltip />
-                        <Bar dataKey={'totalBooking'} fill='blue' barSize={40} radius={[8, 8, 0, 0]} />
-                    </BarChart>
-                </ResponsiveContainer>
+
             </div>
 
         </div>
