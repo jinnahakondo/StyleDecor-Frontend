@@ -60,7 +60,7 @@ const MyBookings = () => {
                 <h2 className="text-2xl font-semibold text-gray-800">
                     My Bookings
                 </h2>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-base-content/80">
                     Manage and track your booked services
                 </p>
             </div>
@@ -82,25 +82,25 @@ const MyBookings = () => {
                         {bookings.map(booking => (
                             <div
                                 key={booking._id}
-                                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6"
+                                className="bg-base-200 rounded-2xl border border-base-300 shadow-sm p-6 text-base-content"
                             >
                                 <div className="flex flex-col lg:flex-row justify-between gap-6">
 
                                     {/* Left */}
                                     <div className="space-y-2">
-                                        <h3 className="text-lg font-semibold text-gray-800">
+                                        <h3 className="text-lg font-semibold ">
                                             {booking.title}
                                         </h3>
 
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-sm ">
                                             {booking.customerName} • {booking.customerEmail}
                                         </p>
-                                        <p className="text-sm text-gray-500 wrap-break-word">
+                                        <p className="text-sm wrap-break-word">
                                             {booking.customerAddress}, {booking.district}
                                         </p>
 
 
-                                        <div className="flex gap-6 text-sm text-gray-600">
+                                        <div className="flex gap-6 text-sm ">
                                             <p>
                                                 <span className="font-medium">Date:</span> {booking.bookingDate}
                                             </p>
@@ -121,7 +121,7 @@ const MyBookings = () => {
                                     <div className="flex flex-col items-end justify-between gap-4">
 
                                         <div className="text-right">
-                                            <p className="text-sm text-gray-500">Total</p>
+                                            <p className="text-sm ">Total</p>
                                             <p className="text-xl font-semibold flex items-center gap-1">
                                                 <FaBangladeshiTakaSign />
                                                 {booking.totalPrice}
@@ -171,22 +171,22 @@ const MyBookings = () => {
                         {completedBookings.map(booking => (
                             <div
                                 key={booking._id}
-                                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6"
+                                className="bg-base-200 rounded-2xl border border-base-300 shadow-sm p-6"
                             >
                                 <div className="flex flex-col lg:flex-row justify-between gap-6">
 
                                     {/* Left */}
                                     <div className="space-y-2">
-                                        <h3 className="text-lg font-semibold text-gray-800">
+                                        <h3 className="text-lg font-semibold text-base-content">
                                             {booking.title}
                                         </h3>
 
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-sm">
                                             {booking.customerName} • {booking.customerEmail}
                                         </p>
 
 
-                                        <div className="flex gap-6 text-sm text-gray-600">
+                                        <div className="flex gap-6 text-sm ">
                                             <p>
                                                 <span className="font-medium">Completed Date:</span> {booking.completedAt.split('T')[0]}
                                             </p>
@@ -205,7 +205,7 @@ const MyBookings = () => {
                                     <div className="flex flex-col items-end justify-between gap-4">
 
                                         <div className="text-right">
-                                            <p className="text-sm text-gray-500">Total</p>
+                                            <p className="text-sm ">Total</p>
                                             <p className="text-xl font-semibold flex items-center gap-1">
                                                 <FaBangladeshiTakaSign />
                                                 {booking.totalPrice}

@@ -7,16 +7,22 @@ import ServiceCardSkeleton from '../../Components/ServiceCard/ServiceCardSkeleto
 const Services = () => {
     const instance = useAxios()
 
-    const [searchText, setSearchText] = useState("")
+    const [searchText, setSearchText] = useState('')
 
     const { data: services = [], isLoading, } = useQuery({
         queryKey: ['services', searchText],
         queryFn: async () => {
-            const res = await instance.get(`/services?searchText=${searchText}`)
+            let serviceApi;
+            if (searchText) {
+                serviceApi = `/services?searchText=${searchText}`;
+            } else {
+                serviceApi = '/services';
+            }
+
+            const res = await instance.get(serviceApi)
             return res.data;
         }
     })
-
 
     return (
         <div className='my-20'>
@@ -49,7 +55,7 @@ const Services = () => {
             </div>
             {isLoading ?
                 <>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+                    <div className='grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
                         {
                             [...Array(8)].map((_, i) => <ServiceCardSkeleton key={i} />)
                         }

@@ -2,6 +2,7 @@ import React from "react";
 import Reviews from "../Reviews/Reviews";
 
 const Tab = ({ service }) => {
+
     return (
         <div className="mt-16">
 
@@ -28,7 +29,7 @@ const Tab = ({ service }) => {
                     aria-label={`Reviews (${service?.reviews?.length || 0})`}
                 />
                 <div className="tab-content pt-8">
-                    <Reviews reviews={service?.reviews} />
+                    <Reviews reviews={service.reviews} />
                 </div>
 
             </div>

@@ -57,19 +57,19 @@ const PendingDecoratorPayments = () => {
         <div>
             <div className="mt-4 px-4">
                 {/* Card */}
-                <div className="bg-white rounded-2xl md:shadow-sm md:border md:border-gray-100">
+                <div className="bg-base-100  md:shadow-sm text-base-content">
                     <div className="p-6 border-b">
-                        <h2 className="text-xl font-semibold text-gray-800">
+                        <h2 className="text-xl font-semibold ">
                             Pending Payment
                         </h2>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm ">
                             View all pending payments
                         </p>
                     </div>
 
                     <div className="overflow-x-auto">
                         <table className="table w-full">
-                            <thead className="bg-gray-50 text-gray-600 text-sm">
+                            <thead className="bg-base-200 text-sm">
                                 <tr>
                                     <th>Service Name</th>
                                     <th>DecoratorEmail</th>
@@ -96,16 +96,16 @@ const PendingDecoratorPayments = () => {
                                         data.map(payment => (
                                             <tr
                                                 key={payment._id}
-                                                className="hover:bg-gray-50 transition"
+                                                className="hover:bg-base-200 transition"
                                             >
-                                                <td className="font-medium text-gray-800">
+                                                <td className="font-medium ">
                                                     {payment?.serviceName}
                                                 </td>
 
-                                                <td className="font-semibold text-gray-700">
+                                                <td className="font-semibold ">
                                                     {payment?.decoratorEmail}
                                                 </td>
-                                                <td className="font-semibold text-gray-700 flex items-center gap-1">
+                                                <td className="font-semibold flex items-center gap-1">
                                                     <FaBangladeshiTakaSign /> {payment?.decoratorEarning}
                                                 </td>
                                                 {/* <td className="font-semibold text-gray-700 flex items-center gap-1">

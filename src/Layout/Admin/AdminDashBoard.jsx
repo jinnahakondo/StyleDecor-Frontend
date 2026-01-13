@@ -105,18 +105,18 @@ const AdminDashBoard = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 ">
                 {stats.map((item, i) => (
-                    <div key={i} className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                    <div key={i} className="bg-base-200 rounded-lg shadow-sm border border-base-300 overflow-hidden text-base-content">
                         <div className="p-6 flex justify-between items-start">
                             <div>
-                                <p className="text-gray-500 text-sm font-medium">{item.title}</p>
-                                <h3 className="text-2xl font-bold text-gray-800 mt-1">{item.value}</h3>
+                                <p className=" text-sm font-medium">{item.title}</p>
+                                <h3 className="text-2xl font-bold mt-1">{item.value}</h3>
                             </div>
                             <div className={`p-3 rounded-lg ${item.bg}`}>
                                 {item.icon}
                             </div>
                         </div>
 
-                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                        <div className="px-6 py-3 bg-base-100 border-t border-base-300">
                             <button className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
                                 View data →
                             </button>

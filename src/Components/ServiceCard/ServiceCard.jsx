@@ -9,7 +9,7 @@ const ServiceCard = ({ service, badge }) => {
 
     return (
         <div className="p-2 sm:p-0 h-full">
-            <div className="card bg-base-100 shadow hover:scale-y-105 transition-all h-full relative">
+            <div className="card bg-base-200 shadow hover:scale-y-105 transition-all h-full relative">
 
                 {/* Badge */}
                 {

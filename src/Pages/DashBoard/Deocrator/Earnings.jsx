@@ -55,52 +55,52 @@ const Earnings = () => {
             <div className="p-10">
 
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6 '>
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="bg-base-200 rounded-lg shadow-sm border border-base-300 text-base-content overflow-hidden">
                         <div className="p-6 flex justify-between items-start">
                             <div>
-                                <p className="text-gray-500 text-sm font-medium">Total Earnings</p>
-                                <h3 className="text-2xl font-bold text-gray-800 mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {totalEarning}</h3>
+                                <p className=" text-sm font-medium">Total Earnings</p>
+                                <h3 className="text-2xl font-bold  mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {totalEarning}</h3>
                             </div>
                             <div className={`p-3 rounded-lg`}>
                                 icon
                             </div>
                         </div>
 
-                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                        <div className="px-6 py-3 bg-base-100 border-t border-base-300">
                             <button className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
                                 View data →
                             </button>
                         </div>
                     </div>
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="bg-base-200 rounded-lg shadow-sm border border-base-300 text-base-content overflow-hidden">
                         <div className="p-6 flex justify-between items-start">
                             <div>
-                                <p className="text-gray-500 text-sm font-medium">Pending Earning</p>
-                                <h3 className="text-2xl font-bold text-gray-800 mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {pendingEarning}</h3>
+                                <p className=" text-sm font-medium">Pending Earning</p>
+                                <h3 className="text-2xl font-bold  mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {pendingEarning}</h3>
                             </div>
                             <div className={`p-3 rounded-lg`}>
                                 icon
                             </div>
                         </div>
 
-                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                        <div className="px-6 py-3 bg-base-100 border-t border-base-300">
                             <button className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
                                 View data →
                             </button>
                         </div>
                     </div>
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="bg-base-200 rounded-lg shadow-sm border border-base-300 text-base-content overflow-hidden">
                         <div className="p-6 flex justify-between items-start">
                             <div>
-                                <p className="text-gray-500 text-sm font-medium">Completed Jobs</p>
-                                <h3 className="text-2xl font-bold text-gray-800 mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {completedPayments?.length}</h3>
+                                <p className=" text-sm font-medium">Completed Jobs</p>
+                                <h3 className="text-2xl font-bold  mt-1 flex items-center gap-1"><FaBangladeshiTakaSign /> {completedPayments?.length}</h3>
                             </div>
                             <div className={`p-3 rounded-lg`}>
                                 icon
                             </div>
                         </div>
 
-                        <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
+                        <div className="px-6 py-3 bg-base-100 border-t border-base-300">
                             <button className="text-blue-600 text-sm font-semibold flex items-center gap-1 hover:underline">
                                 View data →
                             </button>

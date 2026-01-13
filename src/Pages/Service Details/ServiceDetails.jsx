@@ -102,29 +102,8 @@ const ServiceDetails = () => {
                             }}
                         >
                             Book Now
-                        </button>
-
-                        {/* <button className="btn btn-outline px-10">
-                            Add to Cart
-                        </button> */}
+                        </button>   
                     </div>
-
-                    {/* Trust Info */}
-                    {/* <div className="pt-6 space-y-3 border-t border-base-300">
-                        <div className="flex items-center gap-3 text-sm text-base-content/70">
-                            <VscWorkspaceTrusted className="text-xl" />
-                            Trusted Workers Team
-                        </div>
-                        <div className="flex items-center gap-3 text-sm text-base-content/70">
-                            <FaUser className="text-xl" />
-                            Reliable & Professional Staff
-                        </div>
-                        <div className="flex items-center gap-3 text-sm text-base-content/70">
-                            <MdSupportAgent className="text-xl" />
-                            24/7 Customer Support
-                        </div>
-                    </div> */}
-
                 </div>
             </div>
 

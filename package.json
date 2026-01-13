@@ -32,7 +32,8 @@
     "recharts": "^3.6.0",
     "sweetalert2": "^11.26.4",
     "swiper": "^12.0.3",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "theme-change": "^2.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

@@ -31,19 +31,19 @@ const PaymentHistroy = () => {
     return (
         <div className="mt-4 px-4">
             {/* Card */}
-            <div className="bg-white lg:rounded-2xl lg:shadow-sm lg:border border-gray-100">
+            <div className="bg-base-100 lg:rounded-2xl lg:shadow-sm lg:border border-base-300 text-base-content">
                 <div className="p-6 border-b">
-                    <h2 className="text-xl font-semibold text-gray-800">
+                    <h2 className="text-xl font-semibold ">
                         Payment History
                     </h2>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm ">
                         View all your completed transactions
                     </p>
                 </div>
 
                 <div className="overflow-x-auto">
                     <table className="table w-full">
-                        <thead className="bg-gray-50 text-gray-600 text-sm">
+                        <thead className="shadow bg-base-200">
                             <tr>
                                 <th>Service</th>
                                 <th>Amount</th>
@@ -57,7 +57,7 @@ const PaymentHistroy = () => {
                         <tbody>
                             {paymentHistory.length === 0 && (
                                 <tr>
-                                    <td colSpan="6" className="text-center py-10 text-gray-400">
+                                    <td colSpan="6" className="text-center py-10 ">
                                         No payment history found
                                     </td>
                                 </tr>
@@ -69,21 +69,21 @@ const PaymentHistroy = () => {
                                     paymentHistory.map(history => (
                                         <tr
                                             key={history._id}
-                                            className="hover:bg-gray-50 transition"
+                                            className="hover:bg-base-200 transition"
                                         >
-                                            <td className="font-medium text-gray-800">
+                                            <td className="font-medium ">
                                                 {history?.serviceName}
                                             </td>
 
-                                            <td className="font-semibold text-gray-700 flex items-center gap-1">
+                                            <td className="font-semibold  flex items-center gap-1">
                                                 <FaBangladeshiTakaSign /> {history?.amount}
                                             </td>
 
-                                            <td className="text-gray-500">
+                                            <td className="">
                                                 {format(new Date(history?.paidAt), 'dd MMM yyyy')}
                                             </td>
 
-                                            <td className="text-xs text-gray-500">
+                                            <td className="text-xs ">
                                                 {history?.transectionId}
                                             </td>
 
@@ -103,9 +103,9 @@ const PaymentHistroy = () => {
                                                         setPaymentInfo(history)
                                                         showReciept.current.showModal()
                                                     }}
-                                                    className="p-2 rounded-full hover:bg-gray-100 transition"
+                                                    className="p-2 rounded-full hover:bg-base-200 transition"
                                                 >
-                                                    <IoEyeOutline className="text-xl text-gray-600" />
+                                                    <IoEyeOutline className="text-xl " />
                                                 </button>
                                             </td>
                                         </tr>

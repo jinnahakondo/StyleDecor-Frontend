@@ -3,7 +3,7 @@ import React from "react";
 const ServiceCardSkeleton = ({ badge }) => {
   return (
     <div className="p-2 sm:p-0 h-full">
-      <div className="card bg-base-100 shadow h-full relative animate-pulse">
+      <div className="card bg-base-200 shadow h-full relative animate-pulse">
 
         {/* Badge Skeleton */}
         {badge && (

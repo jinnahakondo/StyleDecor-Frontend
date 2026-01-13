@@ -71,7 +71,7 @@ const DashBoardLayout = () => {
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
 
-                <div className="drawer-content flex flex-col bg-slate-50/50">
+                <div className="drawer-content flex flex-col ">
                     {/* --- Modern Glassmorphism Navbar --- */}
                     <header className="navbar bg-base-100/80 backdrop-blur-md px-6 border-b border-base-200 sticky top-0 z-20 h-16">
                         <div className="navbar-start lg:hidden">
@@ -86,7 +86,7 @@ const DashBoardLayout = () => {
 
                         <div className="navbar-end gap-3">
                             {role === 'decorator' && (
-                                <div className="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200">
+                                <div className="flex items-center gap-2 bg-base-200 px-3 py-1.5 rounded-full border border-base-300">
                                     <span className={`text-[10px] font-black uppercase tracking-wider ${workingStatus === 'working' ? 'text-orange-500' : 'text-green-600'}`}>
                                         {workingStatus}
                                     </span>
@@ -184,7 +184,7 @@ const DashBoardLayout = () => {
                         </nav>
 
                         {/* User Summary at Bottom */}
-                        <div className="mt-auto pt-4 bg-slate-50 -mx-5 -mb-5 p-5 border-t border-base-200">
+                        <div className="mt-auto pt-4 bg-base-200 -mx-5 -mb-5 p-5 border-t border-base-200">
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs uppercase">
                                     {role?.charAt(0)}

@@ -3,8 +3,9 @@ import React from "react";
 import { AiFillStar } from "react-icons/ai";
 
 const Review = ({ review }) => {
+
   return (
-    <div className="bg-base-100 border border-base-300 rounded-xl p-5">
+    <div className="bg-base-200 border border-base-300 rounded-xl p-5">
 
       <div className="flex gap-4">
 

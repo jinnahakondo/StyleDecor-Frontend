@@ -78,7 +78,7 @@ const AddService = () => {
                     <div className='flex flex-col gap-2'>
                         <label className='font-bold max-md:text-sm'>Service Image</label>
                         <label htmlFor='serviceImage'>
-                            <div className='w-32 h-[70px] border border-gray-400 rounded-lg grid place-items-center overflow-hidden'>
+                            <div className='w-32 h-[70px] border border-base-300 rounded-lg grid place-items-center overflow-hidden'>
                                 {
                                     serviceImage ?
                                         <img src={serviceImage} alt="service image" className='w-full h-full object-cover' />
@@ -112,21 +112,21 @@ const AddService = () => {
                     {/* service name  */}
                     <div className='flex flex-col gap-2'>
                         <label className='font-bold max-md:text-sm'>Service Name</label>
-                        <input type="text" className='input outline-0 border border-accent w-full' placeholder='Service Name'
+                        <input type="text" className='input outline-0 border border-base-300 w-full' placeholder='Service Name'
                             {...register('title', { required: 'please enter service name' })} />
                         {
                             errors?.title &&
-                            <p className='text-red-500'>{errors?.title?.message}</p>
+                            <p className='text-error'>{errors?.title?.message}</p>
                         }
                     </div>
                     {/* service description  */}
                     <div className='flex flex-col gap-2'>
                         <label className='font-bold max-md:text-sm'>Service description</label>
-                        <textarea type="text" className='textarea outline-0 border border-accent w-full' placeholder='Type here'
+                        <textarea type="text" className='textarea outline-0 border border-base-300 w-full' placeholder='Type here'
                             {...register('description', { required: "please add a description" })} />
                         {
                             errors?.description &&
-                            <p className='text-red-500'>{errors?.description?.message}</p>
+                            <p className='text-error'>{errors?.description?.message}</p>
                         }
                     </div>
                     {/* service category & price  */}
@@ -145,7 +145,7 @@ const AddService = () => {
                                 </select>
                                 {
                                     errors?.category &&
-                                    <p className='text-red-500'>{errors?.category?.message}</p>
+                                    <p className='text-error'>{errors?.category?.message}</p>
                                 }
                             </div>
                             {/* units  */}
@@ -159,7 +159,7 @@ const AddService = () => {
                                 </select>
                                 {
                                     errors?.category &&
-                                    <p className='text-red-500'>{errors?.category?.message}</p>
+                                    <p className='text-error'>{errors?.category?.message}</p>
                                 }
                             </div>
                             {/* price  */}
@@ -174,7 +174,7 @@ const AddService = () => {
                                     })} />
                                 {
                                     errors?.price &&
-                                    <p className='text-red-500'>{errors?.price?.message}</p>
+                                    <p className='text-error'>{errors?.price?.message}</p>
                                 }
                             </div>
                         </div>

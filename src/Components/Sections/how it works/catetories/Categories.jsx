@@ -7,7 +7,7 @@ import {
     FaChalkboardTeacher,
     FaHandshake,
 } from "react-icons/fa";
-import CategoryCard from './CategoryCard';
+
 import FeatureCard from '../../../Cards/FeatureCard';
 
 const Categories = () => {
