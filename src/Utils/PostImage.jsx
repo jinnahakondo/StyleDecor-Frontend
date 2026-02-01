@@ -1,15 +1,16 @@
-import axios from 'axios';
 import React from 'react';
 
 const PostImage = async (image) => {
 
-    const formData = new FormData();
-    formData.append("image", image);
-
-    const res = await axios.post(import.meta.env.VITE_IMAGEBB_API, formData)
-
-    const imageUrl = res.data.data.url
-    return imageUrl;
+    const data = new FormData()
+    data.append('file', image)
+    data.append('upload_preset', 'styledecor')
+    const res = await fetch('https://api.cloudinary.com/v1_1/dz23btt8f/upload', {
+        method: "POST",
+        body: data
+    })
+    const uploadedImageurl = await res.json()
+    return uploadedImageurl.url
 };
 
 export default PostImage;
