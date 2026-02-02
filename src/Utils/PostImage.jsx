@@ -5,7 +5,7 @@ const PostImage = async (image) => {
     const data = new FormData()
     data.append('file', image)
     data.append('upload_preset', 'styledecor')
-    const res = await fetch('https://api.cloudinary.com/v1_1/dz23btt8f/upload', {
+    const res = await fetch(import.meta.env.VITE_appId_cloudinaryImageApi, {
         method: "POST",
         body: data
     })

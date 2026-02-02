@@ -10,17 +10,16 @@
   themes: light --default, dark --prefersdark;
 }
 
-
-
 @plugin "daisyui/theme" {
-  name: "light";
+  name: "styledecor-light";
   default: true;
-  --color-primary: #7A9D54;
-  --color-secondary: #C2B8A3;
-
-
-
+  --color-primary: #B76E79;   
+  --color-secondary: #F3E5D8; 
+  --color-accent: #7A3E48; 
+  --color-neutral: #2A2A2A;
+  --color-base-100: #FFFFFF;
 }
+
 
 
 .dashboard.active {
